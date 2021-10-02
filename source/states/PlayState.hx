@@ -47,6 +47,10 @@ class PlayState extends FlxTransitionableState {
 
 		// SetupCameras.SetupMainCamera(camera);
 
+		level = new Level();
+		add(level);
+
+		// BEGIN TODO move to ogmo
 		var wall = new Wall(66 + Constants.TILE_SIZE, 50);
 		var radBlock = new RadioactiveBlock(1, 1000);
 		radBlock.setPosition(66, 50);
@@ -66,13 +70,11 @@ class PlayState extends FlxTransitionableState {
 		collidables.add(radCooler);
 		playerCollidables.add(radCooler);
 
-		level = new Level();
-		add(level);
-
 		nonCollidables.add(conveyor);
 
 		player = new Player(50, 50);
 		collidables.add(player);
+		// END TODO move to ogmo
 
 		// test = new DepthSprite(32, 32);
 		// test.load_slices(AssetPaths.test__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
