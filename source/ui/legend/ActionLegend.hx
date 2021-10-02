@@ -30,9 +30,6 @@ class ActionLegend extends FlxSpriteGroup {
 		x = FlxG.width - (trayWidth + halfPadding);
 		y = halfPadding;
 
-		x = 300;
-		y = 200;
-
 		addTray();
 		addHighlight();
 	}
