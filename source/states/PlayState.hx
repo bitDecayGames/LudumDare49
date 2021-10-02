@@ -1,11 +1,8 @@
 package states;
 
-<<<<<<< Updated upstream
 import ui.camera.SetupCameras;
 import flixel.FlxCamera;
-=======
 import entities.Conveyor;
->>>>>>> Stashed changes
 import entities.RadioactiveCooler;
 import helpers.Constants;
 import entities.RadioactiveBlock;
@@ -45,7 +42,7 @@ class PlayState extends FlxTransitionableState {
 
 		Lifecycle.startup.dispatch();
 
-		SetupCameras.SetupMainCamera(camera);
+		// SetupCameras.SetupMainCamera(camera);
 
 		var wall = new Wall(66 + Constants.TILE_SIZE, 50);
 		var radBlock = new RadioactiveBlock(1, 1000);

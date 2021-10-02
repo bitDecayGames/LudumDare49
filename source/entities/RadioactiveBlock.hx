@@ -19,14 +19,11 @@ class RadioactiveBlock extends Block {
 
 		decayAmount = _decayAmount;
 		maxLife = _maxLife;
-		// currentLife = maxLife;
-		currentLife = 0;
+		currentLife = maxLife;
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
-		
-		trace('Current life: $currentLife');
 	}
 
 	public function meltedDown() {
@@ -36,7 +33,6 @@ class RadioactiveBlock extends Block {
 	public function decay() {
 		currentLife -= decayAmount;
 
-		//wtf <=
 		if (currentLife < 0)
 		{
 			currentLife = 0;
