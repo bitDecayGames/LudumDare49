@@ -13,11 +13,9 @@ import flixel.addons.transition.TransitionData;
 import flixel.util.FlxColor;
 import misc.FlxTextFactory;
 import openfl.display.Sprite;
-
 #if play
 import states.PlayState;
 #end
-
 #if logan
 import states.LoganState;
 #end
@@ -63,5 +61,6 @@ class Main extends Sprite {
 		FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.35);
 
 		FlxTextFactory.defaultFont = AssetPaths.Brain_Slab_8__ttf;
+		FlxTextFactory.defaultSize = 10;
 	}
 }
