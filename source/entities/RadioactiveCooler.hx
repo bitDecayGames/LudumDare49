@@ -5,10 +5,10 @@ import input.InputCalcuator;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
-class RadioactiveCooler extends Blocks{
+class RadioactiveCooler extends Block{
 
-	var coolingAmount:Int = 0;
-	var radius:Int = 0;
+	public var coolingAmount:Int = 0;
+	public var radius:Int = 0;
 
 	public function new(_coolingAmount:Int = 2, _radius:Int = 1) {
 		super(true);

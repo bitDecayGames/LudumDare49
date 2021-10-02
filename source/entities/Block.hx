@@ -4,7 +4,7 @@ import depth.DepthSprite;
 import flixel.FlxSprite;
 import flixel.FlxSprite.IFlxSprite;
 
-class Blocks extends DepthSprite{
+class Block extends DepthSprite{
 
 	public var pushable: Bool;
 
