@@ -5,25 +5,28 @@ import flixel.FlxObject;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
+import levels.ogmo.Room;
 
-class Level {
-	public var layer:FlxTilemap;
+class MasterLevel extends FlxGroup {
+	public var rooms: Array<Room> = [];
 
-	public function new(project:String, level:String) {
+	public function new() {
+		super();
+
+		var project = AssetPaths.project__ogmo;
+		var level = AssetPaths.master__json;
+
 		var loader = new FlxOgmo3Loader(project, level);
-		layer = loader.loadTilemap("<AssetPath to tilemap for layer>", "<layer name>");
-
-		var objects = new FlxGroup();
 
 		loader.loadEntities((entityData) -> {
-			var obj:FlxBasic;
 			switch (entityData.name) {
-				case "<entity name>":
-					obj = new FlxObject();
+				case Room.OGMO_NAME:
+					var room = new Room(project, entityData.values.name);
+					rooms.push(room);
+					add(room);
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${Type.getClassName(Type.getClass(this))}';
 			}
-			objects.add(obj);
-		}, "<entity layer name>");
+		}, "rooms");
 	}
 }
