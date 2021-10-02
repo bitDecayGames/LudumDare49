@@ -1,5 +1,6 @@
 package ui.camera;
 
+import shaders.Silhouette;
 import flixel.math.FlxPoint;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
@@ -47,9 +48,10 @@ class SetupCameras {
 		minimapCamera.setPosition(x, y);
 		minimapCamera.setSize(width, height);
 		minimapCamera.scroll = FlxPoint.get(0, 0);
-		minimapCamera.bgColor = FlxColor.BLACK;
+		minimapCamera.bgColor = FlxColor.TRANSPARENT;
 		minimapCamera.setScale(minimapZoomFactor, minimapZoomFactor);
 		minimapCamera.pixelPerfectRender = true;
+		minimapCamera.setFilters([new ShaderFilter(new Silhouette())]);
 		FlxG.cameras.add(minimapCamera);
 		FlxG.cameras.setDefaultDrawTarget(minimapCamera, true);
 	}

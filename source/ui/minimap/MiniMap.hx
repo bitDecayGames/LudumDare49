@@ -12,7 +12,7 @@ import flixel.group.FlxSpriteGroup;
 class MiniMap extends FlxSpriteGroup {
 	private static var minimapWidth:Int = 100;
 	private static var minimapHeight:Int = 100;
-	private static var padding:Int = 20;
+	private static var padding:Int = 4;
 
 	private var tray:MapTray;
 

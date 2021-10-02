@@ -67,6 +67,8 @@ class LoganState extends FlxTransitionableState {
 
 		player = new Player(50, 50);
 		depthSprites.add(player);
+		FlxG.camera.follow(player);
+		SetupCameras.minimapCamera.follow(player);
 
 		for (i in 0...20) {
 			var test = new DepthSprite(FlxG.random.int(0, FlxG.width), FlxG.random.int(0, FlxG.height));
