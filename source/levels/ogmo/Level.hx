@@ -4,17 +4,18 @@ import entities.Entrance;
 import entities.Exit;
 import flixel.FlxG;
 import entities.HitBox;
-import flixel.FlxBasic;
-import flixel.FlxObject;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import levels.ogmo.Room;
+import helpers.Constants;
 
 class Level extends FlxGroup {
-	public var rooms: Array<Room> = [];
-	public var entrances: FlxTypedGroup<Entrance>;
-	public var exits: FlxTypedGroup<Exit>;
+	public var rooms:Array<Room> = [];
+	public var entrances:FlxTypedGroup<Entrance>;
+	public var exits:FlxTypedGroup<Exit>;
+	public var start:Entrance;
+	public var end:Exit;
 
 	public function new() {
 		super();
@@ -39,9 +40,21 @@ class Level extends FlxGroup {
 
 		for (r in rooms) {
 			for (ent in r.entrances) {
+				if (ent.start) {
+					if (start != null) {
+						throw "level start already set";
+					}
+					start = ent;
+				}
 				entrances.add(ent);
 			}
 			for (ex in r.exits) {
+				if (ex.end) {
+					if (end != null) {
+						throw "level end already set";
+					}
+					end = ex;
+				}
 				exits.add(ex);
 			}
 		}

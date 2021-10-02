@@ -23,12 +23,15 @@ import signals.Lifecycle;
 import entities.Player;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import systems.ControlSystem;
+import levels.ogmo.Level;
 
 using extensions.FlxStateExt;
 
 class PlayState extends FlxTransitionableState {
 	var controlSystem:ControlSystem;
 
+	var level:Level;
 	var player:FlxSprite;
 
 	var test:DepthSprite;
@@ -44,6 +47,10 @@ class PlayState extends FlxTransitionableState {
 
 		// SetupCameras.SetupMainCamera(camera);
 
+		level = new Level();
+		add(level);
+
+		// BEGIN TODO move to ogmo
 		var wall = new Wall(66 + Constants.TILE_SIZE, 50);
 		var radBlock = new RadioactiveBlock(1, 1000);
 		radBlock.setPosition(66, 50);
@@ -53,7 +60,7 @@ class PlayState extends FlxTransitionableState {
 
 		var conveyor = new Conveyor();
 		conveyor.setPosition(66+(Constants.TILE_SIZE * 3), 50+(Constants.TILE_SIZE * 5));
-		
+
 		collidables.add(wall);
 		playerCollidables.add(wall);
 
@@ -66,8 +73,8 @@ class PlayState extends FlxTransitionableState {
 		nonCollidables.add(conveyor);
 
 		player = new Player(50, 50);
-		
 		collidables.add(player);
+		// END TODO move to ogmo
 
 		// test = new DepthSprite(32, 32);
 		// test.load_slices(AssetPaths.test__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
