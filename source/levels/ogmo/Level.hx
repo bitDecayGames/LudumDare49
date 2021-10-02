@@ -11,7 +11,7 @@ import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import levels.ogmo.Room;
 
-class MasterLevel extends FlxGroup {
+class Level extends FlxGroup {
 	public var rooms: Array<Room> = [];
 	public var entrances: FlxTypedGroup<Entrance>;
 	public var exits: FlxTypedGroup<Exit>;

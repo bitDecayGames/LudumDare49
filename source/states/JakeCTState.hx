@@ -5,12 +5,12 @@ import signals.Lifecycle;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.util.FlxColor;
-import levels.ogmo.MasterLevel;
+import levels.ogmo.Level;
 
 using extensions.FlxStateExt;
 
 class JakeCTState extends FlxTransitionableState {
-	var masterLevel:MasterLevel;
+	var level:Level;
 
 	override public function create() {
 		super.create();
@@ -19,8 +19,8 @@ class JakeCTState extends FlxTransitionableState {
 		FlxG.camera.bgColor = FlxColor.GRAY;
 		FlxG.camera.pixelPerfectRender = true;
 
-		masterLevel = new MasterLevel();
-		add(masterLevel);
+		level = new Level();
+		add(level);
 	}
 
 	override public function update(elapsed:Float) {
