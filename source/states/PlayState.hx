@@ -1,7 +1,11 @@
 package states;
 
+<<<<<<< Updated upstream
 import ui.camera.SetupCameras;
 import flixel.FlxCamera;
+=======
+import entities.Conveyor;
+>>>>>>> Stashed changes
 import entities.RadioactiveCooler;
 import helpers.Constants;
 import entities.RadioactiveBlock;
@@ -34,6 +38,7 @@ class PlayState extends FlxTransitionableState {
 
 	var playerCollidables:FlxTypedGroup<Block> = new FlxTypedGroup();
 	var collidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
+	var nonCollidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 
 	override public function create() {
 		super.create();
@@ -47,8 +52,11 @@ class PlayState extends FlxTransitionableState {
 		radBlock.setPosition(66, 50);
 
 		var radCooler = new RadioactiveCooler();
-		radCooler.setPosition(66 + (Constants.TILE_SIZE * 3), 50);
+		radCooler.setPosition(66+(Constants.TILE_SIZE * 3), 50);
 
+		var conveyor = new Conveyor();
+		conveyor.setPosition(66+(Constants.TILE_SIZE * 3), 50+(Constants.TILE_SIZE * 5));
+		
 		collidables.add(wall);
 		playerCollidables.add(wall);
 
@@ -58,8 +66,11 @@ class PlayState extends FlxTransitionableState {
 		collidables.add(radCooler);
 		playerCollidables.add(radCooler);
 
+		nonCollidables.add(conveyor);
+
 		player = new Player(50, 50);
-		add(player);
+		
+		collidables.add(player);
 
 		// test = new DepthSprite(32, 32);
 		// test.load_slices(AssetPaths.test__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
@@ -67,9 +78,10 @@ class PlayState extends FlxTransitionableState {
 		// test.slice_offset = 0.5;
 		add(collidables);
 		add(playerCollidables);
+		add(nonCollidables);
 		add(test);
 
-		controlSystem = new ControlSystem(player, playerCollidables, collidables);
+		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
 		add(controlSystem);
 	}
 
