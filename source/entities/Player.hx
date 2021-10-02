@@ -26,26 +26,26 @@ class Player extends DepthSprite {
 	override public function update(delta:Float) {
 		super.update(delta);
 
-		if (SimpleController.pressed(Button.DOWN)) {
-			velocity.set(dir.x * speed, dir.y * speed);
-		} else if (SimpleController.pressed(Button.UP)) {
-			velocity.set(-dir.x * speed, -dir.y * speed);
-		} else {
-			velocity.set();
-		}
+		// if (SimpleController.pressed(Button.DOWN)) {
+		// 	velocity.set(dir.x * speed, dir.y * speed);
+		// } else if (SimpleController.pressed(Button.UP)) {
+		// 	velocity.set(-dir.x * speed, -dir.y * speed);
+		// } else {
+		// 	velocity.set();
+		// }
 
-		if (SimpleController.pressed(Button.RIGHT)) {
-			dir.rotate(FlxPoint.weak(), turnSpeed * delta);
-		}
+		// if (SimpleController.pressed(Button.RIGHT)) {
+		// 	dir.rotate(FlxPoint.weak(), turnSpeed * delta);
+		// }
 
-		if (SimpleController.pressed(Button.LEFT)) {
-			dir.rotate(FlxPoint.weak(), -turnSpeed * delta);
-		}
+		// if (SimpleController.pressed(Button.LEFT)) {
+		// 	dir.rotate(FlxPoint.weak(), -turnSpeed * delta);
+		// }
 
-		angle = dir.degrees;
+		// angle = dir.degrees;
 
-		if (SimpleController.just_pressed(Button.A, playerNum)) {
-			color = color ^ 0xFFFFFF;
-		}
+		// if (SimpleController.just_pressed(Button.A, playerNum)) {
+		// 	color = color ^ 0xFFFFFF;
+		// }
 	}
 }

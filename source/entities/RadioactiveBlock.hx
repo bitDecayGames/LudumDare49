@@ -5,7 +5,7 @@ import input.InputCalcuator;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
-class RadioactiveBlock extends FlxSprite {
+class RadioactiveBlock extends Blocks {
 
 	var decayAmount:Int = 0;
 	var maxLife:Int = 0;
@@ -13,7 +13,7 @@ class RadioactiveBlock extends FlxSprite {
 	var blowedUp:Bool = false;
 
 	public function new(_decayAmount:Int = 1, _maxLife:Int = 10) {
-		super();
+		super(true);
 		// makeGraphic(20, 20, FlxColor.WHITE);
 		// color = FlxColor.BLUE;
 
@@ -33,6 +33,7 @@ class RadioactiveBlock extends FlxSprite {
 	public function decay() {
 		currentLife -= decayAmount;
 
+		//wtf <=
 		if (currentLife < 0)
 		{
 			currentLife = 0;

@@ -5,13 +5,13 @@ import input.InputCalcuator;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
-class PowerCore extends FlxSprite {
+class PowerCore extends Blocks {
 
 	var currentCharge:Int = 0;
 	var maxCharge:Int = 0;
 
 	public function new(_maxCharge:Int = 10) {
-		super();
+		super(true);
 		// makeGraphic(20, 20, FlxColor.WHITE);
 		// color = FlxColor.BLUE;
 
