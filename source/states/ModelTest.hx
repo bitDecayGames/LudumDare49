@@ -55,18 +55,19 @@ class ModelTest extends FlxState {
         switch(modelName) {
             case "player":
                 model.load_slices(AssetPaths.player__png, 16, 16, 24);
-                model.slice_offset = 0.5;
             case "cooler":
                 model.load_slices(AssetPaths.cooler_block__png, 16, 16, 16);
-                model.slice_offset = 0.5;
             case "nuke":
                 model.load_slices(AssetPaths.nuke__png, 16, 16, 16);
-                model.slice_offset = 0.5;
             case "crate":
                 model.load_slices(AssetPaths.crate__png, 16, 16, 16);
-                model.slice_offset = 0.5;
+            case "wall_round":
+                model.load_slices(AssetPaths.wall_round__png, 16, 16, 16);
+            case "wall_square":
+                model.load_slices(AssetPaths.wall_square__png, 16, 16, 16);
             default:
         }
+        model.slice_offset = 0.5;
 
         FlxG.watch.add(model, "slice_offset", "Depth: ");
 	}
