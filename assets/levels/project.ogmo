@@ -70,7 +70,7 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {"name": "start", "definition": "Boolean", "display": 0, "defaults": false}
       ]
     },
     {
@@ -95,8 +95,8 @@
       "tileX": false,
       "tileY": false,
       "tileSize": {"x": 16, "y": 16},
-      "resizeableX": false,
-      "resizeableY": false,
+      "resizeableX": true,
+      "resizeableY": true,
       "rotatable": false,
       "rotationDegrees": 360,
       "canFlipX": false,
@@ -146,7 +146,7 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {"name": "end", "definition": "Boolean", "display": 0, "defaults": false}
       ]
     }
   ],

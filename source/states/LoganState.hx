@@ -82,7 +82,7 @@ class LoganState extends FlxTransitionableState {
 			test = new DepthSprite(FlxG.random.int(0, FlxG.width), FlxG.random.int(0, FlxG.height));
 			test.load_slices(AssetPaths.cooler_block__png, 16, 16, 16);
 			test.angle = Math.random() * 360;
-			test.slice_offset = 0.5;
+			test.slice_offset = 1;
 			depthSprites.add(test);
 		}
 	}
