@@ -33,7 +33,7 @@
           "y": 120,
           "originX": 0,
           "originY": 0,
-          "values": {"end": false}
+          "values": {"end": true}
         }
       ]
     },
