@@ -7,26 +7,22 @@ class Exit extends FlxSprite {
 	public static inline var OGMO_NAME = "exit";
 	public final end:Bool;
 
-	var entrance:Entrance;
+	var entrance:Entrance = null;
 
 	public function new(end:Bool) {
 		super();
 
-		makeGraphic(16, 16, FlxColor.WHITE);
+		makeGraphic(Constants.TILE_SIZE, Constants.TILE_SIZE, FlxColor.WHITE);
 		color = FlxColor.GREEN;
 
 		this.end = end;
 	}
 
-	function getXYStr() {
-		return '(x: ${x}, y: ${y})';
-	}
-
-	public function setEntrance(entrance: Entrance) {
+	public function setEntrance(value: Entrance) {
 		if (entrance != null) {
-			throw 'exit at ${getXYStr()} already has entrance set';
+			throw '${this} already has ${entrance} set';
 		}
-		this.entrance = entrance;
+		entrance = value;
 	}
 
 	public function getEntrance() {
@@ -35,14 +31,18 @@ class Exit extends FlxSprite {
 
 	public function validateEntrance() {
 		if (end && entrance != null) {
-			throw 'ending exit at ${getXYStr()} has entrance set';
+			throw 'ending ${this} has entrance set';
 		}
 		if (!end && entrance == null) {
-			throw 'exit at ${getXYStr()} does not have an entrance set';
+			throw '${this} does not have an entrance set';
 		}
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
+	}
+
+	override public function toString() {
+		return '<Exit x: ${x}, y: ${y}>';
 	}
 }
