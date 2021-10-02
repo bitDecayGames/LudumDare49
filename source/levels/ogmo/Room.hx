@@ -1,32 +1,53 @@
 package levels.ogmo;
 
-import flixel.FlxBasic;
-import flixel.FlxObject;
+import flixel.FlxSprite;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
-import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
+import entities.Entrance;
+import entities.Exit;
 
-/**
- * Template for loading an Ogmo level file
-**/
-class Level {
-	public var layer:FlxTilemap;
+class Room {
+	public static inline var OGMO_NAME = "room";
 
-	public function new(level:String) {
-		var loader = new FlxOgmo3Loader("<AssetPath to ogmo file>", level);
-		layer = loader.loadTilemap("<AssetPath to tilemap for layer>", "<layer name>");
+	// public var layer:FlxTilemap;
+	public var entrances:Array<Entrance> = [];
+	public var exits:Array<Exit> = [];
 
-		var objects = new FlxGroup();
+	public function getErrorName() {
+		return Type.getClassName(Type.getClass(this));
+	}
+
+	public function new(project: String, name:String, x:Int, y:Int, width:Int, height:Int) {
+		var level = 'assets/levels/${name}.json';
+		var loader = new FlxOgmo3Loader(project, level);
+		// layer = loader.loadTilemap("<AssetPath to tilemap for layer>", "<layer name>");
+
+		// Validate level data
+		var levelWidth = loader.getLevelValue("width");
+		if (levelWidth != width) {
+			throw '${getErrorName()}: ${name} width mismatch. got ${levelWidth}, expected ${width}';
+		}
+		var levelHeight = loader.getLevelValue("height");
+		if (levelHeight != height) {
+			throw '${getErrorName()}: ${name} height mismatch. got ${levelHeight}, expected ${height}';
+		}
 
 		loader.loadEntities((entityData) -> {
-			var obj:FlxBasic;
+			var obj:FlxSprite;
 			switch (entityData.name) {
-				case "<entity name>":
-					obj = new FlxObject();
+				case Entrance.OGMO_NAME:
+					var enter = new Entrance(entityData.values.start);
+					entrances.push(enter);
+					obj = enter;
+				case Exit.OGMO_NAME:
+					var exit = new Exit(entityData.values.end);
+					exits.push(exit);
+					obj = exit; 
 				default:
-					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${Type.getClassName(Type.getClass(this))}';
+					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
-			objects.add(obj);
-		}, "<entity layer name>");
+			obj.x = entityData.x + x;
+			obj.y = entityData.y + y;
+		}, "objects");
 	}
 }

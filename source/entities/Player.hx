@@ -1,5 +1,6 @@
 package entities;
 
+import helpers.Constants;
 import flixel.math.FlxPoint;
 import spacial.Cardinal;
 import depth.DepthSprite;
@@ -17,7 +18,7 @@ class Player extends DepthSprite {
 
 	public function new(x:Float = 0, y:Float = 0) {
 		super(x, y);
-		load_slices(AssetPaths.test__png, 16, 16, 16);
+		load_slices(AssetPaths.test__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
 		// test.angle = Math.random() * 360;
 		// makeGraphic(20, 20, FlxColor.WHITE);
 		// color = FlxColor.BLUE;

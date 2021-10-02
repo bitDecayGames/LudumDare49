@@ -1,0 +1,52 @@
+{
+  "ogmoVersion": "3.4.0",
+  "width": 128,
+  "height": 256,
+  "offsetX": 0,
+  "offsetY": 0,
+  "layers": [
+    {
+      "name": "objects",
+      "_eid": "15112221",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 8,
+      "gridCellHeight": 8,
+      "gridCellsX": 16,
+      "gridCellsY": 32,
+      "entities": [
+        {
+          "name": "entrance",
+          "id": 0,
+          "_eid": "15149497",
+          "x": 0,
+          "y": 56,
+          "originX": 0,
+          "originY": 0,
+          "values": {"start": false}
+        },
+        {
+          "name": "exit",
+          "id": 1,
+          "_eid": "15357899",
+          "x": 112,
+          "y": 120,
+          "originX": 0,
+          "originY": 0,
+          "values": {"end": false}
+        }
+      ]
+    },
+    {
+      "name": "rooms",
+      "_eid": "15208123",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 8,
+      "gridCellsY": 16,
+      "entities": []
+    }
+  ]
+}

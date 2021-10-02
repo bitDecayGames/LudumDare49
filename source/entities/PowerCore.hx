@@ -5,7 +5,7 @@ import input.InputCalcuator;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
-class PowerCore extends Blocks {
+class PowerCore extends Block {
 
 	var currentCharge:Int = 0;
 	var maxCharge:Int = 0;

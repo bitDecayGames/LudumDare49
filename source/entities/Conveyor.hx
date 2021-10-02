@@ -9,12 +9,14 @@ import flixel.FlxSprite;
 
 class Conveyor extends FlxSprite {
 
-	public function new(_facing:Int = FlxObject.RIGHT) {
+	public var cardFacing:Cardinal;
+
+	public function new(_cardFacing:Cardinal = Cardinal.N) {
 		super();
 		// makeGraphic(20, 20, FlxColor.WHITE);
 		// color = FlxColor.BLUE;
 
-		facing = _facing;
+		cardFacing = _cardFacing;
 	}
 
 	override public function update(delta:Float) {
