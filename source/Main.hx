@@ -13,6 +13,10 @@ import flixel.util.FlxColor;
 import misc.FlxTextFactory;
 import openfl.display.Sprite;
 
+#if play
+import states.PlayState;
+#end
+
 class Main extends Sprite {
 	public function new() {
 		super();
@@ -26,7 +30,7 @@ class Main extends Sprite {
 			startingState = MainMenuState;
 		}
 		#end
-		addChild(new FlxGame(0, 0, startingState, 1, 60, 60, true, false));
+		addChild(new FlxGame(Std.int(640 / 1), Std.int(480 / 1), startingState, 1, 60, 60, true, false));
 
 		FlxG.fixedTimestep = false;
 
