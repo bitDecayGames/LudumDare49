@@ -4,12 +4,11 @@ import entities.Entrance;
 import entities.Exit;
 import flixel.FlxG;
 import entities.HitBox;
-import flixel.FlxBasic;
-import flixel.FlxObject;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import levels.ogmo.Room;
+import helpers.Constants;
 
 class Level extends FlxGroup {
 	public var rooms: Array<Room> = [];
