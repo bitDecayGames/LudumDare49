@@ -1,5 +1,7 @@
 package states;
 
+import ui.camera.SetupCameras;
+import flixel.FlxCamera;
 import entities.RadioactiveCooler;
 import helpers.Constants;
 import entities.RadioactiveBlock;
@@ -24,7 +26,6 @@ import flixel.FlxG;
 using extensions.FlxStateExt;
 
 class PlayState extends FlxTransitionableState {
-
 	var controlSystem:ControlSystem;
 
 	var player:FlxSprite;
@@ -34,26 +35,20 @@ class PlayState extends FlxTransitionableState {
 	var playerCollidables:FlxTypedGroup<Block> = new FlxTypedGroup();
 	var collidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 
-
-
 	override public function create() {
 		super.create();
 
 		Lifecycle.startup.dispatch();
 
-		FlxG.game.setFilters([new ShaderFilter(new FlxShader())]);
-		FlxG.game.stage.quality = StageQuality.LOW;
-		camera.bgColor = FlxColor.GRAY;
+		SetupCameras.SetupMainCamera(camera);
 
-		FlxG.camera.pixelPerfectRender = true;
-
-		var wall = new Wall(66+Constants.TILE_SIZE,50);
+		var wall = new Wall(66 + Constants.TILE_SIZE, 50);
 		var radBlock = new RadioactiveBlock(1, 1000);
 		radBlock.setPosition(66, 50);
 
 		var radCooler = new RadioactiveCooler();
-		radCooler.setPosition(66+(Constants.TILE_SIZE * 3), 50);
-		
+		radCooler.setPosition(66 + (Constants.TILE_SIZE * 3), 50);
+
 		collidables.add(wall);
 		playerCollidables.add(wall);
 

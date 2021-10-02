@@ -1,5 +1,9 @@
 package states;
 
+import signals.UI;
+import ui.legend.ActionLegend;
+import ui.minimap.MiniMap;
+import ui.camera.SetupCameras;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import depth.DepthUtil;
 import flixel.system.FlxAssets.FlxShader;
@@ -24,11 +28,10 @@ class LoganState extends FlxTransitionableState {
 		super.create();
 		Lifecycle.startup.dispatch();
 
-		FlxG.game.setFilters([new ShaderFilter(new FlxShader())]);
-		FlxG.game.stage.quality = StageQuality.LOW;
-		camera.bgColor = FlxColor.GRAY;
-
-		FlxG.camera.pixelPerfectRender = true;
+		SetupCameras.SetupMainCamera(camera);
+		add(new MiniMap());
+		add(new ActionLegend());
+		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY]);
 
 		for (i in 0...20) {
 			var conveyor = new FlxSprite(FlxG.random.int(0, FlxG.width), FlxG.random.int(0, FlxG.height));
@@ -50,7 +53,6 @@ class LoganState extends FlxTransitionableState {
 			if (i == 0 || i == 9) {
 				asset = AssetPaths.wall_round__png;
 			}
-
 
 			if (i == 9) {
 				test.angle = 180;
@@ -90,7 +92,7 @@ class LoganState extends FlxTransitionableState {
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 
-		camera.angle +=  15 * elapsed;
+		camera.angle += 15 * elapsed;
 
 		depthSprites.sort(DepthUtil.sort_by_depth);
 	}

@@ -1,5 +1,6 @@
 package ui.legend;
 
+import ui.camera.SetupCameras;
 import signals.UI;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
@@ -17,11 +18,20 @@ class ActionLegend extends FlxSpriteGroup {
 
 	public function new() {
 		super();
+		if (SetupCameras.uiCamera == null) {
+			SetupCameras.SetupUICamera();
+		}
+		camera = SetupCameras.uiCamera;
+		cameras = [camera];
+
 		UI.highlightActionStep.add(setActionStep);
 		UI.setActionSteps.add(setActionSteps);
 		var halfPadding = trayPadding * .5;
 		x = FlxG.width - (trayWidth + halfPadding);
 		y = halfPadding;
+
+		x = 300;
+		y = 200;
 
 		addTray();
 		addHighlight();
