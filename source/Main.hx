@@ -20,6 +20,8 @@ import states.PlayState;
 
 #if logan
 import states.LoganState;
+#elseif tanner
+import states.TannerState;
 #end
 
 class Main extends Sprite {
@@ -40,7 +42,10 @@ class Main extends Sprite {
 
 		#if logan
 		startingState = LoganState;
+		#elseif tanner
+		startingState = TannerState;
 		#end
+
 
 		addChild(new FlxGame(Std.int(640 / 1), Std.int(480 / 1), startingState, 1, 60, 60, true, false));
 
