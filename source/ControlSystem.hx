@@ -230,8 +230,8 @@ class ControlSystem extends FlxBasic
     }
 
     private function nextPointFromCardinal(currentPoint:FlxPoint, cardinalDir:Cardinal)
-        {
-            return currentPoint.addPoint(cardinalDir.asVector().scale(Constants.TILE_SIZE));
-        }
+    {
+        return currentPoint.addPoint(cardinalDir.asVector().scale(Constants.TILE_SIZE));
+    }
     
 }
