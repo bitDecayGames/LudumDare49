@@ -17,6 +17,10 @@ import openfl.display.Sprite;
 import states.PlayState;
 #end
 
+#if logan
+import states.LoganState;
+#end
+
 class Main extends Sprite {
 	public function new() {
 		super();
@@ -30,6 +34,11 @@ class Main extends Sprite {
 			startingState = MainMenuState;
 		}
 		#end
+
+		#if logan
+		startingState = LoganState;
+		#end
+
 		addChild(new FlxGame(Std.int(640 / 1), Std.int(480 / 1), startingState, 1, 60, 60, true, false));
 
 		FlxG.fixedTimestep = false;
