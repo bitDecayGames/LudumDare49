@@ -22,6 +22,10 @@ import states.PlayState;
 import states.LoganState;
 #end
 
+#if model
+import states.ModelTest;
+#end
+
 class Main extends Sprite {
 	public function new() {
 		super();
@@ -40,6 +44,10 @@ class Main extends Sprite {
 
 		#if logan
 		startingState = LoganState;
+		#end
+
+		#if model
+		startingState = ModelTest;
 		#end
 
 		addChild(new FlxGame(Std.int(640 / 1), Std.int(480 / 1), startingState, 1, 60, 60, true, false));
