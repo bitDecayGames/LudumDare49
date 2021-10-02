@@ -1,32 +1,43 @@
 package levels.ogmo;
 
+import flixel.FlxSprite;
 import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
+import entities.Entrance;
+import entities.Exit;
 
-/**
- * Template for loading an Ogmo level file
-**/
-class Level {
+class Room extends FlxGroup {
+	public static inline var OGMO_NAME = "room";
+
 	public var layer:FlxTilemap;
+	public var objects:FlxGroup;
 
-	public function new(level:String) {
-		var loader = new FlxOgmo3Loader("<AssetPath to ogmo file>", level);
-		layer = loader.loadTilemap("<AssetPath to tilemap for layer>", "<layer name>");
+	public function new(project: String, name:String) {
+		super();
 
-		var objects = new FlxGroup();
+		var loader = new FlxOgmo3Loader(project, 'assets/levels/$name.json');
+		// layer = loader.loadTilemap("<AssetPath to tilemap for layer>", "<layer name>");
+
+		objects = new FlxGroup();
 
 		loader.loadEntities((entityData) -> {
-			var obj:FlxBasic;
+			var obj:FlxSprite;
 			switch (entityData.name) {
-				case "<entity name>":
-					obj = new FlxObject();
+				case Entrance.OGMO_NAME:
+					obj = new Entrance();
+				case Exit.OGMO_NAME:
+					obj = new Exit();
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${Type.getClassName(Type.getClass(this))}';
 			}
+			obj.x = entityData.x;
+			obj.y = entityData.y;
 			objects.add(obj);
-		}, "<entity layer name>");
+		}, "objects");
+
+		add(objects);
 	}
 }
