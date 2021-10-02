@@ -2,6 +2,7 @@ package entities;
 
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
+import helpers.Constants;
 
 class Entrance extends FlxSprite {
 	public static inline var OGMO_NAME = "entrance";
