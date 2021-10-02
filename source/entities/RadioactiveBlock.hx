@@ -5,7 +5,7 @@ import input.InputCalcuator;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
-class RadioactiveBlock extends Blocks {
+class RadioactiveBlock extends Block {
 
 	var decayAmount:Int = 0;
 	var maxLife:Int = 0;
@@ -19,11 +19,14 @@ class RadioactiveBlock extends Blocks {
 
 		decayAmount = _decayAmount;
 		maxLife = _maxLife;
-		currentLife = maxLife;
+		// currentLife = maxLife;
+		currentLife = 0;
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
+		
+		trace('Current life: $currentLife');
 	}
 
 	public function meltedDown() {

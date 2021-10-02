@@ -20,6 +20,18 @@ enum abstract Cardinal(Int) from Int to Int {
 	var W = 270;
 	var NW = 315;
 	var NONE = -1;
+	
+	public static function allCardinalsVectors():Array<FlxVector>
+	{
+		return [N.asVector(),
+				NE.asVector(),
+				E.asVector(),
+				SE.asVector(),
+				S.asVector(),
+				SW.asVector(),
+				W.asVector(),
+				NW.asVector()];
+	}
 
 	/**
 	 * Converts the given cardinal direction to a unit vector
