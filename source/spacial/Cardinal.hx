@@ -21,16 +21,16 @@ enum abstract Cardinal(Int) from Int to Int {
 	var NW = 315;
 	var NONE = -1;
 	
-	public static function allCardinalsVectors():Array<FlxVector>
+	public static function allCardinals():Array<Cardinal>
 	{
-		return [N.asVector(),
-				NE.asVector(),
-				E.asVector(),
-				SE.asVector(),
-				S.asVector(),
-				SW.asVector(),
-				W.asVector(),
-				NW.asVector()];
+		return [N,
+				NE,
+				E,
+				SE,
+				S,
+				SW,
+				W,
+				NW];
 	}
 
 	/**
