@@ -23,6 +23,7 @@ import signals.Lifecycle;
 import entities.Player;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import systems.ControlSystem;
 
 using extensions.FlxStateExt;
 
