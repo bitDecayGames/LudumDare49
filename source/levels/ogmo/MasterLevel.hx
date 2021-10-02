@@ -21,7 +21,8 @@ class MasterLevel extends FlxGroup {
 		loader.loadEntities((entityData) -> {
 			switch (entityData.name) {
 				case Room.OGMO_NAME:
-					var room = new Room(project, entityData.values.name);
+
+					var room = new Room(project, entityData.values.name, entityData.x, entityData.y, entityData.width, entityData.height);
 					rooms.push(room);
 					add(room);
 				default:
