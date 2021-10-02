@@ -72,7 +72,7 @@ class PlayState extends FlxTransitionableState {
 
 		nonCollidables.add(conveyor);
 
-		player = new Player(50, 50);
+		player = new Player(level.start.x, level.start.y);
 		collidables.add(player);
 		// END TODO move to ogmo
 
