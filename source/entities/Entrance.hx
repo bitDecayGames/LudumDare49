@@ -6,17 +6,14 @@ import helpers.Constants;
 
 class Entrance extends FlxSprite {
 	public static inline var OGMO_NAME = "entrance";
-	public final start:Bool = false;
 
 	var exit:Exit = null;
 
-	public function new(start:Bool) {
+	public function new() {
 		super();
 
 		makeGraphic(Constants.TILE_SIZE, Constants.TILE_SIZE, FlxColor.WHITE);
 		color = FlxColor.RED;
-
-		this.start = start;
 	}
 
 	public function setExit(value: Exit) {
@@ -31,11 +28,8 @@ class Entrance extends FlxSprite {
 	}
 
 	public function validateExit() {
-		if (start && exit != null) {
-			throw 'starting ${this} has exit set';
-		}
-		if (!start && exit == null) {
-			throw '${this} does not have exit set';
+		if (exit != null) {
+			throw '${this} has exit set';
 		}
 	}
 

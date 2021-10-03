@@ -61,7 +61,7 @@ class Room {
 			var obj:FlxSprite;
 			switch (entityData.name) {
 				case Entrance.OGMO_NAME:
-					var enter = new Entrance(entityData.values.start);
+					var enter = new Entrance();
 					entrances.push(enter);
 					obj = enter;
 				case Exit.OGMO_NAME:

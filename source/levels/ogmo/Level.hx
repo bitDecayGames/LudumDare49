@@ -3,13 +3,10 @@ package levels.ogmo;
 import states.PlayState.CollidableBundle;
 import entities.Entrance;
 import entities.Exit;
-import flixel.FlxG;
-import entities.HitBox;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import levels.ogmo.Room;
-import helpers.Constants;
 
 class Level extends FlxGroup {
 	public var latestRoom:Room = null;
@@ -74,7 +71,7 @@ class Level extends FlxGroup {
 
 		for (r in nameToRoom) {
 			for (ent in r.entrances) {
-				if (ent.start) {
+				if (r.name == firstRoomName) {
 					if (start != null) {
 						throw "level start already set";
 					}

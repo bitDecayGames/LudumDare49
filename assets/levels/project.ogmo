@@ -85,9 +85,7 @@
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": [],
-      "values": [
-        {"name": "start", "definition": "Boolean", "display": 0, "defaults": false}
-      ]
+      "values": []
     },
     {
       "exportID": "15206722",
