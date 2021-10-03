@@ -124,7 +124,8 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "name", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {"name": "name", "definition": "String", "display": 1, "defaults": "", "maxLength": 0, "trimWhitespace": true},
+        {"name": "start", "definition": "Boolean", "display": 0, "defaults": false}
       ]
     },
     {
@@ -162,7 +163,8 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "end", "definition": "Boolean", "display": 0, "defaults": false}
+        {"name": "end", "definition": "Boolean", "display": 0, "defaults": false},
+        {"name": "nextRoom", "definition": "String", "display": 2, "defaults": "", "maxLength": 0, "trimWhitespace": true}
       ]
     },
     {

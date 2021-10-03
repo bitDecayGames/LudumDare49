@@ -1,12 +1,16 @@
 package entities;
 
+
+import flixel.util.FlxSignal.FlxTypedSignal;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import helpers.Constants;
 
 class Exit extends FlxSprite {
 	public static inline var OGMO_NAME = "exit";
-	public final end:Bool;
+	public final end:Bool = false;
+
+	public final loadRoomSignal:FlxTypedSignal<String -> Void> = new FlxTypedSignal<String -> Void>();
 
 	var entrance:Entrance = null;
 

@@ -23,7 +23,7 @@
           "y": 48,
           "originX": 0,
           "originY": 0,
-          "values": {"start": false}
+          "values": {"start": true}
         },
         {
           "name": "exit",
@@ -33,7 +33,7 @@
           "y": 160,
           "originX": 0,
           "originY": 0,
-          "values": {"end": false}
+          "values": {"end": false, "nextRoom": ""}
         }
       ]
     },

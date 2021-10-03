@@ -66,8 +66,10 @@ class ControlSystem extends FlxBasic {
 
 		switch gameState {
 			case PlayerMovement:
+				// don't fast forward if all cores are charged
 				if (playerOnFastForward() && chargeSystem.anyCoresCharged()) {
 					setFastForwardSystemRuntimes(Constants.FF_SPEED);
+					movementSystem.handlePlayerMovement();
 					gameState = Cooling;
 				} else if (movementSystem.isIdle()) {
 					resetSystemRuntimes();

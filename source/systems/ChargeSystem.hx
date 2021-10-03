@@ -52,14 +52,26 @@ class ChargeSystem extends StateSystem {
 		return collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore)).filter(c -> c.fullyCharged());
 	}
 
+	public function areAllCharged() {
+		var allPowerCores = collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore));
+		var fullyChargedPowerCores = allPowerCores.filter(c -> c.fullyCharged());
+
+		return allPowerCores.length == fullyChargedPowerCores.length;
+	}
+
 	public function anyCoresCharged() {
 		var cores = collidables.members.filter(c -> Std.isOfType(c, PowerCore)).map(c -> cast(c, PowerCore));
 
+		var noCoresCharged = false;
 		for (core in cores) {
 			if (core.currentCharge > 0)
-				return true;
+				noCoresCharged = true;
 		}
 
-		return false;
+		if (areAllCharged() || noCoresCharged) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

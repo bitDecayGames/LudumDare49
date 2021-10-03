@@ -1,5 +1,6 @@
 package states;
 
+import flixel.math.FlxPoint;
 import depth.DepthUtil;
 import depth.DepthSprite;
 import entities.Block;
@@ -55,11 +56,12 @@ class PlayState extends FlxTransitionableState {
 		SetupCameras.SetupMainCamera(camera);
 
 		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables, uiObjs);
-		level = new Level(bundle);
+		level = new Level(AssetPaths.world1__json, bundle);
 		add(level);
 
 		player = new Player(level.start.x, level.start.y);
 		collidables.add(player);
+		camera.focusOn(FlxPoint.get(level.start.x, level.start.y));
 
 		add(new ActionLegend());
 		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY]);

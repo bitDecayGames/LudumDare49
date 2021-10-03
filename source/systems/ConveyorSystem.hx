@@ -1,5 +1,6 @@
 package systems;
 
+import flixel.FlxObject;
 import js.html.TableElement;
 import flixel.math.FlxPoint;
 import depth.DepthSprite;
@@ -55,10 +56,10 @@ class ConveyorSystem extends StateSystem {
 		}
 
 		// Get all collidable objets that are not on top of conveyors
-		var nonConveyorObjects = collidables.members.filter(c -> isNotWithinMapKey(cast(c, DepthSprite), conveyorMovableToDesiredPoint));
+		var nonConveyorObjects = collidables.members.filter(c -> isNotWithinMapKey(c, conveyorMovableToDesiredPoint));
 
 		// Get all player collidable objects that are not on top of conveyors
-		var nonConveyorPlayerCollidables = playerCollidables.members.filter(p -> isNotWithinMapKey(cast(p, DepthSprite), conveyorMovableToDesiredPoint));
+		var nonConveyorPlayerCollidables = playerCollidables.members.filter(p -> isNotWithinMapKey(p, conveyorMovableToDesiredPoint));
 
 		// Resolve objects on conveyors against all other collidable objects not on conveyors
 		for (conveyorMovable => targetPoint in conveyorMovableToDesiredPoint) {
@@ -97,7 +98,7 @@ class ConveyorSystem extends StateSystem {
 			forciblyStopRunning();
 	}
 
-	private function isNotWithinMapKey(inValue:DepthSprite, map:Map<DepthSprite, FlxPoint>):Bool {
+	private function isNotWithinMapKey(inValue:FlxObject, map:Map<DepthSprite, FlxPoint>):Bool {
 		for (value in map.keys()) {
 			if (inValue == value)
 				return false;

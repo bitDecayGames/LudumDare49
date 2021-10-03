@@ -12,25 +12,41 @@ import levels.ogmo.Room;
 import helpers.Constants;
 
 class Level extends FlxGroup {
-	public var rooms:Array<Room> = [];
+	public var latestRoom:Room = null;
+	var firstRoomName:String = null;
+	var nameToRoom:Map<String, Room>;
+
+	var bundle:CollidableBundle;
+	
 	public var entrances:FlxTypedGroup<Entrance>;
 	public var exits:FlxTypedGroup<Exit>;
 	public var start:Entrance;
 	public var end:Exit;
 
-	public function new(bundle:CollidableBundle) {
+	public function new(level:String, bundle:CollidableBundle) {
 		super();
+		this.bundle = bundle;
 
 		var project = AssetPaths.project__ogmo;
-		var level = AssetPaths.world1__json;
 
 		var loader = new FlxOgmo3Loader(project, level);
+
+		nameToRoom = new Map<String, Room>();
 
 		loader.loadEntities((entityData) -> {
 			switch (entityData.name) {
 				case Room.OGMO_NAME:
-					var room = new Room(project, entityData.values.name, entityData.x, entityData.y, entityData.width, entityData.height, bundle);
-					rooms.push(room);
+					var name = entityData.values.name;
+					var room = new Room(project, name, entityData.x, entityData.y, entityData.width, entityData.height);
+					nameToRoom[name] = room;
+
+					if (entityData.values.start) {
+						if (firstRoomName != null) {
+							throw 'duplicate start room. ${firstRoomName} already set, ${name} attempted to override';
+						}
+						
+						firstRoomName = name;
+					}
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${Type.getClassName(Type.getClass(this))}';
 			}
@@ -39,7 +55,24 @@ class Level extends FlxGroup {
 		entrances = new FlxTypedGroup<Entrance>();
 		exits = new FlxTypedGroup<Exit>();
 
-		for (r in rooms) {
+		add(entrances);
+		add(exits);
+
+		loadRoom(firstRoomName);
+	}
+
+	private function loadRoom(roomName: String) {
+		var room = nameToRoom[roomName];
+		latestRoom = room;
+
+		if (room.loaded) {
+			trace('Level.loadRoom: ${roomName} already loaded, skipping');
+			return;
+		}
+
+		room.load(bundle);
+
+		for (r in nameToRoom) {
 			for (ent in r.entrances) {
 				if (ent.start) {
 					if (start != null) {
@@ -56,45 +89,9 @@ class Level extends FlxGroup {
 					}
 					end = ex;
 				}
+				ex.loadRoomSignal.add(loadRoom);
 				exits.add(ex);
 			}
 		}
-
-		add(entrances);
-		add(exits);
-
-		// Links entrances and exits, validate
-		var hitbox = new HitBox(3 * Constants.TILE_SIZE, 3 * Constants.TILE_SIZE);
-		trace("starting entrance/exit linking...");
-		entrances.forEach((enterSpr) -> {
-			var enter = cast(enterSpr, Entrance);
-			hitbox.x = enter.x - Constants.TILE_SIZE;
-			hitbox.y = enter.y - Constants.TILE_SIZE;
-			trace(hitbox);
-			FlxG.overlap(exits, hitbox, (exitSpr, hitboxSpr) -> {
-				var exit = cast (exitSpr, Exit);
-				if (exit.getEntrance() != null && enter.getExit() != null) {
-					trace('${exit} & ${enter} already linked, skipping');
-					return;
-				}
-
-				trace('linking ${exit} & ${enter}');
-
-				exit.setEntrance(enter);
-				enter.setExit(exit);
-				trace('${exit} & ${enter} linked');
-			});
-		});
-
-
-		//JCT fix the validation for level loading
-		// trace("validating entrance/exit linking...");
-		// entrances.forEach((enter) -> {
-		// 	enter.validateExit();
-		// });
-		// exits.forEach((exit) -> {
-		// 	exit.validateEntrance();
-		// });
-		// trace("entrance/exit linking complete");
 	}
 }

@@ -1,7 +1,6 @@
 package levels.ogmo;
 
 import spacial.Cardinal;
-import ui.counter.Counter;
 import states.PlayState.CollidableBundle;
 import flixel.FlxSprite;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
@@ -20,15 +19,29 @@ import entities.FastForward;
 class Room {
 	public static inline var OGMO_NAME = "room";
 
+	public var name:String;
+	public var loaded:Bool = false;
+
+	var project:String;
+	var x:Int;
+	var y:Int;
+	var width:Int;
+	var height:Int;
+
 	// public var layer:FlxTilemap;
 	public var entrances:Array<Entrance> = [];
 	public var exits:Array<Exit> = [];
 
-	public function getErrorName() {
-		return Type.getClassName(Type.getClass(this));
+	public function new(project:String, name:String, x:Int, y:Int, width:Int, height:Int) {
+		this.project = project;
+		this.name = name;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 
-	public function new(project:String, name:String, x:Int, y:Int, width:Int, height:Int, bundle:CollidableBundle) {
+	public function load(bundle:CollidableBundle) {
 		var level = 'assets/levels/${name}.json';
 		var loader = new FlxOgmo3Loader(project, level);
 		// layer = loader.loadTilemap("<AssetPath to tilemap for layer>", "<layer name>");
@@ -108,5 +121,11 @@ class Room {
 
 			bundle.collidables.add(obj);
 		}, "collidables");
+
+		loaded = true;
+	}
+
+	public function getErrorName() {
+		return Type.getClassName(Type.getClass(this));
 	}
 }
