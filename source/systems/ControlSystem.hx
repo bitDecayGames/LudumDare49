@@ -46,14 +46,10 @@ class ControlSystem extends FlxBasic {
 		nonCollidables = _nonCollidables;
 
 		movementSystem = new MovementSystem(player, playerCollidables, collidables);
-		movementSystem.setRunningTimeDuration(Constants.PLAYER_SPEED);
 		coolingSystem = new CoolingSystem(collidables);
-		coolingSystem.setRunningTimeDuration(0.25);
 		conveyorSystem = new ConveyorSystem(player, playerCollidables, collidables, nonCollidables);
 		decaySystem = new DecaySystem(collidables);
-		decaySystem.setRunningTimeDuration(0.25);
         chargeSystem = new ChargeSystem(collidables);
-        chargeSystem.setRunningTimeDuration(0.25);
 
 		UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
 	}
