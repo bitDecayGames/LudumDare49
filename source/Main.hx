@@ -20,8 +20,9 @@ import states.PlayState;
 import states.LoganState;
 #elseif tanner
 import states.TannerState;
+#elseif mike
+import states.MikeState;
 #end
-
 #if model
 import states.ModelTest;
 #end
@@ -46,6 +47,8 @@ class Main extends Sprite {
 		startingState = LoganState;
 		#elseif tanner
 		startingState = TannerState;
+		#elseif mike
+		startingState = MikeState;
 		#end
 
 		#if model
