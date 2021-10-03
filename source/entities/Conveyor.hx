@@ -19,6 +19,8 @@ class Conveyor extends FlxSprite {
 		animation.add("go", [ for(i in 0...9) i], 10);
 		animation.play("stop");
 		cardFacing = _cardFacing;
+		angle = cardFacing - 90;
+
 	}
 
 	override public function update(delta:Float) {

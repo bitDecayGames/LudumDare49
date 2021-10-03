@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import spacial.Cardinal;
 import ui.counter.Counter;
 import states.PlayState.CollidableBundle;
 import flixel.FlxSprite;
@@ -66,12 +67,14 @@ class Room {
 			var obj:FlxSprite;
 			switch (entityData.name) {
 				case Conveyor.OGMO_NAME:
-					obj = new Conveyor(Cardinal.fromFloat(entityData.rotation));
+					var card = Cardinal.fromFloat(entityData.rotation);
+					trace("this card of this conveyor: " + card);
+					obj = new Conveyor(card);
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
-			obj.x = entityData.x + x;
-			obj.y = entityData.y + y;
+			obj.x = entityData.x + x - entityData.originX;
+			obj.y = entityData.y + y - entityData.originY;
 			bundle.nonCollidables.add(obj);
 		}, "noncollidables");
 
