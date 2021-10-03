@@ -9,7 +9,7 @@ class LegendTray extends FlxUI9SliceSprite {
 	private var padding:Float;
 
 	public function new(legendWidth:Int, legendItemHeight:Int, count:Int, padding:Float) {
-		super(0, 0, AssetPaths.tray__9__png, new Rectangle(0, 0, legendWidth + padding, legendItemHeight * count + padding), [4, 4, 12, 12]);
+		super(0, 0, AssetPaths.tray__9__png, new Rectangle(0, 0, legendWidth + padding, legendItemHeight * count + padding), [5, 5, 12, 12]);
 		this.legendItemHeight = legendItemHeight;
 		this.padding = padding;
 		setCount(count);

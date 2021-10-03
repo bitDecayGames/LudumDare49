@@ -64,7 +64,7 @@ class PlayState extends FlxTransitionableState {
 		camera.focusOn(FlxPoint.get(level.start.x, level.start.y));
 
 		add(new ActionLegend());
-		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY]);
+		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY, CHARGE]);
 		add(new MiniMap());
 
 		add(collidables);
