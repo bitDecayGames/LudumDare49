@@ -17,6 +17,9 @@ class CoolingSystem extends StateSystem
         super();
 
         collidables = _collidables;
+
+        defaultRunningTimeDuration = 0.25;
+        resetRunningTimeDuration();
     }
 
     override public function update(elapsed:Float) {

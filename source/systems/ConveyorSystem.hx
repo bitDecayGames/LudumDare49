@@ -30,6 +30,9 @@ class ConveyorSystem extends StateSystem
         playerCollidables = _playerCollidables;
         collidables = _collidables;
         nonCollidables = _nonCollidables;
+
+        defaultRunningTimeDuration = 1;
+        resetRunningTimeDuration();
     }
 
     override public function update(elapsed:Float) {
