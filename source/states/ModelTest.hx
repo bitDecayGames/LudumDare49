@@ -75,6 +75,14 @@ class ModelTest extends FlxState {
                 model.load_slices(AssetPaths.wall_round__png, 16, 16, 16);
             case "wall_square":
                 model.load_slices(AssetPaths.wall_square__png, 16, 16, 16);
+            case "ff_button":
+                model.load_slices(AssetPaths.ff_button__png, 16, 16, 16);
+                model.slice_offset = 1;
+                FlxTween.tween(model, {slice_offset: 1.5}, 2, 
+                    {
+                        type: FlxTweenType.PINGPONG,
+                        ease: FlxEase.quadInOut
+                    });
             case "smoke":
                 model.load_slices(AssetPaths.smoke__png, 8, 8, 4);
             default:
