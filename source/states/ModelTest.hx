@@ -75,6 +75,8 @@ class ModelTest extends FlxState {
                 model.load_slices(AssetPaths.wall_round__png, 16, 16, 16);
             case "wall_square":
                 model.load_slices(AssetPaths.wall_square__png, 16, 16, 16);
+            case "smoke":
+                model.load_slices(AssetPaths.smoke__png, 8, 8, 4);
             default:
         }
 

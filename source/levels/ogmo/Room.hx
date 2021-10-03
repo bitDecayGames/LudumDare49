@@ -78,7 +78,6 @@ class Room {
 			bundle.nonCollidables.add(obj);
 		}, "noncollidables");
 
-
 		// collidables
 		loader.loadEntities((entityData) -> {
 			var obj:Block;
