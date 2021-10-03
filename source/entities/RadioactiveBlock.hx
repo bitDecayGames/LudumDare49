@@ -1,5 +1,6 @@
 package entities;
 
+import flixel.FlxG;
 import ui.counter.Counter;
 import input.SimpleController;
 import input.InputCalcuator;

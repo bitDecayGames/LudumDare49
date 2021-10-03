@@ -1,5 +1,7 @@
 package systems;
 
+import helpers.Constants;
+import flixel.FlxG;
 import haxe.Exception;
 import entities.RadioactiveBlock;
 import entities.RadioactiveCooler;
@@ -16,7 +18,7 @@ class CoolingSystem extends StateSystem {
 
 		collidables = _collidables;
 
-		defaultRunningTimeDuration = 0.25;
+		defaultRunningTimeDuration = Constants.COOLING_SYSTEM_DEFAULT_RUNTIME;
 		resetRunningTimeDuration();
 	}
 

@@ -1,5 +1,6 @@
 package systems;
 
+import flixel.FlxG;
 import flixel.FlxObject;
 import js.html.TableElement;
 import flixel.math.FlxPoint;
@@ -28,7 +29,7 @@ class ConveyorSystem extends StateSystem {
 		collidables = _collidables;
 		nonCollidables = _nonCollidables;
 
-		defaultRunningTimeDuration = 1;
+		defaultRunningTimeDuration = Constants.CONVEYOR_SYSTEM_DEFAULT_RUNTIME;
 		resetRunningTimeDuration();
 	}
 
@@ -88,7 +89,8 @@ class ConveyorSystem extends StateSystem {
 		var conveyorWorkNeeded = false;
 		for (object => point in conveyorMovableToDesiredPoint) {
 			if (!object.overlapsPoint(point)) {
-				FlxTween.linearMotion(object, object.x, object.y, point.x - (Constants.TILE_SIZE / 2), point.y - (Constants.TILE_SIZE / 2));
+				FlxTween.linearMotion(object, object.x, object.y, point.x - (Constants.TILE_SIZE / 2), point.y - (Constants.TILE_SIZE / 2),
+					runningTimeDuration);
 				conveyorWorkNeeded = true;
 			}
 		}
