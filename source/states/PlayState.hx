@@ -1,5 +1,7 @@
 package states;
 
+import flixel.tweens.FlxTween;
+import levels.ogmo.Room;
 import flixel.math.FlxPoint;
 import depth.DepthUtil;
 import depth.DepthSprite;
@@ -57,11 +59,12 @@ class PlayState extends FlxTransitionableState {
 
 		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables, uiObjs);
 		level = new Level(AssetPaths.world1__json, bundle);
+		level.roomLoadedSignal.add(setCameraLocationRotation);
+		level.loadFirstRoom();
 		add(level);
 
 		player = new Player(level.start.x, level.start.y);
 		collidables.add(player);
-		camera.focusOn(FlxPoint.get(level.start.x, level.start.y));
 
 		add(new ActionLegend());
 		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY, CHARGE]);
@@ -88,9 +91,9 @@ class PlayState extends FlxTransitionableState {
 		sortGroup.sort(DepthUtil.sort_by_depth);
 		level.checkExitCollision(player);
 
-		// if(controlSystem.lost()) {
-
-		// }
+		if(controlSystem.lost()) {
+			
+		}
 	}
 
 	override public function onFocusLost() {
@@ -101,5 +104,21 @@ class PlayState extends FlxTransitionableState {
 	override public function onFocus() {
 		super.onFocus();
 		this.handleFocus();
+	}
+
+	private function setCameraLocationRotation(r: Room){
+
+		camera.focusOn(r.cameraPosition);
+
+
+		FlxTween.tween(camera, {
+			angle: r.cameraRotation
+		});
+
+		FlxTween.tween(camera.scroll, {
+			x: r.cameraPosition.x - camera.width * 0.5,
+			y: r.cameraPosition.y - camera.height * 0.5
+		});
+
 	}
 }

@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import flixel.util.FlxSignal.FlxTypedSignal;
 import entities.Player;
 import states.PlayState.CollidableBundle;
 import entities.Entrance;
@@ -21,6 +22,8 @@ class Level extends FlxGroup {
 	public var exits:FlxTypedGroup<Exit>;
 	public var start:Entrance;
 	public var end:Exit;
+
+	public final roomLoadedSignal: FlxTypedSignal<(Room)-> Void> = new FlxTypedSignal<(Room)-> Void>();
 
 	public function new(level:String, bundle:CollidableBundle) {
 		super();
@@ -57,7 +60,6 @@ class Level extends FlxGroup {
 		add(entrances);
 		add(exits);
 
-		loadRoom(firstRoomName);
 	}
 
 	public function checkExitCollision(player:Player) {
@@ -114,5 +116,10 @@ class Level extends FlxGroup {
 			}
 			exits.add(ex);
 		}
+		roomLoadedSignal.dispatch(room);
+	}
+
+	public function loadFirstRoom() {
+		loadRoom(firstRoomName);
 	}
 }

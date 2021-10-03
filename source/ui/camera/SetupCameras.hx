@@ -25,7 +25,7 @@ class SetupCameras {
 		FlxG.camera.x = (FlxG.camera.width - ogWidth) / -2;
 		FlxG.camera.y = (FlxG.camera.height - ogHeight) / -2;
 		FlxG.cameras.setDefaultDrawTarget(FlxG.camera, true);
-		FlxG.camera.zoom = 0.5;
+		FlxG.camera.zoom = 1.5;
 
 		FlxG.game.setFilters([new ShaderFilter(new FlxShader())]);
 		FlxG.game.stage.quality = StageQuality.LOW;
