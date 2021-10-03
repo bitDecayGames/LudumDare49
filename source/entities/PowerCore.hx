@@ -1,5 +1,6 @@
 package entities;
 
+import helpers.Constants;
 import input.SimpleController;
 import input.InputCalcuator;
 import flixel.util.FlxColor;
@@ -13,9 +14,7 @@ class PowerCore extends Block {
 
 	public function new(_maxCharge:Int = 10) {
 		super(true);
-		// makeGraphic(20, 20, FlxColor.WHITE);
-		// color = FlxColor.BLUE;
-
+		load_slices(AssetPaths.battery__png, Constants.TILE_SIZE, Constants.TILE_SIZE, 16);
 		maxCharge = _maxCharge;
 	}
 
