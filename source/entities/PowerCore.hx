@@ -1,5 +1,8 @@
 package entities;
 
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween.FlxTweenType;
+import flixel.tweens.FlxTween;
 import helpers.Constants;
 import input.SimpleController;
 import input.InputCalcuator;
@@ -16,6 +19,12 @@ class PowerCore extends Block {
 		super(true);
 		load_slices(AssetPaths.battery__png, Constants.TILE_SIZE, Constants.TILE_SIZE, 16);
 		maxCharge = _maxCharge;
+		slice_offset = 1;
+		FlxTween.tween(this, {slice_offset: 1.5}, 3, 
+			{
+				type: FlxTweenType.PINGPONG,
+				ease: FlxEase.quadInOut
+			});
 	}
 
 	override public function update(delta:Float) {
