@@ -1,5 +1,6 @@
 package systems;
 
+import entities.FastForward;
 import signals.UI;
 import ui.legend.ActionStep;
 import haxe.Exception;
@@ -34,7 +35,7 @@ class ControlSystem extends FlxBasic {
 	var coolingSystem:CoolingSystem;
 	var conveyorSystem:ConveyorSystem;
 	var decaySystem:DecaySystem;
-    var chargeSystem:ChargeSystem;
+	var chargeSystem:ChargeSystem;
 
 	public function new(_player:Player, _playerCollidables:FlxTypedGroup<Block>, _collidables:FlxTypedGroup<FlxSprite>,
 			_nonCollidables:FlxTypedGroup<FlxSprite>) {
@@ -49,7 +50,7 @@ class ControlSystem extends FlxBasic {
 		coolingSystem = new CoolingSystem(collidables);
 		conveyorSystem = new ConveyorSystem(player, playerCollidables, collidables, nonCollidables);
 		decaySystem = new DecaySystem(collidables);
-        chargeSystem = new ChargeSystem(collidables);
+		chargeSystem = new ChargeSystem(collidables);
 
 		UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
 	}
@@ -60,12 +61,16 @@ class ControlSystem extends FlxBasic {
 		movementSystem.update(elapsed);
 		coolingSystem.update(elapsed);
 		conveyorSystem.update(elapsed);
-        decaySystem.update(elapsed);
-        chargeSystem.update(elapsed);
+		decaySystem.update(elapsed);
+		chargeSystem.update(elapsed);
 
 		switch gameState {
 			case PlayerMovement:
-				if (movementSystem.isIdle()) {
+				if (playerOnFastForward() && chargeSystem.anyCoresCharged()) {
+					setFastForwardSystemRuntimes(Constants.FF_SPEED);
+					gameState = Cooling;
+				} else if (movementSystem.isIdle()) {
+					resetSystemRuntimes();
 					movementSystem.handlePlayerMovement();
 				} else if (movementSystem.isDone()) {
 					gameState = Cooling;
@@ -96,16 +101,39 @@ class ControlSystem extends FlxBasic {
 				}
 
 			case Charging:
-                if (chargeSystem.isIdle()) {
-                    chargeSystem.handleCharge();
-                } else if (chargeSystem.isDone()) {
-                    gameState = PlayerMovement;
-                    UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
-                }
+				if (chargeSystem.isIdle()) {
+					chargeSystem.handleCharge();
+				} else if (chargeSystem.isDone()) {
+					gameState = PlayerMovement;
+					UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
+				}
 
 			default:
-				throw new Exception("Unhandled game state");
+				throw new Exception("Unhandled game state.");
 		}
+	}
+
+	private function resetSystemRuntimes() {
+		coolingSystem.resetRunningTimeDuration();
+		conveyorSystem.resetRunningTimeDuration();
+		decaySystem.resetRunningTimeDuration();
+		chargeSystem.resetRunningTimeDuration();
+	}
+
+	private function setFastForwardSystemRuntimes(percent:Float) {
+		coolingSystem.setRunningTimeDurationPercent(percent);
+		conveyorSystem.setRunningTimeDurationPercent(percent);
+		decaySystem.setRunningTimeDurationPercent(percent);
+		chargeSystem.setRunningTimeDurationPercent(percent);
+	}
+
+	private function playerOnFastForward() {
+		var fastForwardTiles = collidables.members.filter(c -> Std.isOfType(c, FastForward));
+		for (ffTile in fastForwardTiles) {
+			return (player.overlapsPoint(ffTile.getMidpoint()));
+		}
+
+		return false;
 	}
 
 	// Statics

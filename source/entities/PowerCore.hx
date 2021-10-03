@@ -12,7 +12,7 @@ import flixel.FlxSprite;
 class PowerCore extends Block {
 	public static inline var OGMO_NAME = "core";
 
-	var currentCharge:Int = 0;
+	public var currentCharge:Int = 0;
 	var maxCharge:Int = 0;
 
 	public function new(_maxCharge:Int = 10) {

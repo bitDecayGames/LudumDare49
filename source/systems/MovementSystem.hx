@@ -25,8 +25,8 @@ class MovementSystem extends StateSystem {
 		playerCollidables = _playerCollidables;
 		collidables = _collidables;
 
-        defaultRunningTimeDuration = Constants.PLAYER_SPEED;
-        resetRunningTimeDuration();
+		defaultRunningTimeDuration = Constants.PLAYER_SPEED;
+		resetRunningTimeDuration();
 	}
 
 	override public function update(elapsed:Float) {
