@@ -18,7 +18,7 @@ jobs:
       - name: Make html5 build
         uses: bitDecayGames/lime-build-action@v0.0.37
         with:
-          buildArgs: -D API_KEY=${{ secrets.ANALYTICS_TOKEN }} -D dev_analytics -debug
+          buildArgs: -D API_KEY=${{ secrets.ANALYTICS_TOKEN }} -D dev_analytics
 
       - name: Upload html5 zip artifact
         uses: actions/upload-artifact@v2
