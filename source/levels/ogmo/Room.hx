@@ -11,6 +11,7 @@ import entities.Conveyor;
 import entities.Wall;
 import entities.RadioactiveBlock;
 import entities.RadioactiveCooler;
+import entities.PowerCore;
 
 class Room {
 	public static inline var OGMO_NAME = "room";
@@ -88,6 +89,8 @@ class Room {
 					obj = new RadioactiveCooler();
 				case RadioactiveBlock.OGMO_NAME:
 					obj = new RadioactiveBlock(entityData.values.decayAmount, entityData.values.maxLife);
+				case PowerCore.OGMO_NAME:
+					obj = new PowerCore(entityData.values.maxCharge);
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
