@@ -6,7 +6,7 @@ import helpers.Constants;
 
 class Entrance extends FlxSprite {
 	public static inline var OGMO_NAME = "entrance";
-	public final start:Bool;
+	public final start:Bool = false;
 
 	var exit:Exit = null;
 

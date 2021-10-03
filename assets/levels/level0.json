@@ -33,7 +33,7 @@
           "y": 64,
           "originX": 0,
           "originY": 0,
-          "values": {"end": false}
+          "values": {"end": false, "nextRoom": ""}
         }
       ]
     },
