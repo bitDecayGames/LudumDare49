@@ -1,5 +1,13 @@
 package states;
 
+import ui.camera.SetupCameras;
+import helpers.Constants;
+import systems.ControlSystem;
+import entities.Conveyor;
+import entities.RadioactiveCooler;
+import entities.RadioactiveBlock;
+import entities.Wall;
+import entities.Block;
 import dialogmanager.DialogManager;
 import flixel.text.FlxText;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -26,51 +34,130 @@ using extensions.FlxStateExt;
 
 class TannerState extends FlxTransitionableState {
 	var player:Player;
+	var playerOff:Player;
 
 	var dialogManager:DialogManager;
 	var sirenLight:FlxSprite;
 
+	var controlSystem:ControlSystem;
+	var playerCollidables:FlxTypedGroup<Block> = new FlxTypedGroup();
+	var collidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
+	var nonCollidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
+
 	// SFX
 	var typeSoundId = "Typewriter";
+	var sirenId = "siren";
+	var lowPass = false;
 
 	override public function create() {
 		super.create();
 		Lifecycle.startup.dispatch();
+
+		SetupCameras.SetupMainCamera(camera);
+		SetupCameras.SetupUICamera();
 
 		FlxG.game.setFilters([new ShaderFilter(new FlxShader())]);
 		FlxG.game.stage.quality = StageQuality.LOW;
 		camera.bgColor = FlxColor.GRAY;
 
 		FlxG.camera.pixelPerfectRender = true;
-	
-		sirenLight = new FlxSprite(0,0);
-		sirenLight.makeGraphic(FlxG.width, FlxG.height, FlxColor.RED);
-		sirenLight.alpha = .8;
-		add(sirenLight);
-
-		FmodManager.PlaySong(FmodSongs.EmergencyPowerActivated);
-		FmodManager.PlaySoundOneShot(FmodSFX.Siren);	
-		FlxTween.tween(sirenLight, {alpha: 0}, 2, {
-			type: FlxTweenType.LOOPING,
-			onComplete: function(_)
-			{
-				FmodManager.PlaySoundOneShot(FmodSFX.Siren);	
-			}
-		});
 
 		var dialgs = new Map<String, Array<String>>();
 		dialgs["Intro"] = ["Intercom: System power at 0%", "Intercom: Meltdown imminent", "Intercom: Engaging all available Pocobots to recharge facitility power cores",
 		 "Pocobot: ...", "Pocobot: .................powering on", "Pocobot: beep boop", "Pocobot: Power core straight ahead", "I must do my duty"];
-		dialogManager = new DialogManager(dialgs, this, this.camera, FlxKey.SPACE, 
+		dialogManager = new DialogManager(dialgs, this, SetupCameras.uiCamera, FlxKey.SPACE, 
 			() -> {FmodManager.PlaySoundAndAssignId(FmodSFX.Typewriter, typeSoundId);}, 
 			() -> {FmodManager.StopSoundImmediately(typeSoundId);});
 		dialogManager.loadDialog("Intro");
 
+
+		var wall = new Wall(669 + Constants.TILE_SIZE, 50);
+		var radBlock = new RadioactiveBlock(1, 1000);
+		radBlock.setPosition(669, 50);
+
+		var radCooler = new RadioactiveCooler();
+		radCooler.setPosition(669+(Constants.TILE_SIZE * 3), 50);
+
+		var conveyor = new Conveyor();
+		conveyor.setPosition(669+(Constants.TILE_SIZE * 3), 50+(Constants.TILE_SIZE * 5));
+		
+		collidables.add(wall);
+		playerCollidables.add(wall);
+
+		collidables.add(radBlock);
+		playerCollidables.add(radBlock);
+
+		collidables.add(radCooler);
+		playerCollidables.add(radCooler);
+
+		nonCollidables.add(conveyor);
+
+		player = new Player(50, 50);
+		playerOff = new Player(50, 50, AssetPaths.player_off__png);
+		
+		collidables.add(player);
+		collidables.add(playerOff);
+
+
+		// test = new DepthSprite(32, 32);
+		// test.load_slices(AssetPaths.test__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
+		// test.angle = Math.random() * 360;
+		// test.slice_offset = 0.5;
+		add(collidables);
+		add(playerCollidables);
+		add(nonCollidables);
+
+		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
+		controlSystem.playerIscontrollable = false;
+		add(controlSystem);
+
+			
+		sirenLight = new FlxSprite(FlxG.width*-5, FlxG.height*-5);
+		sirenLight.makeGraphic(FlxG.width*10, FlxG.height*10, FlxColor.RED);
+		sirenLight.alpha = .8;
+		add(sirenLight);
+
+		FmodManager.PlaySong(FmodSongs.EmergencyPowerActivated);
+		FmodManager.PlaySoundWithReference(FmodSFX.Siren);	
+		FlxTween.tween(sirenLight, {alpha: 0}, 2, {
+			type: FlxTweenType.LOOPING,
+			onComplete: function(_)
+			{
+				FmodManager.PlaySoundAndAssignId(FmodSFX.Siren, sirenId);	
+			}
+		});
+		
+        FlxG.camera.zoom = 2;
+		camera.angle = -90;
+		FlxG.camera.follow(player);
 	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 		dialogManager.update(elapsed);
+
+		FlxG.watch.addQuick("ID", dialogManager.getCurrentDialogPage());
+
+		if(dialogManager.getCurrentDialogPage() == 3) {
+			if(!lowPass) {
+				FlxTween.tween(camera, {zoom: 4}, 3, {});
+			}
+			lowPass = true;
+		}
+		if(dialogManager.getCurrentDialogPage() == 8) {
+			if(lowPass) {
+				FlxTween.tween(camera, {zoom: 2}, 1, {});
+			}
+			lowPass = false;
+		}
+
+		if(lowPass){
+			FmodManager.SetEventParameterOnSong("LowPass", 1);
+			FmodManager.SetEventParameterOnSound(sirenId, "LowPass", 1);
+		} else {
+			FmodManager.SetEventParameterOnSong("LowPass", 0);
+			FmodManager.SetEventParameterOnSound(sirenId, "LowPass", 0);
+		}
 	}
 
 	override public function onFocusLost() {
