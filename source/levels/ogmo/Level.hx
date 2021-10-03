@@ -22,7 +22,7 @@ class Level extends FlxGroup {
 		super();
 
 		var project = AssetPaths.project__ogmo;
-		var level = AssetPaths.master__json;
+		var level = AssetPaths.world1__json;
 
 		var loader = new FlxOgmo3Loader(project, level);
 
@@ -86,13 +86,15 @@ class Level extends FlxGroup {
 			});
 		});
 
-		trace("validating entrance/exit linking...");
-		entrances.forEach((enter) -> {
-			enter.validateExit();
-		});
-		exits.forEach((exit) -> {
-			exit.validateEntrance();
-		});
-		trace("entrance/exit linking complete");
+
+		//JCT fix the validation for level loading
+		// trace("validating entrance/exit linking...");
+		// entrances.forEach((enter) -> {
+		// 	enter.validateExit();
+		// });
+		// exits.forEach((exit) -> {
+		// 	exit.validateEntrance();
+		// });
+		// trace("entrance/exit linking complete");
 	}
 }

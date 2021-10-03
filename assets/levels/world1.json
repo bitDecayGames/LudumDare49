@@ -1,0 +1,78 @@
+{
+  "ogmoVersion": "3.4.0",
+  "width": 768,
+  "height": 544,
+  "offsetX": 0,
+  "offsetY": 0,
+  "layers": [
+    {
+      "name": "objects",
+      "_eid": "15112221",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 48,
+      "gridCellsY": 34,
+      "entities": []
+    },
+    {
+      "name": "rooms",
+      "_eid": "15208123",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 48,
+      "gridCellsY": 34,
+      "entities": [
+        {
+          "name": "room",
+          "id": 0,
+          "_eid": "15206722",
+          "x": 0,
+          "y": 0,
+          "width": 208,
+          "height": 144,
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": "level0"}
+        },
+        {
+          "name": "room",
+          "id": 1,
+          "_eid": "15206722",
+          "x": 208,
+          "y": 48,
+          "width": 176,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": "level1"}
+        }
+      ]
+    },
+    {
+      "name": "noncollidables",
+      "_eid": "21843015",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 48,
+      "gridCellsY": 34,
+      "entities": []
+    },
+    {
+      "name": "collidables",
+      "_eid": "21846453",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 48,
+      "gridCellsY": 34,
+      "entities": []
+    }
+  ]
+}
