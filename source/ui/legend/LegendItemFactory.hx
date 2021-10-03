@@ -26,7 +26,7 @@ class LegendItemFactory {
 			spr.camera = SetupCameras.uiCamera;
 			spr.cameras = [SetupCameras.uiCamera];
 		}
-		spr.load_slices(AssetPaths.test__png, 16, 16, 16);
+		spr.load_slices(AssetPaths.player__png, 16, 16, 16);
 		return new LegendItem(spr, "MOVEMENT", 0);
 	}
 
@@ -36,7 +36,7 @@ class LegendItemFactory {
 			spr.camera = SetupCameras.uiCamera;
 			spr.cameras = [SetupCameras.uiCamera];
 		}
-		spr.load_slices(AssetPaths.test__png, 16, 16, 16);
+		spr.load_slices(AssetPaths.cooler_block__png, 16, 16, 16);
 		return new LegendItem(spr, "COOLING", 0);
 	}
 
@@ -46,7 +46,7 @@ class LegendItemFactory {
 			spr.camera = SetupCameras.uiCamera;
 			spr.cameras = [SetupCameras.uiCamera];
 		}
-		spr.load_slices(AssetPaths.test__png, 16, 16, 16);
+		spr.load_slices(AssetPaths.conveyor__png, 16, 16, 1);
 		return new LegendItem(spr, "CONVEYOR", 0);
 	}
 
@@ -56,7 +56,7 @@ class LegendItemFactory {
 			spr.camera = SetupCameras.uiCamera;
 			spr.cameras = [SetupCameras.uiCamera];
 		}
-		spr.load_slices(AssetPaths.test__png, 16, 16, 16);
+		spr.load_slices(AssetPaths.nuke__png, 16, 16, 16);
 		return new LegendItem(spr, "DECAY", 0);
 	}
 }
