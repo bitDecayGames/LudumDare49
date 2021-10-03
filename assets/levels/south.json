@@ -10,10 +10,10 @@
       "_eid": "15112221",
       "offsetX": 0,
       "offsetY": 0,
-      "gridCellWidth": 8,
-      "gridCellHeight": 8,
-      "gridCellsX": 16,
-      "gridCellsY": 16,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 8,
+      "gridCellsY": 8,
       "entities": [
         {
           "name": "entrance",
@@ -40,6 +40,28 @@
     {
       "name": "rooms",
       "_eid": "15208123",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 8,
+      "gridCellsY": 8,
+      "entities": []
+    },
+    {
+      "name": "noncollidables",
+      "_eid": "21843015",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 8,
+      "gridCellsY": 8,
+      "entities": []
+    },
+    {
+      "name": "collidables",
+      "_eid": "21846453",
       "offsetX": 0,
       "offsetY": 0,
       "gridCellWidth": 16,

@@ -10,10 +10,10 @@
       "_eid": "15112221",
       "offsetX": 0,
       "offsetY": 0,
-      "gridCellWidth": 8,
-      "gridCellHeight": 8,
-      "gridCellsX": 194,
-      "gridCellsY": 106,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 97,
+      "gridCellsY": 53,
       "entities": []
     },
     {
@@ -75,6 +75,28 @@
           "values": {"name": "se"}
         }
       ]
+    },
+    {
+      "name": "noncollidables",
+      "_eid": "21843015",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 97,
+      "gridCellsY": 53,
+      "entities": []
+    },
+    {
+      "name": "collidables",
+      "_eid": "21846453",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 97,
+      "gridCellsY": 53,
+      "entities": []
     }
   ]
 }

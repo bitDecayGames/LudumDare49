@@ -5,7 +5,8 @@ import input.InputCalcuator;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
-class RadioactiveCooler extends Block{
+class RadioactiveCooler extends Block {
+	public static inline var OGMO_NAME = "cooler";
 
 	public var coolingAmount:Int = 0;
 	public var radius:Int = 0;
