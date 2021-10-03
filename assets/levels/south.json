@@ -19,7 +19,7 @@
           "name": "entrance",
           "id": 0,
           "_eid": "15149497",
-          "x": 56,
+          "x": 64,
           "y": 0,
           "originX": 0,
           "originY": 0,
@@ -30,7 +30,7 @@
           "id": 1,
           "_eid": "15357899",
           "x": 112,
-          "y": 56,
+          "y": 64,
           "originX": 0,
           "originY": 0,
           "values": {"end": false}
