@@ -88,9 +88,9 @@ class PlayState extends FlxTransitionableState {
 		sortGroup.sort(DepthUtil.sort_by_depth);
 		level.checkExitCollision(player);
 
-		if(controlSystem.lost()) {
+		// if(controlSystem.lost()) {
 
-		}
+		// }
 	}
 
 	override public function onFocusLost() {
