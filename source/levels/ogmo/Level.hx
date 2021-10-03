@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import entities.Player;
 import states.PlayState.CollidableBundle;
 import entities.Entrance;
 import entities.Exit;
@@ -7,6 +8,7 @@ import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import levels.ogmo.Room;
+import flixel.FlxG;
 
 class Level extends FlxGroup {
 	public var latestRoom:Room = null;
@@ -58,6 +60,31 @@ class Level extends FlxGroup {
 		loadRoom(firstRoomName);
 	}
 
+	public function checkExitCollision(player:Player) {
+		if (!latestRoom.areAllCoresCharged()) {
+			return;
+		}
+
+		for (ex in latestRoom.exits) {
+			var isGameWon = false;
+			var moveToNextRoom = false;
+			FlxG.overlap(ex, player, (exSpr, playerSpr) -> {
+				if (ex.end) {
+					isGameWon = true;
+					return;
+				}
+				moveToNextRoom = true;
+			});
+
+			if (isGameWon) {
+				throw 'TODO Game won fill me in';
+			}
+			if (moveToNextRoom) {
+				loadRoom(ex.nextRoom);
+			}
+		}
+	}
+
 	private function loadRoom(roomName: String) {
 		var room = nameToRoom[roomName];
 		latestRoom = room;
@@ -69,26 +96,23 @@ class Level extends FlxGroup {
 
 		room.load(bundle);
 
-		for (r in nameToRoom) {
-			for (ent in r.entrances) {
-				if (r.name == firstRoomName) {
-					if (start != null) {
-						throw "level start already set";
-					}
-					start = ent;
+		for (ent in room.entrances) {
+			if (room.name == firstRoomName) {
+				if (start != null) {
+					throw 'level start already set. room ${room.name}, first room ${firstRoomName}';
 				}
-				entrances.add(ent);
+				start = ent;
 			}
-			for (ex in r.exits) {
-				if (ex.end) {
-					if (end != null) {
-						throw "level end already set";
-					}
-					end = ex;
+			entrances.add(ent);
+		}
+		for (ex in room.exits) {
+			if (ex.end) {
+				if (end != null) {
+					throw "level end already set";
 				}
-				ex.loadRoomSignal.add(loadRoom);
-				exits.add(ex);
+				end = ex;
 			}
+			exits.add(ex);
 		}
 	}
 }

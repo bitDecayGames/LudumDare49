@@ -1,7 +1,5 @@
 package entities;
 
-
-import flixel.util.FlxSignal.FlxTypedSignal;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import helpers.Constants;
@@ -9,18 +7,18 @@ import helpers.Constants;
 class Exit extends FlxSprite {
 	public static inline var OGMO_NAME = "exit";
 	public final end:Bool = false;
-
-	public final loadRoomSignal:FlxTypedSignal<String -> Void> = new FlxTypedSignal<String -> Void>();
+	public final nextRoom:String = "FILL_ME";
 
 	var entrance:Entrance = null;
 
-	public function new(end:Bool) {
+	public function new(end:Bool, nextRoom:String) {
 		super();
 
 		makeGraphic(Constants.TILE_SIZE, Constants.TILE_SIZE, FlxColor.WHITE);
 		color = FlxColor.GREEN;
 
 		this.end = end;
+		this.nextRoom = nextRoom;
 	}
 
 	public function setEntrance(value: Entrance) {
