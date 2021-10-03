@@ -18,8 +18,8 @@ class RadioactiveBlock extends Block {
 
 	public function new(_decayAmount:Int = 1, _maxLife:Int = 10) {
 		super(true);
-		// makeGraphic(20, 20, FlxColor.WHITE);
-		// color = FlxColor.BLUE;
+		
+		load_slices(AssetPaths.nuke__png, 16, 16, 16);
 
 		decayAmount = _decayAmount;
 		maxLife = _maxLife;

@@ -1,5 +1,6 @@
 package states;
 
+import depth.DepthUtil;
 import depth.DepthSprite;
 import entities.Block;
 import entities.Player;
@@ -44,6 +45,8 @@ class PlayState extends FlxTransitionableState {
 	var nonCollidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 	var uiObjs:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 
+	var sortGroup:FlxTypedGroup<DepthSprite> = new FlxTypedGroup();
+
 	override public function create() {
 		super.create();
 
@@ -67,6 +70,11 @@ class PlayState extends FlxTransitionableState {
 		add(nonCollidables);
 		add(uiObjs);
 		add(test);
+		add(sortGroup);
+
+		for (m in playerCollidables.members) {
+			sortGroup.add(m);
+		}
 
 		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
 		add(controlSystem);
@@ -74,6 +82,8 @@ class PlayState extends FlxTransitionableState {
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
+
+		sortGroup.sort(DepthUtil.sort_by_depth);
 	}
 
 	override public function onFocusLost() {
