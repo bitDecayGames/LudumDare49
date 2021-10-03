@@ -9,6 +9,7 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
 class Wall extends Block {
+	public static inline var OGMO_NAME = "wall";
 
 	public function new(x:Float = 0, y:Float = 0) {
 		super(x, y, false);

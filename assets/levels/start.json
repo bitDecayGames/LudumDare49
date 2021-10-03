@@ -10,17 +10,17 @@
       "_eid": "15112221",
       "offsetX": 0,
       "offsetY": 0,
-      "gridCellWidth": 8,
-      "gridCellHeight": 8,
-      "gridCellsX": 32,
-      "gridCellsY": 16,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 16,
+      "gridCellsY": 8,
       "entities": [
         {
           "name": "entrance",
           "id": 0,
           "_eid": "15149497",
           "x": 0,
-          "y": 56,
+          "y": 48,
           "originX": 0,
           "originY": 0,
           "values": {"start": true}
@@ -29,7 +29,7 @@
           "name": "exit",
           "id": 1,
           "_eid": "15357899",
-          "x": 184,
+          "x": 192,
           "y": 112,
           "originX": 0,
           "originY": 0,
@@ -47,6 +47,53 @@
       "gridCellsX": 16,
       "gridCellsY": 8,
       "entities": []
+    },
+    {
+      "name": "noncollidables",
+      "_eid": "21843015",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 16,
+      "gridCellsY": 8,
+      "entities": [
+        {"name": "conveyor", "id": 0, "_eid": "21866260", "x": 144, "y": 96, "originX": 0, "originY": 0}
+      ]
+    },
+    {
+      "name": "collidables",
+      "_eid": "21846453",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 16,
+      "gridCellsY": 8,
+      "entities": [
+        {"name": "wall", "id": 0, "_eid": "21846068", "x": 96, "y": 32, "originX": 0, "originY": 0},
+        {
+          "name": "radioactive",
+          "id": 1,
+          "_eid": "21853546",
+          "x": 80,
+          "y": 32,
+          "originX": 0,
+          "originY": 0,
+          "values": {"decayAmount": 1, "maxLife": 10}
+        },
+        {"name": "cooler", "id": 2, "_eid": "21850468", "x": 112, "y": 32, "originX": 0, "originY": 0},
+        {
+          "name": "core",
+          "id": 3,
+          "_eid": "22253844",
+          "x": 144,
+          "y": 32,
+          "originX": 0,
+          "originY": 0,
+          "values": {"maxCharge": 10}
+        }
+      ]
     }
   ]
 }

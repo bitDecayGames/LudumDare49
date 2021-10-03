@@ -8,6 +8,7 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
 class Conveyor extends FlxSprite {
+	public static inline var OGMO_NAME = "conveyor";
 
 	public var cardFacing:Cardinal;
 

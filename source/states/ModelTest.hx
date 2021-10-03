@@ -48,11 +48,21 @@ class ModelTest extends FlxState {
         FlxG.camera.zoom = 3;
 
         model = new DepthSprite(FlxG.width / 2 - 8, FlxG.height / 2 - 8);
+        model.slice_offset = 0.5;
+
         add(model);
         var define = Macros.getDefine("obj");
         var modelName = define.substr(0, Std.int(define.length / 2));
         trace(modelName);
         switch(modelName) {
+            case "battery":
+                model.load_slices(AssetPaths.battery__png, 16, 16, 16);
+                model.slice_offset = 1;
+                FlxTween.tween(model, {slice_offset: 1.5}, 3, 
+                    {
+                        type: FlxTweenType.PINGPONG,
+                        ease: FlxEase.quadInOut
+                    });
             case "player":
                 model.load_slices(AssetPaths.player__png, 16, 16, 24);
             case "cooler":
@@ -67,7 +77,6 @@ class ModelTest extends FlxState {
                 model.load_slices(AssetPaths.wall_square__png, 16, 16, 16);
             default:
         }
-        model.slice_offset = 0.5;
 
         FlxG.watch.add(model, "slice_offset", "Depth: ");
 	}
@@ -107,6 +116,10 @@ class ModelTest extends FlxState {
         if (FlxG.keys.pressed.D) {
             camera.angle -=  30 * elapsed;
             // model.z -=  30 * elapsed;
+        }
+
+        if (FlxG.keys.pressed.B) {
+            model.load_slices(AssetPaths.player_off__png, 16, 16, 24);
         }
 	}
 

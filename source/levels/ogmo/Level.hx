@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import states.PlayState.CollidableBundle;
 import entities.Entrance;
 import entities.Exit;
 import flixel.FlxG;
@@ -17,7 +18,7 @@ class Level extends FlxGroup {
 	public var start:Entrance;
 	public var end:Exit;
 
-	public function new() {
+	public function new(bundle:CollidableBundle) {
 		super();
 
 		var project = AssetPaths.project__ogmo;
@@ -28,7 +29,7 @@ class Level extends FlxGroup {
 		loader.loadEntities((entityData) -> {
 			switch (entityData.name) {
 				case Room.OGMO_NAME:
-					var room = new Room(project, entityData.values.name, entityData.x, entityData.y, entityData.width, entityData.height);
+					var room = new Room(project, entityData.values.name, entityData.x, entityData.y, entityData.width, entityData.height, bundle);
 					rooms.push(room);
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${Type.getClassName(Type.getClass(this))}';

@@ -19,8 +19,8 @@ class JakeCTState extends FlxTransitionableState {
 		FlxG.camera.bgColor = FlxColor.GRAY;
 		FlxG.camera.pixelPerfectRender = true;
 
-		level = new Level();
-		add(level);
+		// level = new Level();
+		// add(level);
 	}
 
 	override public function update(elapsed:Float) {
