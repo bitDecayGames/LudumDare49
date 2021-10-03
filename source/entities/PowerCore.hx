@@ -1,5 +1,6 @@
 package entities;
 
+import ui.counter.Counter;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween.FlxTweenType;
 import flixel.tweens.FlxTween;
@@ -14,6 +15,8 @@ class PowerCore extends Block {
 
 	public var currentCharge:Int = 0;
 	var maxCharge:Int = 0;
+	
+	public var counter:Counter;
 
 	public function new(_maxCharge:Int = 10) {
 		super(true);
@@ -25,6 +28,8 @@ class PowerCore extends Block {
 				type: FlxTweenType.PINGPONG,
 				ease: FlxEase.quadInOut
 			});
+			
+		counter = new Counter(0, 0, currentCharge).setFollow(this);
 	}
 
 	override public function update(delta:Float) {
@@ -44,5 +49,7 @@ class PowerCore extends Block {
 		{
 			currentCharge = maxCharge;
 		}
+
+		counter.setCount(currentCharge);
 	}
 }

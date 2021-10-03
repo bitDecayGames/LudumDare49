@@ -107,8 +107,10 @@ class Room {
 					bundle.uiObjs.add(radioActiveBlock.counter);
 					obj = radioActiveBlock;
 				case PowerCore.OGMO_NAME:
-					obj = new PowerCore(entityData.values.maxCharge);
-					bundle.playerCollidables.add(cast(obj, Block));
+					var powerCore = new PowerCore(entityData.values.maxCharge);
+					bundle.playerCollidables.add(cast(powerCore, Block));
+					bundle.uiObjs.add(powerCore.counter);
+					obj = powerCore;
 				case Grate.OGMO_NAME:
 					obj = new Grate();
 				case FastForward.OGMO_NAME:
