@@ -45,7 +45,7 @@ class PlayState extends FlxTransitionableState {
 
 		Lifecycle.startup.dispatch();
 
-		SetupCameras.SetupMainCamera(camera);
+		// SetupCameras.SetupMainCamera(camera);
 
 		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables);
 		level = new Level(bundle);

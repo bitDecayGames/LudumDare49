@@ -23,7 +23,7 @@
           "y": 64,
           "originX": 0,
           "originY": 0,
-          "values": {"start": false}
+          "values": {"start": true}
         },
         {
           "name": "exit",
