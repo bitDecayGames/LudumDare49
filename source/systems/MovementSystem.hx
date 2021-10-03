@@ -44,6 +44,7 @@ class MovementSystem extends StateSystem {
 
 			// if there's nothing in the way
 			if (collidedBlocks.length == 0) {
+				player.emitSmoke();
 				FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8,
 					Constants.PLAYER_SPEED); // limit player input, add more collisins
 				setRunning();
@@ -62,6 +63,7 @@ class MovementSystem extends StateSystem {
 					// check if there is a block in the way of the block trying to be pushed
 					var collidedBlocks2 = collidables.members.filter(block -> block.overlapsPoint(targetTile2));
 					if (collidedBlocks2.length == 0) {
+						player.emitSmoke();
 						FlxTween.linearMotion(blockingBlock, blockingBlock.x, blockingBlock.y, targetTile2.x - 8, targetTile2.y - 8, Constants.PLAYER_SPEED);
 						FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8, Constants.PLAYER_SPEED);
 						setRunning();

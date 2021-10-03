@@ -12,10 +12,12 @@ class Smoke extends DepthSprite {
 
 	private var maxHealth:Float = 0;
 
-	public function new(x:Float, y:Float, velocity:FlxVector) {
+	public function new(x:Float, y:Float, ?velocity:FlxVector) {
 		super(x, y);
 		load_slices(AssetPaths.smoke__png, 8, 8, 4);
-		// this.velocity = velocity;
+		if (velocity != null) {
+			this.velocity = velocity;
+		}
 		pickRandoms();
 	}
 
