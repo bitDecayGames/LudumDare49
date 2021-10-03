@@ -109,6 +109,8 @@ class ControlSystem extends FlxBasic {
 				if (decaySystem.isIdle()) {
 					UI.highlightActionStep.dispatch(ActionStep.DECAY);
 					decaySystem.handleDecay();
+					//check if meltdown - reset level, tell play meltdown happened
+					// if(decaySystem.anyMeltdowns()) active = false;
 				} else if (decaySystem.isDone()) {
 					decaySystem.setIdle();
 					gameState = Charging;
@@ -151,6 +153,10 @@ class ControlSystem extends FlxBasic {
 		}
 
 		return false;
+	}
+
+	public function lost():Bool {
+		return decaySystem.anyMeltdowns();
 	}
 
 	// Statics

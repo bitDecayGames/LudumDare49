@@ -30,8 +30,8 @@
           "name": "room",
           "id": 0,
           "_eid": "15206722",
-          "x": 0,
-          "y": 0,
+          "x": -0.8763562278112147,
+          "y": 0.5200952349945567,
           "width": 208,
           "height": 144,
           "originX": 0,
@@ -60,7 +60,7 @@
           "height": 128,
           "originX": 0,
           "originY": 0,
-          "values": {"name": "level2", "start": false}
+          "values": {"name": "level2", "start": true}
         },
         {
           "name": "room",
@@ -84,7 +84,7 @@
           "height": 128,
           "originX": 0,
           "originY": 0,
-          "values": {"name": "level4", "start": true}
+          "values": {"name": "level4", "start": false}
         }
       ]
     },

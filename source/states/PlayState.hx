@@ -73,12 +73,8 @@ class PlayState extends FlxTransitionableState {
 		add(test);
 		add(sortGroup);
 		add(uiObjs); // this is last here so text draws on top of everything
-
-		for (m in playerCollidables.members) {
-			sortGroup.add(m);
-		}
+		
 		sortGroup.add(player);
-
 		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
 		add(controlSystem);
 	}
@@ -86,8 +82,15 @@ class PlayState extends FlxTransitionableState {
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 
+		for (m in playerCollidables.members) {
+			sortGroup.add(m);
+		}
 		sortGroup.sort(DepthUtil.sort_by_depth);
 		level.checkExitCollision(player);
+
+		// if(controlSystem.lost()) {
+
+		// }
 	}
 
 	override public function onFocusLost() {
