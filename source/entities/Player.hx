@@ -16,9 +16,13 @@ class Player extends DepthSprite {
 
 	var dir = Cardinal.W.asVector();
 
-	public function new(x:Float = 0, y:Float = 0) {
+	public function new(x:Float = 0, y:Float = 0, ?slicesPath:String) {
 		super(x, y);
-		load_slices(AssetPaths.test__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
+		if (slicesPath == null){
+			load_slices(AssetPaths.player__png, Constants.TILE_SIZE, Constants.TILE_SIZE, 24);
+		} else {
+			load_slices(slicesPath, Constants.TILE_SIZE, Constants.TILE_SIZE, 24);
+		}
 		// test.angle = Math.random() * 360;
 		// makeGraphic(20, 20, FlxColor.WHITE);
 		// color = FlxColor.BLUE;

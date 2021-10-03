@@ -15,6 +15,8 @@ class ControlSystem extends FlxBasic
     var collidables:FlxTypedGroup<FlxSprite>;
     var nonCollidables:FlxTypedGroup<FlxSprite>;
 
+    public var playerIscontrollable:Bool = true;
+    
     // TODO CHANGE THIS!!!!!
 	public static var playerMovementLock: Float = 0;
 
@@ -41,6 +43,10 @@ class ControlSystem extends FlxBasic
 
     override public function update(elapsed:Float) {
         super.update(elapsed);
+
+        if(!playerIscontrollable) {
+            return;
+        }
 
         if (playerMovementLock == 0)
         {
