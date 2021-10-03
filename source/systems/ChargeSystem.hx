@@ -1,43 +1,40 @@
 package systems;
 
 import haxe.Exception;
-import helpers.Constants;
 import spacial.Cardinal;
-import flixel.math.FlxPoint;
 import entities.PowerCore;
 import flixel.FlxSprite;
-import entities.RadioactiveCooler;
 import entities.RadioactiveBlock;
-import flixel.FlxBasic;
 import flixel.group.FlxGroup;
 
-class ChargeSystem extends FlxBasic{
+class ChargeSystem extends StateSystem{
     
-    var decayingObjects:Array<RadioactiveBlock>;
-    var chargingObjects:Array<PowerCore>;
+    var collidables:FlxTypedGroup<FlxSprite>;
 
     public function new(_collidables:FlxTypedGroup<FlxSprite>)
     {
         super();
 
-        decayingObjects = _collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock));
-        chargingObjects = _collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore));
-
+        collidables = _collidables;
     }
 
     override public function update(elapsed:Float) {
-        handleCharge();
+        super.update(elapsed);
 	}
 
-    public function getAllCharged(): Array<PowerCore>{
-        return chargingObjects.filter(c -> c.fullyCharged());
-    }
+    public function handleCharge()
+    {
+        setRunning();
 
-    private function handleCharge(){
-        for(core in chargingObjects){
+        var decayingObjects = collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock));
+        var chargingObjects = collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore));
+
+        var chargeWorkNeeded = false;
+        for(core in chargingObjects)
+        {
             for (cardVector in Cardinal.allCardinals())
             {
-                var potentialChargePoint = nextPointFromCardinal(core.getMidpoint(), cardVector);
+                var potentialChargePoint = ControlSystem.nextPointFromCardinal(core.getMidpoint(), cardVector);
 
                 var matchingRadBlocks = decayingObjects.filter(rad -> rad.overlapsPoint(potentialChargePoint));
                 if (matchingRadBlocks.length > 1)
@@ -46,16 +43,16 @@ class ChargeSystem extends FlxBasic{
                 }
                 else if (matchingRadBlocks.length == 1)
                 {
-                    trace('Rad block and core touching');
+                    chargeWorkNeeded = true;
                     core.charge(1);
                 }
             }
         }
+
+        if (!chargeWorkNeeded) forciblyStopRunning();
     }
 
-    private function nextPointFromCardinal(currentPoint:FlxPoint, cardinalDir:Cardinal)
-    {
-        return currentPoint.addPoint(cardinalDir.asVector().scale(Constants.TILE_SIZE));
+    public function getAllCharged(): Array<PowerCore>{
+        return collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore)).filter(c -> c.fullyCharged());
     }
-    
 }
