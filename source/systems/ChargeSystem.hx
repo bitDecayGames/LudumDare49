@@ -1,5 +1,6 @@
 package systems;
 
+import flixel.FlxG;
 import haxe.Exception;
 import spacial.Cardinal;
 import entities.PowerCore;
@@ -21,6 +22,8 @@ class ChargeSystem extends StateSystem {
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
+
+		FlxG.watch.addQuick("Charge System run time duration", runningTimeDuration);
 	}
 
 	public function handleCharge() {
@@ -62,10 +65,12 @@ class ChargeSystem extends StateSystem {
 	public function anyCoresCharged() {
 		var cores = collidables.members.filter(c -> Std.isOfType(c, PowerCore)).map(c -> cast(c, PowerCore));
 
-		var noCoresCharged = false;
+		var noCoresCharged = true;
 		for (core in cores) {
-			if (core.currentCharge > 0)
-				noCoresCharged = true;
+			if (core.currentCharge > 0) {
+				noCoresCharged = false;
+				break;
+			}
 		}
 
 		if (areAllCharged() || noCoresCharged) {

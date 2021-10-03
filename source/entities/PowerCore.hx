@@ -14,8 +14,9 @@ class PowerCore extends Block {
 	public static inline var OGMO_NAME = "core";
 
 	public var currentCharge:Int = 0;
+
 	var maxCharge:Int = 0;
-	
+
 	public var counter:Counter;
 
 	public function new(_maxCharge:Int = 10) {
@@ -23,12 +24,11 @@ class PowerCore extends Block {
 		load_slices(AssetPaths.battery__png, Constants.TILE_SIZE, Constants.TILE_SIZE, 16);
 		maxCharge = _maxCharge;
 		slice_offset = 1;
-		FlxTween.tween(this, {slice_offset: 1.5}, 3, 
-			{
-				type: FlxTweenType.PINGPONG,
-				ease: FlxEase.quadInOut
-			});
-			
+		FlxTween.tween(this, {slice_offset: 1.5}, 3, {
+			type: FlxTweenType.PINGPONG,
+			ease: FlxEase.quadInOut
+		});
+
 		counter = new Counter(0, 0, currentCharge).setFollow(this);
 	}
 
@@ -36,17 +36,14 @@ class PowerCore extends Block {
 		super.update(delta);
 	}
 
-	public function fullyCharged()
-	{
+	public function fullyCharged() {
 		return currentCharge == maxCharge;
 	}
 
-	public function charge(chargeAmount:Int)
-	{
+	public function charge(chargeAmount:Int) {
 		currentCharge += chargeAmount;
 
-		if (currentCharge > maxCharge)
-		{
+		if (currentCharge > maxCharge) {
 			currentCharge = maxCharge;
 		}
 

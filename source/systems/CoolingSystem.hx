@@ -1,5 +1,6 @@
 package systems;
 
+import flixel.FlxG;
 import haxe.Exception;
 import entities.RadioactiveBlock;
 import entities.RadioactiveCooler;
@@ -22,6 +23,8 @@ class CoolingSystem extends StateSystem {
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
+
+		FlxG.watch.addQuick("Cooling System run time duration", runningTimeDuration);
 	}
 
 	public function handleCooling() {
