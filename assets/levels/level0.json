@@ -15,16 +15,7 @@
       "gridCellsX": 13,
       "gridCellsY": 9,
       "entities": [
-        {
-          "name": "entrance",
-          "id": 0,
-          "_eid": "15149497",
-          "x": 0,
-          "y": 64,
-          "originX": 0,
-          "originY": 0,
-          "values": {"start": false}
-        },
+        {"name": "entrance", "id": 0, "_eid": "15149497", "x": 0, "y": 64, "originX": 0, "originY": 0},
         {
           "name": "exit",
           "id": 4,
@@ -87,7 +78,7 @@
           "y": 80,
           "originX": 0,
           "originY": 0,
-          "values": {"maxCharge": 100}
+          "values": {"maxCharge": 50}
         },
         {"name": "cooler", "id": 2, "_eid": "21850468", "x": 112, "y": 48, "originX": 0, "originY": 0},
         {"name": "wall", "id": 3, "_eid": "21846068", "x": 0, "y": 48, "originX": 0, "originY": 0},
