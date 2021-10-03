@@ -1,5 +1,7 @@
 package systems;
 
+import helpers.Constants;
+import haxe.macro.Expr.Constant;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import entities.RadioactiveBlock;
@@ -13,13 +15,12 @@ class DecaySystem extends StateSystem {
 
 		collidables = _collidables;
 
-		defaultRunningTimeDuration = 0.25;
+		defaultRunningTimeDuration = Constants.DECAY_SYSTEM_DEFAULT_RUNTIME;
 		resetRunningTimeDuration();
 	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
-		FlxG.watch.addQuick("Decay System run time duration", runningTimeDuration);
 	}
 
 	public function handleDecay() {

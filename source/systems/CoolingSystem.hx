@@ -1,5 +1,6 @@
 package systems;
 
+import helpers.Constants;
 import flixel.FlxG;
 import haxe.Exception;
 import entities.RadioactiveBlock;
@@ -17,14 +18,12 @@ class CoolingSystem extends StateSystem {
 
 		collidables = _collidables;
 
-		defaultRunningTimeDuration = 0.25;
+		defaultRunningTimeDuration = Constants.COOLING_SYSTEM_DEFAULT_RUNTIME;
 		resetRunningTimeDuration();
 	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
-
-		FlxG.watch.addQuick("Cooling System run time duration", runningTimeDuration);
 	}
 
 	public function handleCooling() {

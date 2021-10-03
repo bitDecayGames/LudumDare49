@@ -25,13 +25,12 @@ class MovementSystem extends StateSystem {
 		playerCollidables = _playerCollidables;
 		collidables = _collidables;
 
-		defaultRunningTimeDuration = Constants.PLAYER_SPEED;
+		defaultRunningTimeDuration = Constants.MOVEMENT_SYSTEM_DEFAULT_RUNTIME;
 		resetRunningTimeDuration();
 	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
-		FlxG.watch.addQuick("Movement System run time duration", runningTimeDuration);
 	}
 
 	public function handlePlayerMovement() {

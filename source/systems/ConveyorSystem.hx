@@ -29,14 +29,12 @@ class ConveyorSystem extends StateSystem {
 		collidables = _collidables;
 		nonCollidables = _nonCollidables;
 
-		defaultRunningTimeDuration = 1;
+		defaultRunningTimeDuration = Constants.CONVEYOR_SYSTEM_DEFAULT_RUNTIME;
 		resetRunningTimeDuration();
 	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
-
-		FlxG.watch.addQuick("Conveyor System run time duration", runningTimeDuration);
 	}
 
 	public function handleConveyors() {

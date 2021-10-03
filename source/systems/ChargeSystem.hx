@@ -1,5 +1,6 @@
 package systems;
 
+import helpers.Constants;
 import flixel.FlxG;
 import haxe.Exception;
 import spacial.Cardinal;
@@ -16,14 +17,12 @@ class ChargeSystem extends StateSystem {
 
 		collidables = _collidables;
 
-		defaultRunningTimeDuration = 0.25;
+		defaultRunningTimeDuration = Constants.CHARGE_SYSTEM_DEFAULT_RUNTIME;
 		resetRunningTimeDuration();
 	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
-
-		FlxG.watch.addQuick("Charge System run time duration", runningTimeDuration);
 	}
 
 	public function handleCharge() {
