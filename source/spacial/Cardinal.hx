@@ -154,7 +154,7 @@ enum abstract Cardinal(Int) from Int to Int {
 
 	public static function fromFloat(i:Float):Cardinal {
 		for (card in allCardinals()) {
-			if (card == i)
+			if (card == Std.int(i))
 				return card;
 		}
 		return NONE;
