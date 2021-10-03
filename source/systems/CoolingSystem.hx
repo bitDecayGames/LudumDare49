@@ -8,7 +8,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import spacial.Cardinal;
 
-class CoolingSystem extends FlxBasic
+class CoolingSystem extends StateSystem
 {
     var collidables:FlxTypedGroup<FlxSprite>;
 
@@ -21,32 +21,16 @@ class CoolingSystem extends FlxBasic
 
     override public function update(elapsed:Float) {
         super.update(elapsed);
-
-        // Magic state logic here
-
-        // if (playerMovementLock == 0)
-        // {
-        //     movementSystem.handlePlayerMovement(elapsed);
-        // }
-
-        // if (playerMovementLock > 0)
-        // {
-		// 	playerMovementLock -= elapsed;
-
-		// 	if(playerMovementLock < 0)
-        //     {
-        //         handleCooling();
-        //         handleConveyors();
-        //         playerMovementLock = 0;
-        //     }
-		// }
 	}
 
     public function handleCooling()
     {
+        setRunning();
+
         var coolers: Array<RadioactiveCooler> = collidables.members.filter(c -> Std.isOfType(c, RadioactiveCooler)).map(c -> cast(c, RadioactiveCooler));
         var radioactives: Array<RadioactiveBlock> = collidables.members.filter(c -> Std.isOfType(c, RadioactiveBlock)).map(c -> cast(c, RadioactiveBlock));
 
+        var coolingWorkNeeded = false;
         for (cooler in coolers)
         {
             for (cardVector in Cardinal.allCardinals())
@@ -62,8 +46,11 @@ class CoolingSystem extends FlxBasic
                 {
                     var radioactiveBlock = matchingRadBlocks[0];
                     radioactiveBlock.cool(cooler.coolingAmount);
+                    coolingWorkNeeded = true;
                 }
             }
         }
-    }   
+
+        if (!coolingWorkNeeded) forciblyStopRunning();
+    }
 }

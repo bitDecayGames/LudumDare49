@@ -20,20 +20,16 @@ class InputCalcuator {
 		if (SimpleController.pressed(Button.UP, player)) {
 			temp.add(0, -1);
 		}
-
-		if (SimpleController.pressed(Button.DOWN, player)) {
+		else if (SimpleController.pressed(Button.DOWN, player)) {
 			temp.add(0, 1);
 		}
-
-		if (SimpleController.pressed(Button.LEFT, player)) {
+		else if (SimpleController.pressed(Button.LEFT, player)) {
 			temp.add(-1, 0);
 		}
-
-		if (SimpleController.pressed(Button.RIGHT, player)) {
+		else if (SimpleController.pressed(Button.RIGHT, player)) {
 			temp.add(1, 0);
 		}
-
-		if (temp.length == 0) {
+		else if (temp.length == 0) {
 			return Cardinal.NONE;
 		}
 

@@ -12,7 +12,7 @@ import flixel.group.FlxGroup;
 import flixel.tweens.FlxTween;
 import helpers.Constants;
 
-class ConveyorSystem extends FlxBasic
+class ConveyorSystem extends StateSystem
 {
     var player: FlxSprite;
     var playerCollidables:FlxTypedGroup<Block>;
@@ -34,28 +34,12 @@ class ConveyorSystem extends FlxBasic
 
     override public function update(elapsed:Float) {
         super.update(elapsed);
-
-        // TODO magic state logic
-        // if (playerMovementLock == 0)
-        // {
-        //     movementSystem.handlePlayerMovement(elapsed);
-        // }
-
-        // if (playerMovementLock > 0)
-        // {
-		// 	playerMovementLock -= elapsed;
-
-		// 	if(playerMovementLock < 0)
-        //     {
-        //         coolingSystem.handleCooling();
-        //         handleConveyors();
-        //         playerMovementLock = 0;
-        //     }
-		// }
 	}
 
     public function handleConveyors()
     {
+        setRunning();
+
         var conveyors: Array<Conveyor> = nonCollidables.members.filter(n -> Std.isOfType(n, Conveyor)).map(n -> cast(n, Conveyor));
         var movables: Array<DepthSprite> = playerCollidables.members.filter(p -> p.pushable).map(p -> cast(p, DepthSprite));
         movables.push(cast(player, DepthSprite));
@@ -114,13 +98,18 @@ class ConveyorSystem extends FlxBasic
         }
 
         // Move objects on conveyors based on their final desired points
+        var conveyorWorkNeeded = false;
         for (object => point in conveyorMovableToDesiredPoint)
         {
             if (!object.overlapsPoint(point))
             {
                 FlxTween.linearMotion(object, object.x, object.y, point.x - (Constants.TILE_SIZE / 2) , point.y - (Constants.TILE_SIZE / 2));
+                conveyorWorkNeeded = true;
             }
         }
+
+        // End running early if nothing was found on conveyors
+        if (!conveyorWorkNeeded) forciblyStopRunning();
     }
 
     private function isNotWithinMapKey(inValue:DepthSprite, map:Map<DepthSprite, FlxPoint>): Bool

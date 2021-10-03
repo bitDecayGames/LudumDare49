@@ -32,7 +32,7 @@ class PlayState extends FlxTransitionableState {
 	var controlSystem:ControlSystem;
 
 	var level:Level;
-	var player:FlxSprite;
+	var player:Player;
 
 	var test:DepthSprite;
 
