@@ -18,9 +18,6 @@ class StateSystem extends FlxBasic {
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (isDone())
-			setIdle();
-
 		if (isRunning()) {
 			runningTime -= elapsed;
 		}

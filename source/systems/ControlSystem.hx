@@ -1,5 +1,6 @@
 package systems;
 
+import flixel.FlxG;
 import entities.FastForward;
 import signals.UI;
 import ui.legend.ActionStep;
@@ -29,7 +30,7 @@ class ControlSystem extends FlxBasic {
 
 	var gameState:GameState = PlayerMovement;
 
-	var turnCycleStarted:Bool = false;
+	var fastForwardStarted:Bool = false;
 
 	var movementSystem:MovementSystem;
 	var coolingSystem:CoolingSystem;
@@ -68,13 +69,20 @@ class ControlSystem extends FlxBasic {
 			case PlayerMovement:
 				// don't fast forward if all cores are charged
 				if (playerOnFastForward() && chargeSystem.anyCoresCharged()) {
-					setFastForwardSystemRuntimes(Constants.FF_SPEED);
+					if (!fastForwardStarted) {
+						setFastForwardSystemRuntimes(Constants.FF_SPEED);
+						fastForwardStarted = true;
+					}
 					movementSystem.handlePlayerMovement();
 					gameState = Cooling;
 				} else if (movementSystem.isIdle()) {
-					resetSystemRuntimes();
+					if (fastForwardStarted) {
+						fastForwardStarted = false;
+						resetSystemRuntimes();
+					}
 					movementSystem.handlePlayerMovement();
 				} else if (movementSystem.isDone()) {
+					movementSystem.setIdle();
 					gameState = Cooling;
 				}
 
@@ -83,6 +91,7 @@ class ControlSystem extends FlxBasic {
 					UI.highlightActionStep.dispatch(ActionStep.COOLING);
 					coolingSystem.handleCooling();
 				} else if (coolingSystem.isDone()) {
+					coolingSystem.setIdle();
 					gameState = Conveyors;
 				}
 
@@ -91,6 +100,7 @@ class ControlSystem extends FlxBasic {
 					UI.highlightActionStep.dispatch(ActionStep.CONVEYOR);
 					conveyorSystem.handleConveyors();
 				} else if (conveyorSystem.isDone()) {
+					conveyorSystem.setIdle();
 					gameState = Decay;
 				}
 
@@ -99,6 +109,7 @@ class ControlSystem extends FlxBasic {
 					UI.highlightActionStep.dispatch(ActionStep.DECAY);
 					decaySystem.handleDecay();
 				} else if (decaySystem.isDone()) {
+					decaySystem.setIdle();
 					gameState = Charging;
 				}
 
@@ -106,6 +117,7 @@ class ControlSystem extends FlxBasic {
 				if (chargeSystem.isIdle()) {
 					chargeSystem.handleCharge();
 				} else if (chargeSystem.isDone()) {
+					chargeSystem.setIdle();
 					gameState = PlayerMovement;
 					UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
 				}
@@ -131,8 +143,9 @@ class ControlSystem extends FlxBasic {
 
 	private function playerOnFastForward() {
 		var fastForwardTiles = collidables.members.filter(c -> Std.isOfType(c, FastForward));
+
 		for (ffTile in fastForwardTiles) {
-			return (player.overlapsPoint(ffTile.getMidpoint()));
+			return player.overlapsPoint(ffTile.getMidpoint());
 		}
 
 		return false;

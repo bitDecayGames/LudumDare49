@@ -19,6 +19,7 @@ class DecaySystem extends StateSystem {
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
+		FlxG.watch.addQuick("Decay System run time duration", runningTimeDuration);
 	}
 
 	public function handleDecay() {
