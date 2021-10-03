@@ -31,6 +31,7 @@ class Room {
 	// public var layer:FlxTilemap;
 	public var entrances:Array<Entrance> = [];
 	public var exits:Array<Exit> = [];
+	var cores:Array<PowerCore> = [];
 
 	public function new(project:String, name:String, x:Int, y:Int, width:Int, height:Int) {
 		this.project = project;
@@ -39,6 +40,10 @@ class Room {
 		this.y = y;
 		this.width = width;
 		this.height = height;
+	}
+
+	public function areAllCoresCharged() {
+		return cores.filter((c) -> c.fullyCharged()).length == cores.length;
 	}
 
 	public function load(bundle:CollidableBundle) {
@@ -65,7 +70,7 @@ class Room {
 					entrances.push(enter);
 					obj = enter;
 				case Exit.OGMO_NAME:
-					var exit = new Exit(entityData.values.end);
+					var exit = new Exit(entityData.values.end, entityData.values.nextRoom);
 					exits.push(exit);
 					obj = exit;
 				default:
@@ -107,10 +112,11 @@ class Room {
 					bundle.uiObjs.add(radioActiveBlock.counter);
 					obj = radioActiveBlock;
 				case PowerCore.OGMO_NAME:
-					var powerCore = new PowerCore(entityData.values.maxCharge);
-					bundle.playerCollidables.add(cast(powerCore, Block));
-					bundle.uiObjs.add(powerCore.counter);
-					obj = powerCore;
+					var core = new PowerCore(entityData.values.maxCharge);
+					bundle.playerCollidables.add(core);
+					bundle.uiObjs.add(core.counter);
+					cores.push(core);
+					obj = core;
 				case Grate.OGMO_NAME:
 					obj = new Grate();
 				case FastForward.OGMO_NAME:
