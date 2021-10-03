@@ -15,4 +15,4 @@ dialog-manager git https://github.com/Tanz0rz/haxe-dialog-manager.git
 haxefmod git https://github.com/Tanz0rz/haxe-fmod.git gbjam9
 
 # Jam deps
-depth-flixel git https://github.com/AustinEast/depth-flixel.git
+depth-flixel git https://github.com/Kenoshen/depth-flixel.git patch-1

@@ -7,55 +7,59 @@ import flixel.FlxSprite;
 import entities.RadioactiveBlock;
 import flixel.group.FlxGroup;
 
-class ChargeSystem extends StateSystem{
-    
-    var collidables:FlxTypedGroup<FlxSprite>;
+class ChargeSystem extends StateSystem {
+	var collidables:FlxTypedGroup<FlxSprite>;
 
-    public function new(_collidables:FlxTypedGroup<FlxSprite>)
-    {
-        super();
+	public function new(_collidables:FlxTypedGroup<FlxSprite>) {
+		super();
 
-        collidables = _collidables;
+		collidables = _collidables;
 
-        defaultRunningTimeDuration = 0.25;
-        resetRunningTimeDuration();
-    }
-
-    override public function update(elapsed:Float) {
-        super.update(elapsed);
+		defaultRunningTimeDuration = 0.25;
+		resetRunningTimeDuration();
 	}
 
-    public function handleCharge()
-    {
-        setRunning();
+	override public function update(elapsed:Float) {
+		super.update(elapsed);
+	}
 
-        var decayingObjects = collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock));
-        var chargingObjects = collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore));
+	public function handleCharge() {
+		setRunning();
 
-        var chargeWorkNeeded = false;
-        for(core in chargingObjects)
-        {
-            for (cardVector in Cardinal.allCardinals())
-            {
-                var potentialChargePoint = ControlSystem.nextPointFromCardinal(core.getMidpoint(), cardVector);
+		var decayingObjects = collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock));
+		var chargingObjects = collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore));
 
-                var matchingRadBlocks = decayingObjects.filter(rad -> rad.overlapsPoint(potentialChargePoint));
-                if (matchingRadBlocks.length > 1)
-                {
-                    throw new Exception("Multiple radioactive blocks were found overlapping the same charging space.");
-                }
-                else if (matchingRadBlocks.length == 1)
-                {
-                    chargeWorkNeeded = true;
-                    core.charge(1);
-                }
-            }
-        }
+		var chargeWorkNeeded = false;
+		for (core in chargingObjects) {
+			for (cardVector in Cardinal.allCardinals()) {
+				var potentialChargePoint = ControlSystem.nextPointFromCardinal(core.getMidpoint(), cardVector);
 
-        if (!chargeWorkNeeded) forciblyStopRunning();
-    }
+				var matchingRadBlocks = decayingObjects.filter(rad -> rad.overlapsPoint(potentialChargePoint));
+				if (matchingRadBlocks.length > 1) {
+					throw new Exception("Multiple radioactive blocks were found overlapping the same charging space.");
+				} else if (matchingRadBlocks.length == 1) {
+					chargeWorkNeeded = true;
+					core.charge(1);
+				}
+			}
+		}
 
-    public function getAllCharged(): Array<PowerCore>{
-        return collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore)).filter(c -> c.fullyCharged());
-    }
+		if (!chargeWorkNeeded)
+			forciblyStopRunning();
+	}
+
+	public function getAllCharged():Array<PowerCore> {
+		return collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore)).filter(c -> c.fullyCharged());
+	}
+
+	public function anyCoresCharged() {
+		var cores = collidables.members.filter(c -> Std.isOfType(c, PowerCore)).map(c -> cast(c, PowerCore));
+
+		for (core in cores) {
+			if (core.currentCharge > 0)
+				return true;
+		}
+
+		return false;
+	}
 }
