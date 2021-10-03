@@ -1,5 +1,6 @@
 package states;
 
+import misc.FlxTextFactory;
 import signals.UI;
 import ui.legend.ActionLegend;
 import ui.minimap.MiniMap;
@@ -82,6 +83,7 @@ class LoganState extends FlxTransitionableState {
 			test.angle = Math.random() * 360;
 			test.slice_offset = 0.5;
 			depthSprites.add(test);
+			add(FlxTextFactory.makeCounter(i, test.x, test.y).setFollow(test));
 
 			test = new DepthSprite(FlxG.random.int(0, FlxG.width), FlxG.random.int(0, FlxG.height));
 			test.load_slices(AssetPaths.cooler_block__png, 16, 16, 16);
