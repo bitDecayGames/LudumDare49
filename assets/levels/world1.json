@@ -49,6 +49,30 @@
           "originX": 0,
           "originY": 0,
           "values": {"name": "level1"}
+        },
+        {
+          "name": "room",
+          "id": 2,
+          "_eid": "15206722",
+          "x": 176,
+          "y": 176,
+          "width": 144,
+          "height": 128,
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": "level2"}
+        },
+        {
+          "name": "room",
+          "id": 3,
+          "_eid": "15206722",
+          "x": 48,
+          "y": 144,
+          "width": 128,
+          "height": 176,
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": "level3"}
         }
       ]
     },

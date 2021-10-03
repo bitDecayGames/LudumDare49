@@ -1,0 +1,127 @@
+{
+  "ogmoVersion": "3.4.0",
+  "width": 144,
+  "height": 128,
+  "offsetX": 0,
+  "offsetY": 0,
+  "layers": [
+    {
+      "name": "objects",
+      "_eid": "15112221",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 9,
+      "gridCellsY": 8,
+      "entities": [
+        {
+          "name": "entrance",
+          "id": 0,
+          "_eid": "15149497",
+          "x": 112,
+          "y": 0,
+          "originX": 0,
+          "originY": 0,
+          "values": {"start": false}
+        },
+        {
+          "name": "exit",
+          "id": 1,
+          "_eid": "15357899",
+          "x": 0,
+          "y": 16,
+          "originX": 0,
+          "originY": 0,
+          "values": {"end": false}
+        }
+      ]
+    },
+    {
+      "name": "rooms",
+      "_eid": "15208123",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 9,
+      "gridCellsY": 8,
+      "entities": []
+    },
+    {
+      "name": "noncollidables",
+      "_eid": "21843015",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 9,
+      "gridCellsY": 8,
+      "entities": []
+    },
+    {
+      "name": "collidables",
+      "_eid": "21846453",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 9,
+      "gridCellsY": 8,
+      "entities": [
+        {"name": "wall", "id": 13, "_eid": "21846068", "x": 96, "y": 112, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 14, "_eid": "21846068", "x": 80, "y": 112, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 15, "_eid": "21846068", "x": 64, "y": 112, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 16, "_eid": "21846068", "x": 48, "y": 112, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 17, "_eid": "21846068", "x": 32, "y": 112, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 18, "_eid": "21846068", "x": 16, "y": 112, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 19, "_eid": "21846068", "x": 0, "y": 112, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 20, "_eid": "21846068", "x": 0, "y": 96, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 21, "_eid": "21846068", "x": 0, "y": 80, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 22, "_eid": "21846068", "x": 0, "y": 64, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 23, "_eid": "21846068", "x": 0, "y": 48, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 24, "_eid": "21846068", "x": 0, "y": 32, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 29, "_eid": "21846068", "x": 96, "y": 0, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 30, "_eid": "21846068", "x": 80, "y": 0, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 31, "_eid": "21846068", "x": 64, "y": 0, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 32, "_eid": "21846068", "x": 48, "y": 0, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 33, "_eid": "21846068", "x": 32, "y": 0, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 34, "_eid": "21846068", "x": 16, "y": 0, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 35, "_eid": "21846068", "x": 0, "y": 0, "originX": 0, "originY": 0},
+        {
+          "name": "core",
+          "id": 47,
+          "_eid": "22253844",
+          "x": 64,
+          "y": 16,
+          "originX": 0,
+          "originY": 0,
+          "values": {"maxCharge": 100}
+        },
+        {"name": "cooler", "id": 48, "_eid": "21850468", "x": 48, "y": 16, "originX": 0, "originY": 0},
+        {"name": "grate", "id": 49, "_eid": "23029363", "x": 80, "y": 32, "originX": 0, "originY": 0},
+        {
+          "name": "radioactive",
+          "id": 50,
+          "_eid": "21853546",
+          "x": 96,
+          "y": 32,
+          "originX": 0,
+          "originY": 0,
+          "values": {"decayAmount": 1, "maxLife": 15}
+        },
+        {"name": "grate", "id": 51, "_eid": "23029363", "x": 80, "y": 16, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 52, "_eid": "21846068", "x": 128, "y": 0, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 53, "_eid": "21846068", "x": 128, "y": 16, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 54, "_eid": "21846068", "x": 128, "y": 32, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 55, "_eid": "21846068", "x": 128, "y": 48, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 56, "_eid": "21846068", "x": 128, "y": 64, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 57, "_eid": "21846068", "x": 128, "y": 80, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 58, "_eid": "21846068", "x": 128, "y": 96, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 59, "_eid": "21846068", "x": 128, "y": 112, "originX": 0, "originY": 0},
+        {"name": "wall", "id": 60, "_eid": "21846068", "x": 112, "y": 112, "originX": 0, "originY": 0},
+        {"name": "fastforward", "id": 61, "_eid": "23017567", "x": 16, "y": 32, "originX": 0, "originY": 0}
+      ]
+    }
+  ]
+}
