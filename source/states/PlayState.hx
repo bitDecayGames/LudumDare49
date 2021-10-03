@@ -15,6 +15,7 @@ import systems.ControlSystem;
 import ui.camera.SetupCameras;
 import ui.legend.ActionLegend;
 import ui.minimap.MiniMap;
+import flixel.FlxG;
 
 using extensions.FlxStateExt;
 
@@ -48,6 +49,14 @@ class PlayState extends FlxTransitionableState {
 
 	var sortGroup:FlxTypedGroup<DepthSprite> = new FlxTypedGroup();
 
+	var startingRoomName:String = null;
+
+	public function new(startingRoomName:String = null) {
+		super();
+
+		this.startingRoomName = startingRoomName;
+	}
+
 	override public function create() {
 		super.create();
 
@@ -56,7 +65,7 @@ class PlayState extends FlxTransitionableState {
 		SetupCameras.SetupMainCamera(camera);
 
 		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables, uiObjs);
-		level = new Level(AssetPaths.world1__json, bundle);
+		level = new Level(AssetPaths.world1__json, bundle, startingRoomName);
 		add(level);
 
 		player = new Player(level.start.x, level.start.y);
@@ -88,9 +97,10 @@ class PlayState extends FlxTransitionableState {
 		sortGroup.sort(DepthUtil.sort_by_depth);
 		level.checkExitCollision(player);
 
-		// if(controlSystem.lost()) {
-
-		// }
+		if(controlSystem.lost()) {
+			// TODO Indicate player lost
+			FlxG.switchState(new PlayState(level.checkpointRoomName));
+		}
 	}
 
 	override public function onFocusLost() {
