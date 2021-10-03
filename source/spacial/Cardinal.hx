@@ -20,17 +20,9 @@ enum abstract Cardinal(Int) from Int to Int {
 	var W = 270;
 	var NW = 315;
 	var NONE = -1;
-	
-	public static function allCardinals():Array<Cardinal>
-	{
-		return [N,
-				NE,
-				E,
-				SE,
-				S,
-				SW,
-				W,
-				NW];
+
+	public static function allCardinals():Array<Cardinal> {
+		return [N, NE, E, SE, S, SW, W, NW];
 	}
 
 	/**
@@ -76,7 +68,7 @@ enum abstract Cardinal(Int) from Int to Int {
 	 * Returns the opposite cardinal (180 degrees away)
 	**/
 	public function opposite():Cardinal {
-		switch(this) {
+		switch (this) {
 			case N:
 				return S;
 			case NE:
@@ -158,5 +150,13 @@ enum abstract Cardinal(Int) from Int to Int {
 				return N;
 			}
 		}
+	}
+
+	public static function fromFloat(i:Float):Cardinal {
+		for (card in allCardinals()) {
+			if (card == i)
+				return card;
+		}
+		return NONE;
 	}
 }

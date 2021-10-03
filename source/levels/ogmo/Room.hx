@@ -66,7 +66,7 @@ class Room {
 			var obj:FlxSprite;
 			switch (entityData.name) {
 				case Conveyor.OGMO_NAME:
-					obj = new Conveyor();
+					obj = new Conveyor(Cardinal.fromFloat(entityData.rotation));
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
