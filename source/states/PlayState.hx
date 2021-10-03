@@ -1,30 +1,18 @@
 package states;
 
-import ui.camera.SetupCameras;
-import flixel.FlxCamera;
-import entities.Conveyor;
-import entities.RadioactiveCooler;
-import helpers.Constants;
-import entities.RadioactiveBlock;
-import spacial.Cardinal;
-import flixel.tweens.FlxTween;
-import input.InputCalcuator;
-import input.SimpleController;
-import entities.Wall;
-import entities.Block;
-import flixel.group.FlxGroup;
-import flixel.system.FlxAssets.FlxShader;
-import openfl.display.StageQuality;
-import openfl.filters.ShaderFilter;
-import flixel.util.FlxColor;
 import depth.DepthSprite;
-import flixel.addons.transition.FlxTransitionableState;
-import signals.Lifecycle;
+import entities.Block;
 import entities.Player;
 import flixel.FlxSprite;
-import flixel.FlxG;
-import systems.ControlSystem;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.group.FlxGroup;
 import levels.ogmo.Level;
+import signals.Lifecycle;
+import signals.UI;
+import systems.ControlSystem;
+import ui.camera.SetupCameras;
+import ui.legend.ActionLegend;
+import ui.minimap.MiniMap;
 
 using extensions.FlxStateExt;
 
@@ -33,11 +21,7 @@ class CollidableBundle {
 	public var collidables:FlxTypedGroup<FlxSprite>;
 	public var nonCollidables:FlxTypedGroup<FlxSprite>;
 
-	public function new(
-		playerCollidables:FlxTypedGroup<Block>,
-		collidables:FlxTypedGroup<FlxSprite>,
-		nonCollidables:FlxTypedGroup<FlxSprite>
-	) {
+	public function new(playerCollidables:FlxTypedGroup<Block>, collidables:FlxTypedGroup<FlxSprite>, nonCollidables:FlxTypedGroup<FlxSprite>) {
 		this.playerCollidables = playerCollidables;
 		this.collidables = collidables;
 		this.nonCollidables = nonCollidables;
@@ -48,7 +32,7 @@ class PlayState extends FlxTransitionableState {
 	var controlSystem:ControlSystem;
 
 	var level:Level;
-	var player:FlxSprite;
+	var player:Player;
 
 	var test:DepthSprite;
 
@@ -61,7 +45,7 @@ class PlayState extends FlxTransitionableState {
 
 		Lifecycle.startup.dispatch();
 
-		// SetupCameras.SetupMainCamera(camera);
+		SetupCameras.SetupMainCamera(camera);
 
 		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables);
 		level = new Level(bundle);
@@ -70,10 +54,10 @@ class PlayState extends FlxTransitionableState {
 		player = new Player(level.start.x, level.start.y);
 		collidables.add(player);
 
-		// test = new DepthSprite(32, 32);
-		// test.load_slices(AssetPaths.test__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
-		// test.angle = Math.random() * 360;
-		// test.slice_offset = 0.5;
+		add(new ActionLegend());
+		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY]);
+		add(new MiniMap());
+
 		add(collidables);
 		add(playerCollidables);
 		add(nonCollidables);
@@ -85,9 +69,6 @@ class PlayState extends FlxTransitionableState {
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
-
-		// test.angle +=  30 * elapsed;
-		// camera.angle +=  15 * elapsed;
 	}
 
 	override public function onFocusLost() {

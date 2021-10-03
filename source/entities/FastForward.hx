@@ -8,6 +8,7 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
 class FastForward extends FlxSprite {
+	public static inline var OGMO_NAME = "fastforward";
 
 	public function new() {
 		super();
