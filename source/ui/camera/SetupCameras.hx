@@ -10,8 +10,10 @@ import flixel.FlxCamera;
 import flixel.system.FlxAssets.FlxShader;
 
 class SetupCameras {
+	public static var bgColor = new FlxColor(0xff0b1319);
+
 	public static function SetupMainCamera(camera:FlxCamera) {
-		camera.bgColor = FlxColor.GRAY;
+		camera.bgColor = bgColor;
 
 		FlxG.camera.pixelPerfectRender = true;
 

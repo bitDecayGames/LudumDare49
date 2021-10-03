@@ -1,5 +1,6 @@
 package entities;
 
+import flixel.tweens.FlxTween;
 import flixel.FlxG;
 import helpers.Constants;
 import spacial.Cardinal;
@@ -9,7 +10,8 @@ class Player extends DepthSprite {
 	var speed:Float = 30;
 	var turnSpeed:Float = 90;
 
-	var dir = Cardinal.W.asVector();
+	// player's initial facing is east because of the art
+	var dir = Cardinal.E;
 
 	var emittingSmoke:Float = 0.0;
 	var smokeTimer:Float = 0.25;
@@ -25,6 +27,11 @@ class Player extends DepthSprite {
 		// test.angle = Math.random() * 360;
 		// makeGraphic(20, 20, FlxColor.WHITE);
 		// color = FlxColor.BLUE;
+	}
+
+	public function setDir(dir:Cardinal) {
+		this.dir = dir;
+		FlxTween.tween(this, { angle: dir + 90 }, 0.2);
 	}
 
 	override public function update(delta:Float) {
@@ -47,6 +54,25 @@ class Player extends DepthSprite {
 
 	private function smoke() {
 		// TODO: MW add offset to x,y so it looks like it is coming out the back
-		// FlxG.state.add(new Smoke(x, y));
+		var smokeX = 0.0;
+		var smokeY = 0.0;
+
+		switch(dir) {
+			case N: 
+				smokeX = x + 16;
+				smokeY = y - 24;
+			case S:
+				smokeX = x;
+				smokeY = y-16;
+			case E:
+				smokeX = x;
+				smokeY = y - 16;
+			case W:
+				smokeX = x + width;
+				smokeY = y - 32;
+			default:
+		};
+
+		FlxG.state.add(new Smoke(smokeX, smokeY));
 	}
 }
