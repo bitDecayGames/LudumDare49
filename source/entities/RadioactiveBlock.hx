@@ -6,6 +6,7 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
 class RadioactiveBlock extends Block {
+	public static inline var OGMO_NAME = "radioactive";
 
 	var decayAmount:Int = 0;
 	var maxLife:Int = 0;

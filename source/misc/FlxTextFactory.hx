@@ -1,5 +1,6 @@
 package misc;
 
+import ui.counter.Counter;
 import flixel.system.FlxAssets;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
@@ -40,6 +41,12 @@ class FlxTextFactory {
 	public static function make(text:String, ?x:Float, ?y:Float, ?size:Int, ?align:Null<FlxTextAlign>, ?color:Int):FlxText {
 		var txt = new FlxText(x, y, text);
 		txt.setFormat(defaultFont, size == null ? defaultSize : size, color == null ? defaultColor : color, align == null ? defaultAlign : align);
+		return txt;
+	}
+
+	public static function makeCounter(count:Int, ?x:Float, ?y:Float, ?size:Int, ?color:Int):Counter {
+		var txt = new Counter(x, y, count);
+		txt.setFormat(defaultFont, size == null ? defaultSize : size, color == null ? defaultColor : color, FlxTextAlign.CENTER);
 		return txt;
 	}
 }

@@ -28,6 +28,22 @@ import levels.ogmo.Level;
 
 using extensions.FlxStateExt;
 
+class CollidableBundle {
+	public var playerCollidables:FlxTypedGroup<Block>;
+	public var collidables:FlxTypedGroup<FlxSprite>;
+	public var nonCollidables:FlxTypedGroup<FlxSprite>;
+
+	public function new(
+		playerCollidables:FlxTypedGroup<Block>,
+		collidables:FlxTypedGroup<FlxSprite>,
+		nonCollidables:FlxTypedGroup<FlxSprite>
+	) {
+		this.playerCollidables = playerCollidables;
+		this.collidables = collidables;
+		this.nonCollidables = nonCollidables;
+	}
+}
+
 class PlayState extends FlxTransitionableState {
 	var controlSystem:ControlSystem;
 
@@ -47,34 +63,12 @@ class PlayState extends FlxTransitionableState {
 
 		// SetupCameras.SetupMainCamera(camera);
 
-		level = new Level();
+		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables);
+		level = new Level(bundle);
 		add(level);
-
-		// BEGIN TODO move to ogmo
-		var wall = new Wall(66 + Constants.TILE_SIZE, 50);
-		var radBlock = new RadioactiveBlock(1, 1000);
-		radBlock.setPosition(66, 50);
-
-		var radCooler = new RadioactiveCooler();
-		radCooler.setPosition(66+(Constants.TILE_SIZE * 3), 50);
-
-		var conveyor = new Conveyor();
-		conveyor.setPosition(66+(Constants.TILE_SIZE * 3), 50+(Constants.TILE_SIZE * 5));
-
-		collidables.add(wall);
-		playerCollidables.add(wall);
-
-		collidables.add(radBlock);
-		playerCollidables.add(radBlock);
-
-		collidables.add(radCooler);
-		playerCollidables.add(radCooler);
-
-		nonCollidables.add(conveyor);
 
 		player = new Player(level.start.x, level.start.y);
 		collidables.add(player);
-		// END TODO move to ogmo
 
 		// test = new DepthSprite(32, 32);
 		// test.load_slices(AssetPaths.test__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
