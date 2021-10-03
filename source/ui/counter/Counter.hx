@@ -4,7 +4,7 @@ import flixel.FlxObject;
 import flixel.text.FlxText;
 
 class Counter extends FlxText {
-	private static var yOffset = -10.0;
+	private static var yOffset = -20.0;
 
 	private var count:Int = 0;
 	private var follow:FlxObject;

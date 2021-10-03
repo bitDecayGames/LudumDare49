@@ -70,9 +70,9 @@ class PlayState extends FlxTransitionableState {
 		add(collidables);
 		add(playerCollidables);
 		add(nonCollidables);
-		add(uiObjs);
 		add(test);
 		add(sortGroup);
+		add(uiObjs); // this is last here so text draws on top of everything
 
 		for (m in playerCollidables.members) {
 			sortGroup.add(m);
