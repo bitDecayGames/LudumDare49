@@ -40,13 +40,13 @@ class Player extends DepthSprite {
 		}
 	}
 
-	public function emitSmoke(forSeconds:Float = 2.0, secondsPerSmoke:Float = 0.1) {
+	public function emitSmoke(forSeconds:Float = .2, secondsPerSmoke:Float = 0.1) {
 		smokeTimer = secondsPerSmoke;
 		emittingSmoke = forSeconds;
 	}
 
 	private function smoke() {
 		// TODO: MW add offset to x,y so it looks like it is coming out the back
-		FlxG.state.add(new Smoke(x, y));
+		// FlxG.state.add(new Smoke(x, y));
 	}
 }

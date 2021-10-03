@@ -1,5 +1,6 @@
 package states;
 
+import entities.RadioactiveBlock;
 import flixel.math.FlxVector;
 import flixel.math.FlxPoint;
 import entities.Smoke;
@@ -23,6 +24,8 @@ import ui.minimap.MiniMap;
 using extensions.FlxStateExt;
 
 class MikeState extends FlxTransitionableState {
+	var radioActiveBlock:RadioactiveBlock;
+
 	override public function create() {
 		super.create();
 
@@ -33,12 +36,17 @@ class MikeState extends FlxTransitionableState {
 		SetupCameras.SetupMainCamera(camera);
 
 		camera.focusOn(FlxPoint.get(0, 0));
+
+		radioActiveBlock = new RadioactiveBlock(10, 100);
+		add(radioActiveBlock);
 	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 		if (SimpleController.just_pressed(Button.LEFT) || SimpleController.just_pressed(Button.RIGHT)) {
 			add(new Smoke(0, 0, FlxVector.get(1, 1).scale(10)));
+
+			radioActiveBlock.counter.setCount(Std.int(elapsed * 100));
 		}
 		camera.angle += elapsed * 2;
 	}
