@@ -45,7 +45,7 @@ class PlayState extends FlxTransitionableState {
 
 		Lifecycle.startup.dispatch();
 
-		SetupCameras.SetupMainCamera(camera);
+		// SetupCameras.SetupMainCamera(camera);
 
 		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables);
 		level = new Level(bundle);
@@ -56,7 +56,7 @@ class PlayState extends FlxTransitionableState {
 
 		add(new ActionLegend());
 		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY]);
-		add(new MiniMap());
+		// add(new MiniMap());
 
 		add(collidables);
 		add(playerCollidables);
