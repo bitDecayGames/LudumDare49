@@ -18,6 +18,7 @@ class Smoke extends DepthSprite {
 		if (velocity != null) {
 			this.velocity = velocity;
 		}
+		z = 16;
 		pickRandoms();
 	}
 

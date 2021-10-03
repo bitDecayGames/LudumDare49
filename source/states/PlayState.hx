@@ -77,6 +77,7 @@ class PlayState extends FlxTransitionableState {
 		for (m in playerCollidables.members) {
 			sortGroup.add(m);
 		}
+		sortGroup.add(player);
 
 		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
 		add(controlSystem);
@@ -86,6 +87,7 @@ class PlayState extends FlxTransitionableState {
 		super.update(elapsed);
 
 		sortGroup.sort(DepthUtil.sort_by_depth);
+		level.checkExitCollision(player);
 	}
 
 	override public function onFocusLost() {
