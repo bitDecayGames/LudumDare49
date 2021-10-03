@@ -110,7 +110,7 @@ class ControlSystem extends FlxBasic {
 					UI.highlightActionStep.dispatch(ActionStep.DECAY);
 					decaySystem.handleDecay();
 					//check if meltdown - reset level, tell play meltdown happened
-					// if(decaySystem.anyMeltdowns()) active = false;
+					if(decaySystem.anyMeltdowns()) active = false;
 				} else if (decaySystem.isDone()) {
 					decaySystem.setIdle();
 					gameState = Charging;
