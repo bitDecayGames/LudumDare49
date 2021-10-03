@@ -34,6 +34,7 @@ class ControlSystem extends FlxBasic {
 	var coolingSystem:CoolingSystem;
 	var conveyorSystem:ConveyorSystem;
 	var decaySystem:DecaySystem;
+    var chargeSystem:ChargeSystem;
 
 	public function new(_player:Player, _playerCollidables:FlxTypedGroup<Block>, _collidables:FlxTypedGroup<FlxSprite>,
 			_nonCollidables:FlxTypedGroup<FlxSprite>) {
@@ -45,12 +46,11 @@ class ControlSystem extends FlxBasic {
 		nonCollidables = _nonCollidables;
 
 		movementSystem = new MovementSystem(player, playerCollidables, collidables);
-		movementSystem.setRunningTimeDuration(Constants.PLAYER_SPEED);
 		coolingSystem = new CoolingSystem(collidables);
-		coolingSystem.setRunningTimeDuration(0.25);
 		conveyorSystem = new ConveyorSystem(player, playerCollidables, collidables, nonCollidables);
 		decaySystem = new DecaySystem(collidables);
-		decaySystem.setRunningTimeDuration(0);
+        chargeSystem = new ChargeSystem(collidables);
+
 		UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
 	}
 
@@ -60,6 +60,8 @@ class ControlSystem extends FlxBasic {
 		movementSystem.update(elapsed);
 		coolingSystem.update(elapsed);
 		conveyorSystem.update(elapsed);
+        decaySystem.update(elapsed);
+        chargeSystem.update(elapsed);
 
 		switch gameState {
 			case PlayerMovement:
@@ -82,9 +84,7 @@ class ControlSystem extends FlxBasic {
 					UI.highlightActionStep.dispatch(ActionStep.CONVEYOR);
 					conveyorSystem.handleConveyors();
 				} else if (conveyorSystem.isDone()) {
-					// gameState = Decay;
-					gameState = PlayerMovement;
-					UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
+					gameState = Decay;
 				}
 
 			case Decay:
@@ -92,12 +92,16 @@ class ControlSystem extends FlxBasic {
 					UI.highlightActionStep.dispatch(ActionStep.DECAY);
 					decaySystem.handleDecay();
 				} else if (decaySystem.isDone()) {
-					// gameState = Charging;
-					gameState = PlayerMovement;
-					UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
+					gameState = Charging;
 				}
 
 			case Charging:
+                if (chargeSystem.isIdle()) {
+                    chargeSystem.handleCharge();
+                } else if (chargeSystem.isDone()) {
+                    gameState = PlayerMovement;
+                    UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
+                }
 
 			default:
 				throw new Exception("Unhandled game state");

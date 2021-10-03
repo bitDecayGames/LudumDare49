@@ -20,11 +20,14 @@ class CollidableBundle {
 	public var playerCollidables:FlxTypedGroup<Block>;
 	public var collidables:FlxTypedGroup<FlxSprite>;
 	public var nonCollidables:FlxTypedGroup<FlxSprite>;
+	public var uiObjs:FlxTypedGroup<FlxSprite>;
 
-	public function new(playerCollidables:FlxTypedGroup<Block>, collidables:FlxTypedGroup<FlxSprite>, nonCollidables:FlxTypedGroup<FlxSprite>) {
+	public function new(playerCollidables:FlxTypedGroup<Block>, collidables:FlxTypedGroup<FlxSprite>, nonCollidables:FlxTypedGroup<FlxSprite>,
+			uiObjs:FlxTypedGroup<FlxSprite>) {
 		this.playerCollidables = playerCollidables;
 		this.collidables = collidables;
 		this.nonCollidables = nonCollidables;
+		this.uiObjs = uiObjs;
 	}
 }
 
@@ -39,6 +42,7 @@ class PlayState extends FlxTransitionableState {
 	var playerCollidables:FlxTypedGroup<Block> = new FlxTypedGroup();
 	var collidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 	var nonCollidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
+	var uiObjs:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 
 	override public function create() {
 		super.create();
@@ -47,7 +51,7 @@ class PlayState extends FlxTransitionableState {
 
 		// SetupCameras.SetupMainCamera(camera);
 
-		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables);
+		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables, uiObjs);
 		level = new Level(bundle);
 		add(level);
 
@@ -56,11 +60,12 @@ class PlayState extends FlxTransitionableState {
 
 		add(new ActionLegend());
 		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY]);
-		// add(new MiniMap());
+		add(new MiniMap());
 
 		add(collidables);
 		add(playerCollidables);
 		add(nonCollidables);
+		add(uiObjs);
 		add(test);
 
 		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);

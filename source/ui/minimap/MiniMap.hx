@@ -22,7 +22,7 @@ class MiniMap extends FlxSpriteGroup {
 		super();
 		var halfPadding = Std.int(padding / 2);
 		x = halfPadding;
-		y = halfPadding;
+		y = FlxG.height - (halfPadding + minimapHeight);
 		if (SetupCameras.uiCamera == null) {
 			SetupCameras.SetupUICamera();
 		}

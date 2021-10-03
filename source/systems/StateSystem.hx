@@ -14,7 +14,7 @@ class StateSystem extends FlxBasic {
 
     var runningTime:Float = 0;
     var runningTimeDuration:Float = 1;
-
+    var defaultRunningTimeDuration:Float = 1;
 
     override public function update(elapsed:Float) {
         super.update(elapsed);
@@ -36,6 +36,11 @@ class StateSystem extends FlxBasic {
     public function setRunningTimeDuration(time:Float)
     {
         runningTimeDuration = time;
+    }
+
+    public function resetRunningTimeDuration()
+    {
+        runningTimeDuration = defaultRunningTimeDuration;
     }
 
     public function forciblyStopRunning()
