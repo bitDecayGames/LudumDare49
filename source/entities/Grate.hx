@@ -8,6 +8,7 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 
 class Grate extends FlxSprite {
+	public static inline var OGMO_NAME = "grate";
 
 	public function new() {
 		super();

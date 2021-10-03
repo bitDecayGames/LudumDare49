@@ -12,6 +12,8 @@ import entities.Wall;
 import entities.RadioactiveBlock;
 import entities.RadioactiveCooler;
 import entities.PowerCore;
+import entities.Grate;
+import entities.FastForward;
 
 class Room {
 	public static inline var OGMO_NAME = "room";
@@ -80,16 +82,24 @@ class Room {
 
 		// collidables
 		loader.loadEntities((entityData) -> {
-			var obj:Block;
+			var obj:FlxSprite;
 			switch (entityData.name) {
 				case Wall.OGMO_NAME:
 					obj = new Wall();
+					bundle.playerCollidables.add(cast (obj, Block));
 				case RadioactiveCooler.OGMO_NAME:
 					obj = new RadioactiveCooler();
+					bundle.playerCollidables.add(cast (obj, Block));
 				case RadioactiveBlock.OGMO_NAME:
 					obj = new RadioactiveBlock(entityData.values.decayAmount, entityData.values.maxLife);
+					bundle.playerCollidables.add(cast (obj, Block));
 				case PowerCore.OGMO_NAME:
 					obj = new PowerCore(entityData.values.maxCharge);
+					bundle.playerCollidables.add(cast (obj, Block));
+				case Grate.OGMO_NAME:
+					obj = new Grate();
+				case FastForward.OGMO_NAME:
+					obj = new FastForward();
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
@@ -97,7 +107,6 @@ class Room {
 			obj.y = entityData.y + y;
 
 			bundle.collidables.add(obj);
-			bundle.playerCollidables.add(obj);
 		}, "collidables");
 	}
 }
