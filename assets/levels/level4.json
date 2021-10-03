@@ -105,7 +105,7 @@
           "y": 48,
           "originX": 0,
           "originY": 0,
-          "values": {"maxCharge": 50}
+          "values": {"maxCharge": 20}
         },
         {"name": "fastforward", "id": 30, "_eid": "23017567", "x": 96, "y": 96, "originX": 0, "originY": 0}
       ]
