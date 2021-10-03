@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import ui.counter.Counter;
 import states.PlayState.CollidableBundle;
 import flixel.FlxSprite;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
@@ -26,13 +27,7 @@ class Room {
 		return Type.getClassName(Type.getClass(this));
 	}
 
-	public function new(
-		project: String,
-		name:String,
-		x:Int, y:Int,
-		width:Int, height:Int,
-		bundle:CollidableBundle
-	) {
+	public function new(project:String, name:String, x:Int, y:Int, width:Int, height:Int, bundle:CollidableBundle) {
 		var level = 'assets/levels/${name}.json';
 		var loader = new FlxOgmo3Loader(project, level);
 		// layer = loader.loadTilemap("<AssetPath to tilemap for layer>", "<layer name>");
@@ -58,7 +53,7 @@ class Room {
 				case Exit.OGMO_NAME:
 					var exit = new Exit(entityData.values.end);
 					exits.push(exit);
-					obj = exit; 
+					obj = exit;
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
@@ -86,16 +81,18 @@ class Room {
 			switch (entityData.name) {
 				case Wall.OGMO_NAME:
 					obj = new Wall();
-					bundle.playerCollidables.add(cast (obj, Block));
+					bundle.playerCollidables.add(cast(obj, Block));
 				case RadioactiveCooler.OGMO_NAME:
 					obj = new RadioactiveCooler();
-					bundle.playerCollidables.add(cast (obj, Block));
+					bundle.playerCollidables.add(cast(obj, Block));
 				case RadioactiveBlock.OGMO_NAME:
-					obj = new RadioactiveBlock(entityData.values.decayAmount, entityData.values.maxLife);
-					bundle.playerCollidables.add(cast (obj, Block));
+					var radioActiveBlock = new RadioactiveBlock(entityData.values.decayAmount, entityData.values.maxLife);
+					bundle.playerCollidables.add(cast(radioActiveBlock, Block));
+					bundle.uiObjs.add(radioActiveBlock.counter);
+					obj = radioActiveBlock;
 				case PowerCore.OGMO_NAME:
 					obj = new PowerCore(entityData.values.maxCharge);
-					bundle.playerCollidables.add(cast (obj, Block));
+					bundle.playerCollidables.add(cast(obj, Block));
 				case Grate.OGMO_NAME:
 					obj = new Grate();
 				case FastForward.OGMO_NAME:
