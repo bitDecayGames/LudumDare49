@@ -85,6 +85,8 @@ class ModelTest extends FlxState {
                     });
             case "smoke":
                 model.load_slices(AssetPaths.smoke__png, 8, 8, 4);
+            case "door":
+                model.load_slices(AssetPaths.blast_door__png, 16, 16, 16);
             default:
         }
 
