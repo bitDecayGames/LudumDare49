@@ -16,6 +16,7 @@ class RadioactiveBlock extends Block {
 	var maxLife:Int = 0;
 	var currentLife:Int = 0;
 	var blowedUp:Bool = false;
+	var auraColor:FlxColor = FlxColor.LIME;
 
 	public var counter:Counter;
 
@@ -35,6 +36,7 @@ class RadioactiveBlock extends Block {
 
 	override public function update(delta:Float) {
 		super.update(delta);
+
 	}
 
 	public function meltedDown() {
@@ -47,7 +49,7 @@ class RadioactiveBlock extends Block {
 
 	public function decay() {
 		currentLife -= decayAmount;
-
+		updateAura();
 		if (currentLife <= 0) {
 			currentLife = 0;
 			blowedUp = true;
@@ -57,10 +59,23 @@ class RadioactiveBlock extends Block {
 
 	public function cool(coolAmount:Int) {
 		currentLife += coolAmount;
-
+		updateAura();
 		if (currentLife > maxLife) {
 			currentLife = maxLife;
 		}
 		counter.setCount(currentLife);
+	}
+
+	private function updateAura(){
+		if(currentLife >= .66 * maxLife && auraColor != FlxColor.LIME){
+			auraColor = FlxColor.LIME;
+			aura.updateAura(FlxColor.LIME);
+		}else if(currentLife > .33 * maxLife && currentLife < .66 * maxLife && auraColor != FlxColor.YELLOW){
+			auraColor = FlxColor.YELLOW;
+			aura.updateAura(FlxColor.YELLOW);
+		}else if(currentLife <= .33 * maxLife && auraColor != FlxColor.RED){
+			auraColor = FlxColor.RED;
+			aura.updateAura(FlxColor.RED );
+		}
 	}
 }
