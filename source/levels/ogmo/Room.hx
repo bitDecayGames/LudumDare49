@@ -73,6 +73,7 @@ class Room {
 					var enter = new Entrance();
 					entrances.push(enter);
 					bundle.sortGroup.add(enter);
+					//enter.rotation = entityData.rotation;
 					obj = enter;
 				case Exit.OGMO_NAME:
 					var exit = new Exit(entityData.values.end, entityData.values.nextRoom);
@@ -86,8 +87,8 @@ class Room {
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
-			obj.x = entityData.x + x;
-			obj.y = entityData.y + y;
+			obj.x = entityData.x + x - entityData.originX;
+			obj.y = entityData.y + y - entityData.originY;
 		}, "objects");
 
 		// noncollidables
@@ -96,7 +97,6 @@ class Room {
 			switch (entityData.name) {
 				case Conveyor.OGMO_NAME:
 					var card = Cardinal.fromFloat(entityData.rotation);
-					trace("this card of this conveyor: " + card);
 					obj = new Conveyor(card);
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
