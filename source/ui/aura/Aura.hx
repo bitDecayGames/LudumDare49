@@ -19,6 +19,13 @@ class Aura extends FlxSprite {
 
 	public function new(x:Float, y:Float, color:FlxColor, off:FlxPoint) {
 		super(x, y);
+ 
+        updateAura(color);
+        followOffset = off;
+	}
+
+    public function updateAura(color:FlxColor, speed:Int = 1){
+
         loadGraphic(AssetPaths.circle__png);
         alpha = 0.20;
         FlxTween.tween(this, {
@@ -26,9 +33,8 @@ class Aura extends FlxSprite {
         }, {
             type: FlxTweenType.PINGPONG
         } );
-        followOffset = off;
         this.color = color;
-	}
+    }
 
 	public function setFollow(obj:FlxObject):Aura {
 		follow = obj;
