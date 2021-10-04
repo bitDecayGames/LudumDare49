@@ -76,10 +76,13 @@ class Level extends FlxGroup {
 		if (!latestRoom.endUnlocked) {
 			latestRoom.endUnlocked = true;
 			for (e in latestRoom.exits) {
-				FlxTween.tween(e,
-					{
+				FlxTween.tween(e, {
 						alpha: 0,
 						z: -32
+					}, {
+						onComplete: (t) -> {
+							e.isActive = false;
+						}
 					});
 			}
 		}

@@ -76,6 +76,7 @@ class Room {
 
 		// entrance & exits
 		loader.loadEntities((entityData) -> {
+			var offset = FlxPoint.weak();
 			var obj:FlxSprite;
 			switch (entityData.name) {
 				case Entrance.OGMO_NAME:
@@ -84,12 +85,18 @@ class Room {
 					bundle.sortGroup.add(enter);
 					enter.angle = entityData.rotation;
 					obj = enter;
+					bundle.playerCollidables.add(cast(obj, Block));
 				case Exit.OGMO_NAME:
 					var exit = new Exit(entityData.values.end, entityData.values.nextRoom);
 					exits.push(exit);
 					bundle.sortGroup.add(exit);
 					exit.angle = entityData.rotation;
+					if(entityData.rotation == 0)
+						offset.set(0,4);
+					else
+						offset.set(4,0);
 					obj = exit;
+					bundle.playerCollidables.add(cast(obj, Block));
 				case 'camera':
 					cameraPosition.set(entityData.x + x , entityData.y +y);
 					cameraRotation = entityData.rotation;
@@ -97,8 +104,9 @@ class Room {
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
-			obj.x = entityData.x + x - entityData.originX;
-			obj.y = entityData.y + y - entityData.originY;
+			obj.x = entityData.x + x - entityData.originX + offset.x;
+			obj.y = entityData.y + y - entityData.originY + offset.y;
+			offset.put();
 			allEntities.push(obj);
 		}, "objects");
 

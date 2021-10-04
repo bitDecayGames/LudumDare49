@@ -5,13 +5,13 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import helpers.Constants;
 
-class Entrance extends DepthSprite {
+class Entrance extends Block {
 	public static inline var OGMO_NAME = "entrance";
 
 	var exit:Exit = null;
 
 	public function new() {
-		super();
+		super(false);
 	
 		load_slices(AssetPaths.blast_door__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
 		slice_offset = 0.5;
