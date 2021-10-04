@@ -1,7 +1,6 @@
 package entities;
 
 import flixel.tweens.FlxTween;
-import flixel.FlxG;
 import helpers.Constants;
 import spacial.Cardinal;
 import depth.DepthSprite;
@@ -30,49 +29,22 @@ class Player extends DepthSprite {
 	}
 
 	public function setDir(dir:Cardinal) {
-		this.dir = dir;
-		FlxTween.tween(this, { angle: dir + 90 }, 0.2);
+		var currentDir = this.dir;
+		var targetDir = dir + 90;
+
+		if (currentDir == 360 && targetDir == 90) {
+			currentDir = 0;
+		} else if (currentDir == 90 && targetDir == 360) {
+			targetDir = 0;
+		} else if (currentDir == 0 && (targetDir == 360 || targetDir == 270)) {
+			currentDir = 360;
+		}
+
+		FlxTween.angle(this, currentDir, targetDir, 0.2);
+		this.dir = targetDir;
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
-
-		if (emittingSmoke > 0) {
-			emittingSmoke -= delta;
-			curSmoke -= smokeTimer;
-			if (curSmoke < smokeTimer) {
-				curSmoke = smokeTimer;
-				smoke();
-			}
-		}
-	}
-
-	public function emitSmoke(forSeconds:Float = .2, secondsPerSmoke:Float = 0.1) {
-		smokeTimer = secondsPerSmoke;
-		emittingSmoke = forSeconds;
-	}
-
-	private function smoke() {
-		// TODO: MW add offset to x,y so it looks like it is coming out the back
-		var smokeX = 0.0;
-		var smokeY = 0.0;
-
-		switch(dir) {
-			case N: 
-				smokeX = x + 16;
-				smokeY = y - 24;
-			case S:
-				smokeX = x;
-				smokeY = y-16;
-			case E:
-				smokeX = x;
-				smokeY = y - 16;
-			case W:
-				smokeX = x + width;
-				smokeY = y - 32;
-			default:
-		};
-
-		FlxG.state.add(new Smoke(smokeX, smokeY));
 	}
 }
