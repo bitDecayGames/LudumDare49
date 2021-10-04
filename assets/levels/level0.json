@@ -15,19 +15,19 @@
       "gridCellsX": 13,
       "gridCellsY": 9,
       "entities": [
-        {"name": "entrance", "id": 0, "_eid": "15149497", "x": 0, "y": 64, "originX": 0, "originY": 0, "rotation": 0},
+        {"name": "camera", "id": 5, "_eid": "30215525", "x": 99.3383393622556, "y": 61.916380530862355, "originX": 0, "originY": 0, "rotation": 19},
+        {"name": "entrance", "id": 6, "_eid": "15149497", "x": 8, "y": 72, "originX": 8, "originY": 8, "rotation": 90},
         {
           "name": "exit",
-          "id": 4,
+          "id": 7,
           "_eid": "15357899",
-          "x": 192,
-          "y": 64,
-          "originX": 0,
-          "originY": 0,
-          "rotation": 0,
+          "x": 200,
+          "y": 72,
+          "originX": 8,
+          "originY": 8,
+          "rotation": 90,
           "values": {"end": false, "nextRoom": "level1"}
-        },
-        {"name": "camera", "id": 5, "_eid": "30215525", "x": 99.3383393622556, "y": 61.916380530862355, "originX": 0, "originY": 0, "rotation": 19}
+        }
       ]
     },
     {
