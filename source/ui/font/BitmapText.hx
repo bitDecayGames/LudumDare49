@@ -34,7 +34,7 @@ abstract Shadow(BitmapText) to BitmapText {
 	inline static function get_font() {
 		if (font == null) {
 			@:privateAccess
-			font = BitmapText.createPressStartFont();
+			font = BitmapText.createShadowFont();
 		}
 		return font;
 	}

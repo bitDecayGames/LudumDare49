@@ -126,7 +126,7 @@ class PlayState extends FlxTransitionableState {
 			sirenTimer = 0.0;
 		}
 
-		if (controlSystem.lost() || FlxG.keys.justPressed.Q) {
+		if (controlSystem.lost() || FlxG.keys.justPressed.R) {
 			lose();
 		}
 	}
@@ -166,7 +166,7 @@ class PlayState extends FlxTransitionableState {
 
 		var targetTile = ControlSystem.nextPointFromCardinal(player.getMidpoint(), player.untouchedDir);
 		targetTile = ControlSystem.nextPointFromCardinal(targetTile, player.untouchedDir);
-		targetTile = ControlSystem.nextPointFromCardinal(targetTile, player.untouchedDir);
+		// targetTile = ControlSystem.nextPointFromCardinal(targetTile, player.untouchedDir);
 		FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8, 1, {
 			onComplete: (t) -> {
 				ControlSystem.playerIsControllable = true;

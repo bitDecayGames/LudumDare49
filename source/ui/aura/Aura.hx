@@ -16,21 +16,30 @@ class Aura extends FlxSprite {
 
 	private var follow:FlxObject;
     private var isSet: Bool = false;
+    private var colorTween: FlxTween;
 
 	public function new(x:Float, y:Float, color:FlxColor, off:FlxPoint) {
 		super(x, y);
- 
-        updateAura(color);
+        loadGraphic(AssetPaths.circle__png);
+
+        alpha = 0.20;
+        colorTween = FlxTween.tween(this, {
+            alpha: 0.05
+        }, {
+            type: FlxTweenType.PINGPONG
+        } );
+        this.color = color;
+
         followOffset = off;
 	}
 
-    public function updateAura(color:FlxColor, speed:Int = 1){
+    public function updateAura(color:FlxColor, speed:Float = 1){
+        colorTween.cancel();
 
-        loadGraphic(AssetPaths.circle__png);
         alpha = 0.20;
-        FlxTween.tween(this, {
+        colorTween = FlxTween.tween(this, {
             alpha: 0.05
-        }, {
+        }, speed ,{
             type: FlxTweenType.PINGPONG
         } );
         this.color = color;
