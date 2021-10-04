@@ -1,5 +1,6 @@
 package ui.legend;
 
+import flixel.FlxSprite;
 import ui.camera.SetupCameras;
 import signals.UI;
 import flixel.FlxG;
@@ -32,6 +33,12 @@ class ActionLegend extends FlxSpriteGroup {
 
 		addTray();
 		addHighlight();
+	}
+
+	override function remove(Sprite:FlxSprite, Splice:Bool = false):FlxSprite {
+		UI.highlightActionStep.remove(setActionStep);
+		UI.setActionSteps.remove(setActionSteps);
+		return super.remove(Sprite, Splice);
 	}
 
 	private function setActionSteps(actionSteps:Array<ActionStep>) {

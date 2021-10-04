@@ -48,7 +48,7 @@ class LegendItemFactory {
 			spr.camera = SetupCameras.uiCamera;
 			spr.cameras = [SetupCameras.uiCamera];
 		}
-		spr.load_slices(AssetPaths.conveyor__png, 16, 16, 16);
+		spr.load_slices(AssetPaths.conveyor__png, 16, 16, 1);
 		return new LegendItem(spr, "CONVEYOR", 0);
 	}
 

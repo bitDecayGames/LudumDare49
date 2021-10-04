@@ -32,7 +32,7 @@ class LegendHighlight extends FlxUI9SliceSprite {
 		return orderPosition;
 	}
 
-	public function setOrderPosition(orderPosition:Int, seconds:Float = 0.2) {
+	public function setOrderPosition(orderPosition:Int, seconds:Float = 0.05) {
 		this.orderPosition = orderPosition;
 		start = y;
 		target = orderPosition * legendItemHeight + rootY;
