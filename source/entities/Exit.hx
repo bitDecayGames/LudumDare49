@@ -1,10 +1,11 @@
 package entities;
 
+import depth.DepthSprite;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import helpers.Constants;
 
-class Exit extends FlxSprite {
+class Exit extends DepthSprite {
 	public static inline var OGMO_NAME = "exit";
 	public final end:Bool = false;
 	public final nextRoom:String = "FILL_ME";
@@ -14,9 +15,9 @@ class Exit extends FlxSprite {
 	public function new(end:Bool, nextRoom:String) {
 		super();
 
-		makeGraphic(Constants.TILE_SIZE, Constants.TILE_SIZE, FlxColor.WHITE);
-		color = FlxColor.GREEN;
-
+		load_slices(AssetPaths.blast_door__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
+		slice_offset = 0.5;
+		angle += 90;
 		this.end = end;
 		this.nextRoom = nextRoom;
 	}
