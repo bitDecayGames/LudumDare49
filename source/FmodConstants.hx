@@ -6,15 +6,20 @@
 package;
 
 class FmodSongs {
+    public static inline var Carefully:String = "event:/Music/Carefully";
     public static inline var EmergencyPowerActivated:String = "event:/Music/EmergencyPowerActivated";
+    public static inline var EmergencyPowerActivatedLouderDrums:String = "event:/Music/EmergencyPowerActivatedLouderDrums";
     public static inline var OutsideTheMines:String = "event:/Music/OutsideTheMines";
 }
 
 class FmodSFX {
+    public static inline var AlarmPowerDown:String = "event:/SFX/Cutscene/AlarmPowerDown";
     public static inline var Siren:String = "event:/SFX/Cutscene/Siren";
     public static inline var Type:String = "event:/SFX/Hud/Type";
     public static inline var Typewriter:String = "event:/SFX/Hud/Typewriter";
     public static inline var MenuHover:String = "event:/SFX/Menu/MenuHover";
     public static inline var MenuSelect:String = "event:/SFX/Menu/MenuSelect";
+    public static inline var PocobotMoving:String = "event:/SFX/Pocobot/PocobotMoving";
     public static inline var PowerUp:String = "event:/SFX/Pocobot/PowerUp";
+    public static inline var UiPhaseProgress:String = "event:/SFX/UI/UiPhaseProgress";
 }
