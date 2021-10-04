@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.00.00">
 	<object class="Event" id="{820b6950-ea3d-45bd-84aa-e97e90d19003}">
 		<property name="name">
-			<value>PocobotMove</value>
+			<value>PocobotMoving</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>

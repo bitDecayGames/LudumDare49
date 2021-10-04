@@ -111,6 +111,20 @@
         },
         {"name": "fastforward", "id": 30, "_eid": "23017567", "x": 96, "y": 96, "originX": 0, "originY": 0}
       ]
+    },
+    {
+      "name": "floor",
+      "_eid": "32194968",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 16,
+      "gridCellHeight": 16,
+      "gridCellsX": 8,
+      "gridCellsY": 8,
+      "tileset": "Floor",
+      "data": [-1, 2, -1, -1, -1, -1, -1, -1, -1, 2, 1, 1, 1, 1, 1, -1, -1, 17, 3, 10, 1, 1, 1, -1, -1, 1, 1, 2, 1, 1, 1, -1, -1, 1, 1, 2, 1, 1, 1, -1, -1, 1, 1, 17, 3, 3, 3, 3, -1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+      "exportMode": 0,
+      "arrayMode": 0
     }
   ]
 }

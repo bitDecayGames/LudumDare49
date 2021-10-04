@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import flixel.tweens.FlxTween;
 import flixel.math.FlxPoint;
 import spacial.Cardinal;
 import states.PlayState.CollidableBundle;
@@ -32,7 +33,9 @@ class Room {
 	public var cameraPosition: FlxPoint = FlxPoint.get();
 	public var cameraRotation: Float = 0;
 
-	// public var layer:FlxTilemap;
+	var allEntities:Array<FlxSprite> = [];
+
+	public var floor:FlxTilemap;
 	public var entrances:Array<Entrance> = [];
 	public var exits:Array<Exit> = [];
 	var cores:Array<PowerCore> = [];
@@ -65,6 +68,10 @@ class Room {
 			throw '${getErrorName()}: ${name} height mismatch. got ${levelHeight}, expected ${height}';
 		}
 
+		floor = loader.loadTilemap(AssetPaths.floor_tiles__png, "floor");
+		floor.x += x;
+		floor.y += y;
+
 		// entrance & exits
 		loader.loadEntities((entityData) -> {
 			var obj:FlxSprite;
@@ -90,6 +97,7 @@ class Room {
 			}
 			obj.x = entityData.x + x - entityData.originX;
 			obj.y = entityData.y + y - entityData.originY;
+			allEntities.push(obj);
 		}, "objects");
 
 		// noncollidables
@@ -105,6 +113,7 @@ class Room {
 			obj.x = entityData.x + x - entityData.originX;
 			obj.y = entityData.y + y - entityData.originY;
 			bundle.nonCollidables.add(obj);
+			allEntities.push(obj);
 		}, "noncollidables");
 
 		// collidables
@@ -121,11 +130,13 @@ class Room {
 					var radioActiveBlock = new RadioactiveBlock(entityData.values.decayAmount, entityData.values.maxLife);
 					bundle.playerCollidables.add(cast(radioActiveBlock, Block));
 					bundle.uiObjs.add(radioActiveBlock.counter);
+					allEntities.push(radioActiveBlock.counter);
 					obj = radioActiveBlock;
 				case PowerCore.OGMO_NAME:
 					var core = new PowerCore(entityData.values.maxCharge);
 					bundle.playerCollidables.add(core);
 					bundle.uiObjs.add(core.counter);
+					allEntities.push(core.counter);
 					cores.push(core);
 					obj = core;
 				case Grate.OGMO_NAME:
@@ -139,12 +150,33 @@ class Room {
 			obj.y = entityData.y + y;
 
 			bundle.collidables.add(obj);
+			allEntities.push(obj);
 		}, "collidables");
 
 		loaded = true;
 	}
 
-	public function getErrorName() {
+	public function unload() {
+		for (ent in allEntities) {
+			FlxTween.tween(ent, {
+				alpha: 0,
+			}, {
+				onComplete: (t) -> {
+					ent.kill();
+				}
+			});			
+		}
+
+		FlxTween.tween(floor, {
+			alpha: 0,
+		}, {
+			onComplete: (t) -> {
+				floor.kill();
+			}
+		});
+	}
+
+	function getErrorName() {
 		return Type.getClassName(Type.getClass(this));
 	}
 }
