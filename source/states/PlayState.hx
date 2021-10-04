@@ -42,8 +42,6 @@ class PlayState extends FlxTransitionableState {
 	var level:Level;
 	var player:Player;
 
-	var test:DepthSprite;
-
 	var playerCollidables:FlxTypedGroup<Block> = new FlxTypedGroup();
 	var collidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 	var nonCollidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
@@ -90,7 +88,6 @@ class PlayState extends FlxTransitionableState {
 		add(collidables);
 		add(playerCollidables);
 		add(nonCollidables);
-		add(test);
 		add(sortGroup);
 		add(uiObjs); // this is last here so text draws on top of everything
 

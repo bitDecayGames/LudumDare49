@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import flixel.tweens.FlxTween;
 import flixel.math.FlxPoint;
 import spacial.Cardinal;
 import states.PlayState.CollidableBundle;
@@ -68,6 +69,8 @@ class Room {
 		}
 
 		floor = loader.loadTilemap(AssetPaths.floor_tiles__png, "floor");
+		floor.x += x;
+		floor.y += y;
 
 		// entrance & exits
 		loader.loadEntities((entityData) -> {
@@ -154,9 +157,22 @@ class Room {
 
 	public function unload() {
 		for (ent in allEntities) {
-			ent.kill();
+			FlxTween.tween(ent, {
+				alpha: 0,
+			}, {
+				onComplete: (t) -> {
+					ent.kill();
+				}
+			});			
 		}
-		floor.kill();
+
+		FlxTween.tween(floor, {
+			alpha: 0,
+		}, {
+			onComplete: (t) -> {
+				floor.kill();
+			}
+		});
 	}
 
 	function getErrorName() {
