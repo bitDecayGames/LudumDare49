@@ -1,5 +1,7 @@
 package levels.ogmo;
 
+import states.CreditsState;
+import haxefmod.flixel.FmodFlxUtilities;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import entities.Player;
@@ -96,7 +98,7 @@ class Level extends FlxGroup {
 			});
 
 			if (isGameWon) {
-				throw 'TODO Game won fill me in';
+				FmodFlxUtilities.TransitionToState(new CreditsState());
 			}
 			if (moveToNextRoom) {
 				latestRoom.unload();

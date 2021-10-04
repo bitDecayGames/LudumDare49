@@ -60,10 +60,7 @@ class PlayState extends FlxTransitionableState {
 	override public function create() {
 		super.create();
 
-		#if music
 		FmodManager.PlaySong(FmodSongs.Carefully);
-		#end
-
 
 		Lifecycle.startup.dispatch();
 
@@ -95,6 +92,10 @@ class PlayState extends FlxTransitionableState {
 		sortGroup.add(player);
 		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
 		add(controlSystem);
+
+		if (startingRoomName != null) {
+			FmodManager.PlaySoundOneShot(FmodSFX.PowerUp);
+		}
 	}
 
 	override public function update(elapsed:Float) {
