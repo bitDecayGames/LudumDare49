@@ -1,5 +1,6 @@
 package states;
 
+import ui.counter.Tooltip;
 import entities.RadioactiveBlock;
 import flixel.math.FlxVector;
 import flixel.math.FlxPoint;
@@ -39,6 +40,14 @@ class MikeState extends FlxTransitionableState {
 
 		radioActiveBlock = new RadioactiveBlock(10, 100);
 		add(radioActiveBlock);
+
+		var spread = 10;
+		for (x in -3...3) {
+			for (y in -3...3) {
+				var obj = new Tooltip(x * spread, y * spread, '${x}${y}');
+				add(obj);
+			}
+		}
 	}
 
 	override public function update(elapsed:Float) {
