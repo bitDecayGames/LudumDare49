@@ -45,6 +45,7 @@ class MovementSystem extends StateSystem {
 			// if there's nothing in the way
 			if (collidedBlocks.length == 0) {
 				player.setDir(cardinalInput);
+				FmodManager.PlaySoundOneShot(FmodSFX.PocobotMove);
 				FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8,
 					Constants.PLAYER_SPEED); // limit player input, add more collisins
 				setRunning();

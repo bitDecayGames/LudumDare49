@@ -6,8 +6,8 @@
 package;
 
 class FmodSongs {
+    public static inline var Carefully:String = "event:/Music/Carefully";
     public static inline var EmergencyPowerActivated:String = "event:/Music/EmergencyPowerActivated";
-    public static inline var EmergencyPowerActivated_2:String = "event:/Music/EmergencyPowerActivated_2";
     public static inline var EmergencyPowerActivatedLouderDrums:String = "event:/Music/EmergencyPowerActivatedLouderDrums";
     public static inline var OutsideTheMines:String = "event:/Music/OutsideTheMines";
 }
@@ -19,5 +19,7 @@ class FmodSFX {
     public static inline var Typewriter:String = "event:/SFX/Hud/Typewriter";
     public static inline var MenuHover:String = "event:/SFX/Menu/MenuHover";
     public static inline var MenuSelect:String = "event:/SFX/Menu/MenuSelect";
+    public static inline var PocobotMove:String = "event:/SFX/Pocobot/PocobotMove";
     public static inline var PowerUp:String = "event:/SFX/Pocobot/PowerUp";
+    public static inline var UiPhaseProgress:String = "event:/SFX/UI/UiPhaseProgress";
 }

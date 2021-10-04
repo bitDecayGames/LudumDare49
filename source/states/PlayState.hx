@@ -62,6 +62,11 @@ class PlayState extends FlxTransitionableState {
 	override public function create() {
 		super.create();
 
+		#if music
+		FmodManager.PlaySong(FmodSongs.Carefully);
+		#end
+
+
 		Lifecycle.startup.dispatch();
 
 		SetupCameras.SetupMainCamera(camera);
