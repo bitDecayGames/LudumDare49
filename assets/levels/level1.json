@@ -24,8 +24,9 @@
           "y": 112,
           "originX": 0,
           "originY": 0,
-          "values": {"end": false, "nextRoom": ""}
-        }
+          "values": {"end": false, "nextRoom": "level2"}
+        },
+        {"name": "camera", "id": 2, "_eid": "30215525", "x": 48, "y": 64, "originX": 0, "originY": 0, "rotation": 20}
       ]
     },
     {
@@ -49,9 +50,9 @@
       "gridCellsX": 11,
       "gridCellsY": 8,
       "entities": [
-        {"name": "conveyor", "id": 0, "_eid": "21866260", "x": 112, "y": 32, "originX": 0, "originY": 0, "rotation": 0},
-        {"name": "conveyor", "id": 1, "_eid": "21866260", "x": 80, "y": 32, "originX": 0, "originY": 0, "rotation": 0},
-        {"name": "conveyor", "id": 2, "_eid": "21866260", "x": 96, "y": 32, "originX": 0, "originY": 0, "rotation": 0}
+        {"name": "conveyor", "id": 0, "_eid": "21866260", "x": 128, "y": 32, "originX": 0, "originY": 0, "rotation": 90},
+        {"name": "conveyor", "id": 1, "_eid": "21866260", "x": 96, "y": 32, "originX": 0, "originY": 0, "rotation": 90},
+        {"name": "conveyor", "id": 2, "_eid": "21866260", "x": 112, "y": 32, "originX": 0, "originY": 0, "rotation": 90}
       ]
     },
     {

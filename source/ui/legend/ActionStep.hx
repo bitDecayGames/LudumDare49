@@ -6,4 +6,5 @@ package ui.legend;
 	var COOLING = 10;
 	var CONVEYOR = 20;
 	var DECAY = 30;
+	var CHARGE = 40;
 }

@@ -307,7 +307,7 @@
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": true,
-      "rotationDegrees": 360,
+      "rotationDegrees": 4,
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
@@ -316,7 +316,9 @@
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": [],
-      "values": []
+      "values": [],
+      "texture": "../images/editor/conveyor_icon.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAPElEQVR42mNoaWn5TwlmwCf5PcIejEk2AKYRHRM0AJcGfAYxEFJAyAIGYv2KK2wYaBoLA2/AaDoYKukAAAUti4+e1qanAAAAAElFTkSuQmCC"
     },
     {
       "exportID": "22253844",
@@ -392,7 +394,9 @@
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": [],
-      "values": []
+      "values": [],
+      "texture": "../images/editor/ff_icon.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAi0lEQVR42mO4snv9fx8fH7IwSC8DiNHS0kI0/h5hD2eD9GI1AKQIhrHJPXQ2xW8AskKYYmRDYRirAdgUwuRAhiEbjGEAsiQyRnY2Ti8gSxDiYxiArhibAegxQLYByGIEDUAPRJIMgPkVPSpJMgBfIsIaC6RoxjAAFt/EasaalGGGoGNc3gMbQGl2BgB68GJZk6C5xgAAAABJRU5ErkJggg=="
     },
     {
       "exportID": "23029363",
@@ -419,6 +423,44 @@
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [],
+      "texture": "../images/editor/grate_icon.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAUklEQVR42mO4snv9fx8fH7IwSC8DiNHS0kIWBumFG+Dm4PQf2TAQn5AYhgGkGIJhAKmGYDWAFEOweoFUQ0YDcVAGIiyTIGvAJYYzDEjOTJRmZwAVXikPMmFTDgAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "30215525",
+      "name": "camera",
+      "limit": -1,
+      "size": {"x": 16, "y": 16},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ffff00ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": true,
       "rotationDegrees": 360,
       "canFlipX": false,
       "canFlipY": false,

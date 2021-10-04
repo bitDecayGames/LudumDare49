@@ -24,8 +24,9 @@
           "y": 64,
           "originX": 0,
           "originY": 0,
-          "values": {"end": false, "nextRoom": ""}
-        }
+          "values": {"end": false, "nextRoom": "level1"}
+        },
+        {"name": "camera", "id": 5, "_eid": "30215525", "x": 99.3383393622556, "y": 61.916380530862355, "originX": 0, "originY": 0, "rotation": 19}
       ]
     },
     {

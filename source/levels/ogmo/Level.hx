@@ -1,5 +1,7 @@
 package levels.ogmo;
 
+import flixel.util.FlxSignal.FlxTypedSignal;
+import entities.Player;
 import states.PlayState.CollidableBundle;
 import entities.Entrance;
 import entities.Exit;
@@ -7,11 +9,13 @@ import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import levels.ogmo.Room;
+import flixel.FlxG;
 
 class Level extends FlxGroup {
 	public var latestRoom:Room = null;
 	var firstRoomName:String = null;
 	var nameToRoom:Map<String, Room>;
+	var startingRoomName: String = null;
 
 	var bundle:CollidableBundle;
 	
@@ -20,10 +24,15 @@ class Level extends FlxGroup {
 	public var start:Entrance;
 	public var end:Exit;
 
-	public function new(level:String, bundle:CollidableBundle) {
+	public final roomLoadedSignal: FlxTypedSignal<(Room)-> Void> = new FlxTypedSignal<(Room)-> Void>();
+
+	public var checkpointRoomName:String = null;
+	
+	public function new(level:String, bundle:CollidableBundle, startingRoomName:String = null) {
 		super();
 		this.bundle = bundle;
-
+		this.firstRoomName = startingRoomName;
+		this.startingRoomName = startingRoomName;
 		var project = AssetPaths.project__ogmo;
 
 		var loader = new FlxOgmo3Loader(project, level);
@@ -37,7 +46,7 @@ class Level extends FlxGroup {
 					var room = new Room(project, name, entityData.x, entityData.y, entityData.width, entityData.height);
 					nameToRoom[name] = room;
 
-					if (entityData.values.start) {
+					if (entityData.values.start && startingRoomName == null) {
 						if (firstRoomName != null) {
 							throw 'duplicate start room. ${firstRoomName} already set, ${name} attempted to override';
 						}
@@ -55,11 +64,40 @@ class Level extends FlxGroup {
 		add(entrances);
 		add(exits);
 
-		loadRoom(firstRoomName);
+	}
+
+	public function checkExitCollision(player:Player) {
+		if (!latestRoom.areAllCoresCharged()) {
+			return;
+		}
+
+		for (ex in latestRoom.exits) {
+			var isGameWon = false;
+			var moveToNextRoom = false;
+			FlxG.overlap(ex, player, (exSpr, playerSpr) -> {
+				if (ex.end) {
+					isGameWon = true;
+					return;
+				}
+				moveToNextRoom = true;
+			});
+
+			if (isGameWon) {
+				throw 'TODO Game won fill me in';
+			}
+			if (moveToNextRoom) {
+				checkpointRoomName = ex.nextRoom;
+				loadRoom(ex.nextRoom);
+			}
+		}
 	}
 
 	private function loadRoom(roomName: String) {
 		var room = nameToRoom[roomName];
+		if (room == null) {
+			throw 'room ${roomName} not found in level';
+		}
+
 		latestRoom = room;
 
 		if (room.loaded) {
@@ -69,26 +107,35 @@ class Level extends FlxGroup {
 
 		room.load(bundle);
 
-		for (r in nameToRoom) {
-			for (ent in r.entrances) {
-				if (r.name == firstRoomName) {
-					if (start != null) {
-						throw "level start already set";
-					}
-					start = ent;
+		for (ent in room.entrances) {
+			if (room.name == firstRoomName) {
+				if (start != null) {
+					throw 'level start already set. room ${room.name}, first room ${firstRoomName}';
 				}
-				entrances.add(ent);
+				start = ent;
 			}
-			for (ex in r.exits) {
-				if (ex.end) {
-					if (end != null) {
-						throw "level end already set";
-					}
-					end = ex;
-				}
-				ex.loadRoomSignal.add(loadRoom);
-				exits.add(ex);
-			}
+			entrances.add(ent);
 		}
+		for (ex in room.exits) {
+			if (ex.end) {
+				if (end != null) {
+					throw "level end already set";
+				}
+				end = ex;
+			}
+			exits.add(ex);
+		}
+		roomLoadedSignal.dispatch(room);
+	}
+
+	public function loadFirstRoom() {
+		if (startingRoomName != null) {
+			checkpointRoomName = startingRoomName;
+			loadRoom(startingRoomName);
+			return;
+		}
+
+		checkpointRoomName = firstRoomName;
+		loadRoom(firstRoomName);
 	}
 }

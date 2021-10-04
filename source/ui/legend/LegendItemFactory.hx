@@ -15,6 +15,8 @@ class LegendItemFactory {
 				return Conveyor();
 			case DECAY:
 				return Decay();
+			case CHARGE:
+				return Charge();
 			default:
 				throw "Failed to find factory method for action step " + actionStep;
 		}
@@ -58,5 +60,15 @@ class LegendItemFactory {
 		}
 		spr.load_slices(AssetPaths.nuke__png, 16, 16, 16);
 		return new LegendItem(spr, "DECAY", 0);
+	}
+
+	public static function Charge():LegendItem {
+		var spr = new DepthSprite(0, 0);
+		if (SetupCameras.uiCamera != null) {
+			spr.camera = SetupCameras.uiCamera;
+			spr.cameras = [SetupCameras.uiCamera];
+		}
+		spr.load_slices(AssetPaths.battery__png, 16, 16, 16);
+		return new LegendItem(spr, "CHARGE", 0);
 	}
 }

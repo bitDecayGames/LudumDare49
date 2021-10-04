@@ -10,8 +10,10 @@ import flixel.FlxCamera;
 import flixel.system.FlxAssets.FlxShader;
 
 class SetupCameras {
+	public static var bgColor = new FlxColor(0xff0b1319);
+
 	public static function SetupMainCamera(camera:FlxCamera) {
-		camera.bgColor = FlxColor.GRAY;
+		camera.bgColor = bgColor;
 
 		FlxG.camera.pixelPerfectRender = true;
 
@@ -23,7 +25,7 @@ class SetupCameras {
 		FlxG.camera.x = (FlxG.camera.width - ogWidth) / -2;
 		FlxG.camera.y = (FlxG.camera.height - ogHeight) / -2;
 		FlxG.cameras.setDefaultDrawTarget(FlxG.camera, true);
-		FlxG.camera.zoom = 2.0;
+		FlxG.camera.zoom = 1.5;
 
 		FlxG.game.setFilters([new ShaderFilter(new FlxShader())]);
 		FlxG.game.stage.quality = StageQuality.LOW;

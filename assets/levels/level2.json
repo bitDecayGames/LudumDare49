@@ -24,8 +24,9 @@
           "y": 16,
           "originX": 0,
           "originY": 0,
-          "values": {"end": false, "nextRoom": ""}
-        }
+          "values": {"end": false, "nextRoom": "level3"}
+        },
+        {"name": "camera", "id": 2, "_eid": "30215525", "x": 96, "y": 80, "originX": 0, "originY": 0, "rotation": -20}
       ]
     },
     {
@@ -111,7 +112,8 @@
         {"name": "wall", "id": 58, "_eid": "21846068", "x": 128, "y": 96, "originX": 0, "originY": 0},
         {"name": "wall", "id": 59, "_eid": "21846068", "x": 128, "y": 112, "originX": 0, "originY": 0},
         {"name": "wall", "id": 60, "_eid": "21846068", "x": 112, "y": 112, "originX": 0, "originY": 0},
-        {"name": "fastforward", "id": 61, "_eid": "23017567", "x": 16, "y": 32, "originX": 0, "originY": 0}
+        {"name": "fastforward", "id": 61, "_eid": "23017567", "x": 16, "y": 32, "originX": 0, "originY": 0},
+        {"name": "grate", "id": 62, "_eid": "23029363", "x": 112, "y": 32, "originX": 0, "originY": 0}
       ]
     }
   ]
