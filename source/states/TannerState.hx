@@ -186,10 +186,8 @@ class TannerState extends FlxTransitionableState {
 		}
 
 		if(lowPass){
-			if (FmodManager.GetEventParameterOnSong("LowPass") == 0){
-				FmodManager.SetEventParameterOnSong("LowPass", 1);
-				FmodManager.SetEventParameterOnSound(sirenId, "LowPass", 1);
-			}
+			FmodManager.SetEventParameterOnSong("LowPass", 1);
+			FmodManager.SetEventParameterOnSound(sirenId, "LowPass", 1);
 		} else if (FmodManager.GetEventParameterOnSong("LowPass") == 1){
 			FmodManager.SetEventParameterOnSong("LowPass", 0);
 			FmodManager.SetEventParameterOnSound(sirenId, "LowPass", 0);
