@@ -38,7 +38,7 @@ class ModelTest extends FlxState {
 	override public function create() {
 		super.create();
 		Lifecycle.startup.dispatch();
-
+        FlxG.autoPause = false;
         FlxG.debugger.visible = true;
 
 		FlxG.game.setFilters([new ShaderFilter(new FlxShader())]);
@@ -48,7 +48,7 @@ class ModelTest extends FlxState {
         FlxG.camera.zoom = 3;
 
         model = new DepthSprite(FlxG.width / 2 - 8, FlxG.height / 2 - 8);
-        model.slice_offset = 0.5;
+        model.slice_offset = 1;
 
         add(model);
         var define = Macros.getDefine("obj");
@@ -100,6 +100,14 @@ class ModelTest extends FlxState {
             bgColorIndex = FlxMath.wrap(bgColorIndex + 1, 0, bgColors.length - 1);
         }
 		camera.bgColor = bgColors[bgColorIndex];
+
+        if (FlxG.keys.justPressed.C) {
+            camera.angle = 0;
+            camera.update(elapsed);
+            FlxTween.tween(camera, { angle: 360 }, 2, {
+                ease: FlxEase.quadInOut
+            });
+        }
 
 
 		// camera.angle +=  15 * elapsed;
