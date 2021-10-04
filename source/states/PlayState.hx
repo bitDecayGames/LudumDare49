@@ -76,6 +76,8 @@ class PlayState extends FlxTransitionableState {
 		player = new Player(level.start.x, level.start.y);
 		collidables.add(player);
 
+		UI.setActionSteps.removeAll();
+		UI.highlightActionStep.removeAll();
 		add(new ActionLegend());
 		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY, CHARGE]);
 		// add(new MiniMap());
