@@ -138,6 +138,7 @@ class Room {
 				case RadioactiveCooler.OGMO_NAME:
 					var cooler = new RadioactiveCooler();
 					bundle.uiObjs.add(cooler.aura);
+					allEntities.push(cooler.aura);
 					obj = cooler;	
 					bundle.playerCollidables.add(cast(obj, Block));
 				case RadioactiveBlock.OGMO_NAME:
@@ -145,6 +146,7 @@ class Room {
 					bundle.playerCollidables.add(cast(radioActiveBlock, Block));
 					bundle.uiObjs.add(radioActiveBlock.counter);
 					bundle.uiObjs.add(radioActiveBlock.aura);
+					allEntities.push(radioActiveBlock.aura);
 					allEntities.push(radioActiveBlock.counter);
 					obj = radioActiveBlock;
 					Tutorial.showPushMe(entityData.x + x, entityData.y + y);
