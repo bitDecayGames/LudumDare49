@@ -10,9 +10,9 @@ bitlytics git https://github.com/bitDecayGames/Bitlytics.git
 flixelutils git https://github.com/bitDecayGames/flixel-utils.git
 textpop git https://github.com/bitDecayGames/text-pop.git
 
-# Jam deps
-depth-flixel git https://github.com/Kenoshen/depth-flixel.git patch-1
-
 # misc deps
 dialog-manager git https://github.com/jacque006/haxe-dialog-manager.git ludumdare-49
 haxefmod git https://github.com/Tanz0rz/haxe-fmod.git gbjam9
+
+# Jam deps
+depth-flixel git https://github.com/Kenoshen/depth-flixel.git patch-1
