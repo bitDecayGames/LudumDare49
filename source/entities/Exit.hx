@@ -20,8 +20,8 @@ class Exit extends Block {
 		this.end = end;
 		this.nextRoom = nextRoom;
 
-		width = 8;
-		height = 8;
+		width = 10;
+		height = 10;
 		
 	}
 
