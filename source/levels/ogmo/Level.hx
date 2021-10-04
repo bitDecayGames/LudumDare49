@@ -35,6 +35,8 @@ class Level extends FlxGroup {
 	public final roomLoadedSignal: FlxTypedSignal<(Room, Bool, ()->Void)-> Void> = new FlxTypedSignal<(Room, Bool, ()->Void)-> Void>();
 
 	public var checkpointRoomName:String = null;
+
+	public var controlSystem:ControlSystem = null;
 	
 	public function new(level:String, bundle:CollidableBundle, startingRoomName:String = null) {
 		super();
@@ -47,11 +49,12 @@ class Level extends FlxGroup {
 
 		nameToRoom = new Map<String, Room>();
 
+		var roomNum = 0;
 		loader.loadEntities((entityData) -> {
 			switch (entityData.name) {
 				case Room.OGMO_NAME:
 					var name = entityData.values.name;
-					var room = new Room(project, name, entityData.x, entityData.y, entityData.width, entityData.height);
+					var room = new Room(project, name, entityData.x, entityData.y, entityData.width, entityData.height, roomNum++);
 					nameToRoom[name] = room;
 
 					if (entityData.values.start && startingRoomName == null) {
@@ -94,10 +97,14 @@ class Level extends FlxGroup {
 		}
 
 		for (ex in latestRoom.exits) {
+			if (controlSystem == null || !controlSystem.isMovementIdle()) {
+				return;
+			}
+
 			var isGameWon = false;
 			var moveToNextRoom = false;
 			FlxG.overlap(ex, player, (exSpr, playerSpr) -> {
-				Metrics.levelCompleted(0, ControlSystem.getMovesInLevel());
+				Metrics.levelCompleted(latestRoom.roomNumber, ControlSystem.getMovesInLevel());
 				if (ex.end) {
 					isGameWon = true;
 					return;

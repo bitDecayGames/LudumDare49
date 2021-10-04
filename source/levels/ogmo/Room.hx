@@ -23,6 +23,8 @@ class Room {
 	public static inline var OGMO_NAME = "room";
 
 	public var name:String;
+	public var roomNumber:Int;
+
 	public var loaded:Bool = false;
 
 	var project:String;
@@ -44,7 +46,8 @@ class Room {
 
 	public var endUnlocked = false;
 
-	public function new(project:String, name:String, x:Int, y:Int, width:Int, height:Int) {
+	public function new(project:String, name:String, x:Int, y:Int, width:Int, height:Int, roomNum:Int) {
+		this.roomNumber = roomNum;
 		this.project = project;
 		this.name = name;
 		this.x = x;

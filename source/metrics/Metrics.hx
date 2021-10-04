@@ -12,21 +12,14 @@ class Metrics {
     public static inline var LEVEL_COMPLETE = "level_completed";
     public static inline var MOVE_COUNT = "move_count";
 
-    public static var max_level_completed(default, set) = 0;
-
-    public static function set_max_level_completed(m:Int):Int {
-        if (m > max_level_completed) {
-            // new high score. Report this!
-            Bitlytics.Instance().Queue(MAX_LEVEL, m);
-            return m;
-        }
-
-        return max_level_completed;
-    }
+    private static var max_level_completed = -1;
 
     public static function levelCompleted(num:Int, steps:Int) {
-        // let our magic setter handle this metric
-        max_level_completed = num;
+        trace('level finished: ${num} in ${steps} steps');
+        if (num > max_level_completed) {
+            Bitlytics.Instance().Queue(MAX_LEVEL, num);
+            max_level_completed = num;
+        }
 
         // report all level completions for good aggregation metrics
         Bitlytics.Instance().Queue(LEVEL_COMPLETE, steps, [new Tag(LEVEL_TAG, '${num}')] );
