@@ -35,6 +35,7 @@ class ControlSystem extends FlxBasic {
 	var fastForwardStarted:Bool = false;
 
 	public var movementSystem:MovementSystem;
+
 	var coolingSystem:CoolingSystem;
 	var conveyorSystem:ConveyorSystem;
 	var decaySystem:DecaySystem;
@@ -78,16 +79,20 @@ class ControlSystem extends FlxBasic {
 						setFastForwardSystemRuntimes(Constants.FF_SPEED);
 						fastForwardStarted = true;
 					}
-					movementSystem.handlePlayerMovement();
-					gameState = Cooling;
-				} else if (movementSystem.isIdle()) {
-					if (fastForwardStarted) {
-						fastForwardStarted = false;
-						resetSystemRuntimes();
+
+					if (movementSystem.isIdle()) {
+						movementSystem.handlePlayerMovement();
 					}
+
+					gameState = Cooling;
+
+					if (movementSystem.isRunning()) {
+						resetSystemRuntimes();
+						fastForwardStarted = false;
+					}
+				} else if (movementSystem.isIdle()) {
 					movementSystem.handlePlayerMovement();
 				} else if (movementSystem.isDone()) {
-					movementSystem.setIdle();
 					gameState = Cooling;
 				}
 
@@ -96,7 +101,6 @@ class ControlSystem extends FlxBasic {
 					UI.highlightActionStep.dispatch(ActionStep.COOLING);
 					coolingSystem.handleCooling();
 				} else if (coolingSystem.isDone()) {
-					coolingSystem.setIdle();
 					gameState = Conveyors;
 				}
 
@@ -105,7 +109,6 @@ class ControlSystem extends FlxBasic {
 					UI.highlightActionStep.dispatch(ActionStep.CONVEYOR);
 					conveyorSystem.handleConveyors();
 				} else if (conveyorSystem.isDone()) {
-					conveyorSystem.setIdle();
 					gameState = Decay;
 				}
 
@@ -113,10 +116,10 @@ class ControlSystem extends FlxBasic {
 				if (decaySystem.isIdle()) {
 					UI.highlightActionStep.dispatch(ActionStep.DECAY);
 					decaySystem.handleDecay();
-					//check if meltdown - reset level, tell play meltdown happened
-					if(decaySystem.anyMeltdowns()) active = false;
+					// check if meltdown - reset level, tell play meltdown happened
+					if (decaySystem.anyMeltdowns())
+						active = false;
 				} else if (decaySystem.isDone()) {
-					decaySystem.setIdle();
 					gameState = Charging;
 				}
 
@@ -125,7 +128,6 @@ class ControlSystem extends FlxBasic {
 					UI.highlightActionStep.dispatch(ActionStep.CHARGE);
 					chargeSystem.handleCharge();
 				} else if (chargeSystem.isDone()) {
-					chargeSystem.setIdle();
 					gameState = PlayerMovement;
 					UI.highlightActionStep.dispatch(ActionStep.MOVEMENT);
 				}
