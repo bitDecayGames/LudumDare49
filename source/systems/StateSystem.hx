@@ -16,10 +16,14 @@ class StateSystem extends FlxBasic {
 	// DONT TOUCH THIS UNLESS YOU KNOW WHAT YOU ARE DOING
 	// WE CERTAINLY DONT
 	public var runningTimeDuration:Float = 1;
+
 	var defaultRunningTimeDuration:Float = 1;
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
+
+		if (isDone())
+			setIdle();
 
 		if (isRunning()) {
 			runningTime -= elapsed;

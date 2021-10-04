@@ -26,7 +26,7 @@
           "originX": 8,
           "originY": 8,
           "rotation": 90,
-          "values": {"end": true, "nextRoom": ""}
+          "values": {"end": false, "nextRoom": "level6"}
         }
       ]
     },

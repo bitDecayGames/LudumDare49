@@ -112,8 +112,8 @@ class ConveyorSystem extends StateSystem {
 		var valuesSeen:Array<FlxPoint> = new Array<FlxPoint>();
 		var duplicateValues:Array<FlxPoint> = new Array<FlxPoint>();
 
-		for (value in map) {
-			if (valuesSeen.filter(p -> p == value).length == 1) {
+		for (object => value in map) {
+			if (valuesSeen.filter(p -> p.equals(value)).length == 1) {
 				duplicateValues.push(value);
 			} else {
 				valuesSeen.push(value);

@@ -36,10 +36,14 @@ class RadioactiveBlock extends Block {
 		return blowedUp;
 	}
 
+	public function isCritical() {
+		return currentLife <= maxLife / 3;
+	}
+
 	public function decay() {
 		currentLife -= decayAmount;
 
-		if (currentLife < 0) {
+		if (currentLife <= 0) {
 			currentLife = 0;
 			blowedUp = true;
 		}
