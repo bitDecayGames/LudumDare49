@@ -98,7 +98,7 @@ class Level extends FlxGroup {
 			});
 
 			if (isGameWon) {
-				FmodFlxUtilities.TransitionToState(new CreditsState());
+				FmodFlxUtilities.TransitionToState(new CreditsState(true));
 			}
 			if (moveToNextRoom) {
 				latestRoom.unload();
