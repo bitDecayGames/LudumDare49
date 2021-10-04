@@ -1,5 +1,7 @@
 package states;
 
+import states.transitions.Trans;
+import states.transitions.SwirlTransition;
 import flixel.tweens.misc.VarTween;
 import flixel.util.FlxTimer;
 import ui.camera.SetupCameras;
@@ -26,6 +28,7 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.input.keyboard.FlxKey;
 import flixel.tweens.FlxTween;
+import states.PlayState;
 
 using extensions.FlxStateExt;
 
@@ -73,7 +76,8 @@ class TannerState extends FlxTransitionableState {
 		 "Pocobot: ...", "Pocobot: .................powering on", "Pocobot: beep boop", "Pocobot: Power core straight ahead", "Pocobot: I must do my duty"];
 		dialogManager = new DialogManager(dialgs, this, SetupCameras.uiCamera, FlxKey.SPACE, 
 			() -> {FmodManager.PlaySoundAndAssignId(FmodSFX.Typewriter, typeSoundId);}, 
-			() -> {FmodManager.StopSoundImmediately(typeSoundId);});
+			() -> {FmodManager.StopSoundImmediately(typeSoundId);}
+		);
 		dialogManager.loadDialog("Intro");
 
 
@@ -182,7 +186,16 @@ class TannerState extends FlxTransitionableState {
 				FlxTween.tween(camera, {zoom: 2}, 1, {});
 			}
 			lowPass = false;
-			ControlSystem.playerIsControllable = true;
+
+			// Start game
+			FmodManager.StopSong();
+			var swirlOut = new SwirlTransition(Trans.OUT, () -> {
+				// make sure our music is stopped;
+				FmodManager.StopSongImmediately();
+				ControlSystem.playerIsControllable = true;
+				FlxG.switchState(new PlayState());
+			}, FlxColor.GRAY);
+			openSubState(swirlOut);
 		}
 
 		if(lowPass){

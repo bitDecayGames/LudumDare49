@@ -66,6 +66,7 @@ class PlayState extends FlxTransitionableState {
 		super.create();
 
 		uiObjs = new FlxTypedGroup();
+		SetupCameras.uiCamera = null;
 		FmodManager.PlaySong(FmodSongs.Carefully);
 
 		Lifecycle.startup.dispatch();
@@ -131,8 +132,7 @@ class PlayState extends FlxTransitionableState {
 
 	public function lose() {
 		SetupCameras.uiCamera = null;
-		// TODO Indicate player lost
-		FlxG.switchState(new PlayState(level.checkpointRoomName));
+		FlxG.switchState(new FailSubstate(level.checkpointRoomName));
 	}
 
 	override public function onFocusLost() {
