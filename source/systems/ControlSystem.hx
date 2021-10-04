@@ -116,6 +116,7 @@ class ControlSystem extends FlxBasic {
 
 			case Charging:
 				if (chargeSystem.isIdle()) {
+					UI.highlightActionStep.dispatch(ActionStep.CHARGE);
 					chargeSystem.handleCharge();
 				} else if (chargeSystem.isDone()) {
 					chargeSystem.setIdle();
