@@ -87,8 +87,8 @@ class Room {
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
-			obj.x = entityData.x + x;
-			obj.y = entityData.y + y;
+			obj.x = entityData.x + x - entityData.originX;
+			obj.y = entityData.y + y - entityData.originY;
 		}, "objects");
 
 		// noncollidables
