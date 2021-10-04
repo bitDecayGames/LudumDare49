@@ -39,15 +39,15 @@ class FailSubstate extends FlxSubState {
 		text.updateHitbox();
         add(text);
 
-		_btnRetry = UiHelpers.createMenuButton("RETRY", handleRetry);
-		_btnRetry.setPosition(FlxG.width / 2 - _btnRetry.width / 2, FlxG.height / 2 - _btnRetry.height);
-		_btnRetry.updateHitbox();
-		add(_btnRetry);
-
 		_btnDone = UiHelpers.createMenuButton("Main Menu", clickMainMenu);
 		_btnDone.setPosition(FlxG.width / 2 - _btnDone.width / 2, FlxG.height - _btnDone.height - 40);
 		_btnDone.updateHitbox();
 		add(_btnDone);
+
+		_btnRetry = UiHelpers.createMenuButton("RETRY", handleRetry);
+		_btnRetry.setPosition(FlxG.width / 2 - _btnRetry.width / 2, _btnDone.y - (_btnDone.height * 2));
+		_btnRetry.updateHitbox();
+		add(_btnRetry);
 	}
 
 	function handleRetry() {
