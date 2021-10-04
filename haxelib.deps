@@ -14,5 +14,5 @@ textpop git https://github.com/bitDecayGames/text-pop.git
 depth-flixel git https://github.com/Kenoshen/depth-flixel.git patch-1
 
 # misc deps
-dialog-manager git https://github.com/Tanz0rz/haxe-dialog-manager.git
+dialog-manager git https://github.com/jacque006/haxe-dialog-manager.git ludumdare-49
 haxefmod git https://github.com/Tanz0rz/haxe-fmod.git gbjam9
