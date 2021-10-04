@@ -47,11 +47,12 @@ class Level extends FlxGroup {
 
 		nameToRoom = new Map<String, Room>();
 
+		var roomNum = 0;
 		loader.loadEntities((entityData) -> {
 			switch (entityData.name) {
 				case Room.OGMO_NAME:
 					var name = entityData.values.name;
-					var room = new Room(project, name, entityData.x, entityData.y, entityData.width, entityData.height);
+					var room = new Room(project, name, entityData.x, entityData.y, entityData.width, entityData.height, roomNum++);
 					nameToRoom[name] = room;
 
 					if (entityData.values.start && startingRoomName == null) {
@@ -97,7 +98,7 @@ class Level extends FlxGroup {
 			var isGameWon = false;
 			var moveToNextRoom = false;
 			FlxG.overlap(ex, player, (exSpr, playerSpr) -> {
-				Metrics.levelCompleted(0, ControlSystem.getMovesInLevel());
+				Metrics.levelCompleted(latestRoom.roomNumber, ControlSystem.getMovesInLevel());
 				if (ex.end) {
 					isGameWon = true;
 					return;
