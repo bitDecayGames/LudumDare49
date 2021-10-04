@@ -1,5 +1,7 @@
 package entities;
 
+import flixel.math.FlxPoint;
+import ui.aura.Aura;
 import flixel.FlxG;
 import ui.counter.Counter;
 import input.SimpleController;
@@ -17,6 +19,8 @@ class RadioactiveBlock extends Block {
 
 	public var counter:Counter;
 
+	public var aura:Aura;
+
 	public function new(_decayAmount:Int = 1, _maxLife:Int = 10) {
 		super(true);
 
@@ -26,6 +30,7 @@ class RadioactiveBlock extends Block {
 		maxLife = _maxLife;
 		currentLife = maxLife;
 		counter = new Counter(0, 0, currentLife).setFollow(this);
+		aura = new Aura(0,0, FlxColor.LIME, FlxPoint.get(-16, -16)).setFollow(this);
 	}
 
 	override public function update(delta:Float) {
