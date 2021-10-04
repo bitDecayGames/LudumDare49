@@ -1,5 +1,6 @@
 package systems;
 
+import ui.counter.Tutorial;
 import helpers.Constants;
 import haxe.macro.Expr.Constant;
 import flixel.FlxG;
@@ -55,8 +56,8 @@ class MovementSystem extends StateSystem {
 			else {
 				var blockingBlock = collidedBlocks[0];
 
-				if (!blockingBlock.isActive) {			
-					//if block is dead you can move into it	
+				if (!blockingBlock.isActive) {
+					// if block is dead you can move into it
 					player.setDir(cardinalInput);
 					FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8,
 						Constants.PLAYER_SPEED); // limit player input, add more collisins
@@ -76,6 +77,7 @@ class MovementSystem extends StateSystem {
 						FlxTween.linearMotion(blockingBlock, blockingBlock.x, blockingBlock.y, targetTile2.x - 8, targetTile2.y - 8, runningTimeDuration);
 						FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8, runningTimeDuration);
 						setRunning();
+						Tutorial.hidePushMe(); // this is safe to call over and over
 					}
 				}
 			}

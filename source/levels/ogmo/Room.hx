@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import ui.counter.Tutorial;
 import flixel.tweens.FlxTween;
 import flixel.math.FlxPoint;
 import spacial.Cardinal;
@@ -30,17 +31,18 @@ class Room {
 	var width:Int;
 	var height:Int;
 
-	public var cameraPosition: FlxPoint = FlxPoint.get();
-	public var cameraRotation: Float = 0;
+	public var cameraPosition:FlxPoint = FlxPoint.get();
+	public var cameraRotation:Float = 0;
 
 	var allEntities:Array<FlxSprite> = [];
 
 	public var floor:FlxTilemap;
 	public var entrances:Array<Entrance> = [];
 	public var exits:Array<Exit> = [];
-	var cores:Array<PowerCore> = [];
-	public var endUnlocked = false;
 
+	var cores:Array<PowerCore> = [];
+
+	public var endUnlocked = false;
 
 	public function new(project:String, name:String, x:Int, y:Int, width:Int, height:Int) {
 		this.project = project;
@@ -91,14 +93,14 @@ class Room {
 					exits.push(exit);
 					bundle.sortGroup.add(exit);
 					exit.angle = entityData.rotation;
-					if(entityData.rotation == 0)
-						offset.set(0,4);
+					if (entityData.rotation == 0)
+						offset.set(0, 4);
 					else
-						offset.set(4,0);
+						offset.set(4, 0);
 					obj = exit;
 					bundle.playerCollidables.add(cast(obj, Block));
 				case 'camera':
-					cameraPosition.set(entityData.x + x , entityData.y +y);
+					cameraPosition.set(entityData.x + x, entityData.y + y);
 					cameraRotation = entityData.rotation;
 					return;
 				default:
@@ -142,6 +144,7 @@ class Room {
 					bundle.uiObjs.add(radioActiveBlock.counter);
 					allEntities.push(radioActiveBlock.counter);
 					obj = radioActiveBlock;
+					Tutorial.showPushMe(entityData.x + x, entityData.y + y);
 				case PowerCore.OGMO_NAME:
 					var core = new PowerCore(entityData.values.maxCharge);
 					bundle.playerCollidables.add(core);
@@ -153,6 +156,7 @@ class Room {
 					obj = new Grate();
 				case FastForward.OGMO_NAME:
 					obj = new FastForward();
+					Tutorial.preSetTouchMe(entityData.x + x, entityData.y + y);
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
@@ -174,7 +178,7 @@ class Room {
 				onComplete: (t) -> {
 					ent.kill();
 				}
-			});			
+			});
 		}
 
 		FlxTween.tween(floor, {
