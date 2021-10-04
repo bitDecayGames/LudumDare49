@@ -26,13 +26,15 @@ class CollidableBundle {
 	public var collidables:FlxTypedGroup<FlxSprite>;
 	public var nonCollidables:FlxTypedGroup<FlxSprite>;
 	public var uiObjs:FlxTypedGroup<FlxSprite>;
+	public var sortGroup:FlxTypedGroup<DepthSprite> = new FlxTypedGroup();
 
 	public function new(playerCollidables:FlxTypedGroup<Block>, collidables:FlxTypedGroup<FlxSprite>, nonCollidables:FlxTypedGroup<FlxSprite>,
-			uiObjs:FlxTypedGroup<FlxSprite>) {
+			uiObjs:FlxTypedGroup<FlxSprite>, sortGroup: FlxTypedGroup<DepthSprite> ) {
 		this.playerCollidables = playerCollidables;
 		this.collidables = collidables;
 		this.nonCollidables = nonCollidables;
 		this.uiObjs = uiObjs;
+		this.sortGroup = sortGroup;
 	}
 }
 
@@ -66,7 +68,7 @@ class PlayState extends FlxTransitionableState {
 
 		SetupCameras.SetupMainCamera(camera);
 
-		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables, uiObjs);
+		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables, uiObjs, sortGroup);
 
 		level = new Level(AssetPaths.world1__json, bundle, startingRoomName);
 		level.roomLoadedSignal.add(setCameraLocationRotation);

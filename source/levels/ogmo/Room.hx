@@ -72,10 +72,12 @@ class Room {
 				case Entrance.OGMO_NAME:
 					var enter = new Entrance();
 					entrances.push(enter);
+					bundle.sortGroup.add(enter);
 					obj = enter;
 				case Exit.OGMO_NAME:
 					var exit = new Exit(entityData.values.end, entityData.values.nextRoom);
 					exits.push(exit);
+					bundle.sortGroup.add(exit);
 					obj = exit;
 				case 'camera':
 					cameraPosition.set(entityData.x + x , entityData.y +y);
