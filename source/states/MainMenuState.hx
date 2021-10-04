@@ -1,5 +1,6 @@
 package states;
 
+import ui.counter.Tutorial;
 import states.transitions.Trans;
 import states.transitions.SwirlTransition;
 import com.bitdecay.analytics.Bitlytics;
@@ -100,6 +101,7 @@ class MainMenuState extends FlxUIState {
 	}
 
 	function clickPlay():Void {
+		Tutorial.reset();
 		FmodManager.StopSong();
 		var swirlOut = new SwirlTransition(Trans.OUT, () -> {
 			// make sure our music is stopped;

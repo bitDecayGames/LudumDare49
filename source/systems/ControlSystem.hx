@@ -1,5 +1,6 @@
 package systems;
 
+import ui.counter.Tutorial;
 import flixel.FlxG;
 import entities.FastForward;
 import signals.UI;
@@ -78,6 +79,7 @@ class ControlSystem extends FlxBasic {
 					if (!fastForwardStarted) {
 						setFastForwardSystemRuntimes(Constants.FF_SPEED);
 						fastForwardStarted = true;
+						Tutorial.hideTouchMe(); // its ok to call this multiple times
 					}
 
 					if (movementSystem.isIdle()) {

@@ -45,13 +45,15 @@ class PlayState extends FlxTransitionableState {
 	var playerCollidables:FlxTypedGroup<Block> = new FlxTypedGroup();
 	var collidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 	var nonCollidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
-	var uiObjs:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
+
+	public static var uiObjs:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 
 	var sortGroup:FlxTypedGroup<DepthSprite> = new FlxTypedGroup();
 
 	var startingRoomName:String = null;
 
 	static final sirenDelayMilli = 3.0;
+
 	var sirenTimer = 0.0;
 
 	public function new(startingRoomName:String = null) {
@@ -63,8 +65,8 @@ class PlayState extends FlxTransitionableState {
 	override public function create() {
 		super.create();
 
+		uiObjs = new FlxTypedGroup();
 		SetupCameras.uiCamera = null;
-
 		FmodManager.PlaySong(FmodSongs.Carefully);
 
 		Lifecycle.startup.dispatch();
@@ -143,7 +145,7 @@ class PlayState extends FlxTransitionableState {
 		this.handleFocus();
 	}
 
-	private function setCameraLocationRotation(r:Room, disablePlayer:Bool, cb:()->Void) {
+	private function setCameraLocationRotation(r:Room, disablePlayer:Bool, cb:() -> Void) {
 		FlxTween.tween(camera, {
 			angle: r.cameraRotation
 		});
@@ -154,7 +156,7 @@ class PlayState extends FlxTransitionableState {
 		});
 	}
 
-	private function movePlayerToNextRoom(r:Room, _disablePlayer:Bool, cb:()->Void) {
+	private function movePlayerToNextRoom(r:Room, _disablePlayer:Bool, cb:() -> Void) {
 		if (!_disablePlayer) {
 			return;
 		}
@@ -164,13 +166,11 @@ class PlayState extends FlxTransitionableState {
 		var targetTile = ControlSystem.nextPointFromCardinal(player.getMidpoint(), player.untouchedDir);
 		targetTile = ControlSystem.nextPointFromCardinal(targetTile, player.untouchedDir);
 		targetTile = ControlSystem.nextPointFromCardinal(targetTile, player.untouchedDir);
-		FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8, 1,
-			{
-				onComplete: (t) -> {
-					ControlSystem.playerIsControllable = true;
-					cb();
-				}
+		FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8, 1, {
+			onComplete: (t) -> {
+				ControlSystem.playerIsControllable = true;
+				cb();
 			}
-		);
+		});
 	}
 }
