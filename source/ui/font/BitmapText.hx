@@ -23,6 +23,23 @@ abstract PressStart(BitmapText) to BitmapText {
 	}
 }
 
+@:forward
+abstract Shadow(BitmapText) to BitmapText {
+	static public var font(get, null):FlxBitmapFont = null;
+
+	inline public function new(x = 0.0, y = 0.0, text = "") {
+		this = new BitmapText(x, y, text, font);
+	}
+
+	inline static function get_font() {
+		if (font == null) {
+			@:privateAccess
+			font = BitmapText.createPressStartFont();
+		}
+		return font;
+	}
+}
+
 class BitmapText extends flixel.text.FlxBitmapText {
 	static var mainFont:FlxBitmapFont = null;
 
@@ -71,6 +88,15 @@ class BitmapText extends flixel.text.FlxBitmapText {
 		font.lineHeight = height;
 		font.spaceWidth = spaceWidth;
 		return font;
+	}
+
+	@:allow(Shadow)
+	static function createShadowFont():FlxBitmapFont {
+		// Base font information
+		var path = AssetPaths.shaded__png;
+		var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		
+		return createMonospace(chars, path);
 	}
 
 	private static function createMonospace(chars:String, path:String, yOffset:Int = 0, size:Int = 8):FlxBitmapFont {

@@ -32,6 +32,6 @@ jobs:
         with:
           dir: export/html5.zip
           itchUserName: bitdecaygames
-          itchGameName: ludumdare-49
+          itchGameName: pocobot
           itchChannel: web-dev
           butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
