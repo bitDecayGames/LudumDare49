@@ -86,6 +86,7 @@ class Level extends FlxGroup {
 				throw 'TODO Game won fill me in';
 			}
 			if (moveToNextRoom) {
+				latestRoom.unload();
 				checkpointRoomName = ex.nextRoom;
 				loadRoom(ex.nextRoom);
 			}
