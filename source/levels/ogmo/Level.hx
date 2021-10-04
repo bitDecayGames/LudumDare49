@@ -100,8 +100,7 @@ class Level extends FlxGroup {
 			if (controlSystem == null || !controlSystem.isMovementIdle()) {
 				return;
 			}
-
-			var isGameWon = false;
+			var isGameWon = player.x >= 852-16;
 			var moveToNextRoom = false;
 			FlxG.overlap(ex, player, (exSpr, playerSpr) -> {
 				Metrics.levelCompleted(latestRoom.roomNumber, ControlSystem.getMovesInLevel());
