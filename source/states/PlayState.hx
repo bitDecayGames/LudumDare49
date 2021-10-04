@@ -51,6 +51,9 @@ class PlayState extends FlxTransitionableState {
 
 	var startingRoomName:String = null;
 
+	static final sirenDelayMilli = 3.0;
+	var sirenTimer = 0.0;
+
 	public function new(startingRoomName:String = null) {
 		super();
 
@@ -106,6 +109,17 @@ class PlayState extends FlxTransitionableState {
 		}
 		sortGroup.sort(DepthUtil.sort_by_depth);
 		level.checkExitCollision(player);
+
+		// Critical siren
+		if (controlSystem.isCritical()) {
+			sirenTimer -= elapsed;
+			if (sirenTimer <= 0.0) {
+				sirenTimer = sirenDelayMilli;
+				FmodManager.PlaySoundOneShot(FmodSFX.Siren);
+			}
+		} else {
+			sirenTimer = 0.0;
+		}
 
 		if (controlSystem.lost() || FlxG.keys.justPressed.Q) {
 			lose();

@@ -40,6 +40,14 @@ class DecaySystem extends StateSystem {
 		return collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock)).filter(d -> d.meltedDown());
 	}
 
+	public function isCritical() {
+		return collidables.members
+			.filter(col -> Std.isOfType(col, RadioactiveBlock))
+			.map(col -> cast(col, RadioactiveBlock))
+			.filter(d -> d.isCritical())
+			.length > 0;
+	}
+
 	public function anyMeltdowns(): Bool{
 		return getAllMeltdowns().length > 0;
 	}
