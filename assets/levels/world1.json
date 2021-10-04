@@ -36,7 +36,7 @@
           "height": 144,
           "originX": 0,
           "originY": 0,
-          "values": {"name": "level0", "start": false}
+          "values": {"name": "level0", "start": true}
         },
         {
           "name": "room",
@@ -120,7 +120,7 @@
           "height": 224,
           "originX": 0,
           "originY": 0,
-          "values": {"name": "level7", "start": true}
+          "values": {"name": "level7", "start": false}
         }
       ]
     },
