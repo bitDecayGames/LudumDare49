@@ -127,8 +127,6 @@ class PlayState extends FlxTransitionableState {
 	}
 
 	private function setCameraLocationRotation(r:Room) {
-		camera.focusOn(r.cameraPosition);
-
 		FlxTween.tween(camera, {
 			angle: r.cameraRotation
 		});
