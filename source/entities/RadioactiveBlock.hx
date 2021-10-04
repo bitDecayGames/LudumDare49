@@ -72,10 +72,10 @@ class RadioactiveBlock extends Block {
 			aura.updateAura(FlxColor.LIME);
 		}else if(currentLife > .33 * maxLife && currentLife < .66 * maxLife && auraColor != FlxColor.YELLOW){
 			auraColor = FlxColor.YELLOW;
-			aura.updateAura(FlxColor.YELLOW);
+			aura.updateAura(FlxColor.YELLOW, .75);
 		}else if(currentLife <= .33 * maxLife && auraColor != FlxColor.RED){
 			auraColor = FlxColor.RED;
-			aura.updateAura(FlxColor.RED );
+			aura.updateAura(FlxColor.RED, .5);
 		}
 	}
 }

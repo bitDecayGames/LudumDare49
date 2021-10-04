@@ -33,13 +33,13 @@ class Aura extends FlxSprite {
         followOffset = off;
 	}
 
-    public function updateAura(color:FlxColor, speed:Int = 1){
+    public function updateAura(color:FlxColor, speed:Float = 1){
         colorTween.cancel();
-        
+
         alpha = 0.20;
         colorTween = FlxTween.tween(this, {
             alpha: 0.05
-        }, {
+        }, speed ,{
             type: FlxTweenType.PINGPONG
         } );
         this.color = color;
