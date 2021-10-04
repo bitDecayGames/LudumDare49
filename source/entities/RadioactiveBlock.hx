@@ -39,7 +39,7 @@ class RadioactiveBlock extends Block {
 	public function decay() {
 		currentLife -= decayAmount;
 
-		if (currentLife < 0) {
+		if (currentLife <= 0) {
 			currentLife = 0;
 			blowedUp = true;
 		}
