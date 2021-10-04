@@ -1,5 +1,7 @@
 package states;
 
+import flixel.tweens.FlxTween;
+import levels.ogmo.Room;
 import flixel.math.FlxPoint;
 import depth.DepthUtil;
 import depth.DepthSprite;
@@ -24,13 +26,15 @@ class CollidableBundle {
 	public var collidables:FlxTypedGroup<FlxSprite>;
 	public var nonCollidables:FlxTypedGroup<FlxSprite>;
 	public var uiObjs:FlxTypedGroup<FlxSprite>;
+	public var sortGroup:FlxTypedGroup<DepthSprite> = new FlxTypedGroup();
 
 	public function new(playerCollidables:FlxTypedGroup<Block>, collidables:FlxTypedGroup<FlxSprite>, nonCollidables:FlxTypedGroup<FlxSprite>,
-			uiObjs:FlxTypedGroup<FlxSprite>) {
+			uiObjs:FlxTypedGroup<FlxSprite>, sortGroup: FlxTypedGroup<DepthSprite> ) {
 		this.playerCollidables = playerCollidables;
 		this.collidables = collidables;
 		this.nonCollidables = nonCollidables;
 		this.uiObjs = uiObjs;
+		this.sortGroup = sortGroup;
 	}
 }
 
@@ -64,17 +68,19 @@ class PlayState extends FlxTransitionableState {
 
 		SetupCameras.SetupMainCamera(camera);
 
-		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables, uiObjs);
+		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables, uiObjs, sortGroup);
+
 		level = new Level(AssetPaths.world1__json, bundle, startingRoomName);
+		level.roomLoadedSignal.add(setCameraLocationRotation);
+		level.loadFirstRoom();
 		add(level);
 
 		player = new Player(level.start.x, level.start.y);
 		collidables.add(player);
-		camera.focusOn(FlxPoint.get(level.start.x, level.start.y));
 
 		add(new ActionLegend());
 		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY, CHARGE]);
-		add(new MiniMap());
+		// add(new MiniMap());
 
 		add(collidables);
 		add(playerCollidables);
@@ -111,5 +117,21 @@ class PlayState extends FlxTransitionableState {
 	override public function onFocus() {
 		super.onFocus();
 		this.handleFocus();
+	}
+
+	private function setCameraLocationRotation(r: Room){
+
+		camera.focusOn(r.cameraPosition);
+
+
+		FlxTween.tween(camera, {
+			angle: r.cameraRotation
+		});
+
+		FlxTween.tween(camera.scroll, {
+			x: r.cameraPosition.x - camera.width * 0.5,
+			y: r.cameraPosition.y - camera.height * 0.5
+		});
+
 	}
 }

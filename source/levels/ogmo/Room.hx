@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import flixel.math.FlxPoint;
 import spacial.Cardinal;
 import states.PlayState.CollidableBundle;
 import flixel.FlxSprite;
@@ -27,6 +28,9 @@ class Room {
 	var y:Int;
 	var width:Int;
 	var height:Int;
+
+	public var cameraPosition: FlxPoint = FlxPoint.get();
+	public var cameraRotation: Float = 0;
 
 	// public var layer:FlxTilemap;
 	public var entrances:Array<Entrance> = [];
@@ -68,11 +72,17 @@ class Room {
 				case Entrance.OGMO_NAME:
 					var enter = new Entrance();
 					entrances.push(enter);
+					bundle.sortGroup.add(enter);
 					obj = enter;
 				case Exit.OGMO_NAME:
 					var exit = new Exit(entityData.values.end, entityData.values.nextRoom);
 					exits.push(exit);
+					bundle.sortGroup.add(exit);
 					obj = exit;
+				case 'camera':
+					cameraPosition.set(entityData.x + x , entityData.y +y);
+					cameraRotation = entityData.rotation;
+					return;
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}

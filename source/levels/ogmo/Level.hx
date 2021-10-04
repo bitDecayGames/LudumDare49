@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import flixel.util.FlxSignal.FlxTypedSignal;
 import entities.Player;
 import states.PlayState.CollidableBundle;
 import entities.Entrance;
@@ -14,6 +15,7 @@ class Level extends FlxGroup {
 	public var latestRoom:Room = null;
 	var firstRoomName:String = null;
 	var nameToRoom:Map<String, Room>;
+	var startingRoomName: String = null;
 
 	var bundle:CollidableBundle;
 	
@@ -22,13 +24,15 @@ class Level extends FlxGroup {
 	public var start:Entrance;
 	public var end:Exit;
 
-	public var checkpointRoomName:String = null;
+	public final roomLoadedSignal: FlxTypedSignal<(Room)-> Void> = new FlxTypedSignal<(Room)-> Void>();
 
+	public var checkpointRoomName:String = null;
+	
 	public function new(level:String, bundle:CollidableBundle, startingRoomName:String = null) {
 		super();
 		this.bundle = bundle;
 		this.firstRoomName = startingRoomName;
-
+		this.startingRoomName = startingRoomName;
 		var project = AssetPaths.project__ogmo;
 
 		var loader = new FlxOgmo3Loader(project, level);
@@ -60,14 +64,6 @@ class Level extends FlxGroup {
 		add(entrances);
 		add(exits);
 
-		if (startingRoomName != null) {
-			checkpointRoomName = startingRoomName;
-			loadRoom(startingRoomName);
-			return;
-		}
-
-		checkpointRoomName = firstRoomName;
-		loadRoom(firstRoomName);
 	}
 
 	public function checkExitCollision(player:Player) {
@@ -129,5 +125,17 @@ class Level extends FlxGroup {
 			}
 			exits.add(ex);
 		}
+		roomLoadedSignal.dispatch(room);
+	}
+
+	public function loadFirstRoom() {
+		if (startingRoomName != null) {
+			checkpointRoomName = startingRoomName;
+			loadRoom(startingRoomName);
+			return;
+		}
+
+		checkpointRoomName = firstRoomName;
+		loadRoom(firstRoomName);
 	}
 }

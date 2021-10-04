@@ -149,7 +149,10 @@ class ControlSystem extends FlxBasic {
 		var fastForwardTiles = collidables.members.filter(c -> Std.isOfType(c, FastForward));
 
 		for (ffTile in fastForwardTiles) {
-			return player.overlapsPoint(ffTile.getMidpoint());
+			var isOnFF = player.overlapsPoint(ffTile.getMidpoint());
+			if (isOnFF) {
+				return true;
+			}
 		}
 
 		return false;
