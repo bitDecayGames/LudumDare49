@@ -15,7 +15,7 @@
       "gridCellsX": 16,
       "gridCellsY": 8,
       "entities": [
-        {"name": "entrance", "id": 0, "_eid": "15149497", "x": 0, "y": 48, "originX": 0, "originY": 0},
+        {"name": "entrance", "id": 0, "_eid": "15149497", "x": 0, "y": 48, "originX": 0, "originY": 0, "rotation": 0},
         {
           "name": "exit",
           "id": 1,
@@ -24,6 +24,7 @@
           "y": 112,
           "originX": 0,
           "originY": 0,
+          "rotation": 0,
           "values": {"end": false, "nextRoom": "test/middle"}
         }
       ]
