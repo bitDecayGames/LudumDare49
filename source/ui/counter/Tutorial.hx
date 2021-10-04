@@ -29,6 +29,7 @@ class Tutorial {
 	public static function hidePushMe() {
 		if (pushMe != null) {
 			PlayState.uiObjs.remove(pushMe);
+			showTouchMe();
 		}
 	}
 

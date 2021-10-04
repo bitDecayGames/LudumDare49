@@ -74,12 +74,15 @@ class ControlSystem extends FlxBasic {
 				if (!playerIsControllable) {
 					return;
 				}
+				var isPlayerOnFastForward = playerOnFastForward();
+				if (isPlayerOnFastForward) {
+					Tutorial.hideTouchMe(); // this is ok to call multiple times
+				}
 
-				if (playerOnFastForward() && chargeSystem.anyCoresCharged()) {
+				if (isPlayerOnFastForward && chargeSystem.anyCoresCharged()) {
 					if (!fastForwardStarted) {
 						setFastForwardSystemRuntimes(Constants.FF_SPEED);
 						fastForwardStarted = true;
-						Tutorial.hideTouchMe(); // its ok to call this multiple times
 					}
 
 					if (movementSystem.isIdle()) {
