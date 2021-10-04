@@ -75,7 +75,7 @@
       "tileSize": {"x": 16, "y": 16},
       "resizeableX": false,
       "resizeableY": false,
-      "rotatable": false,
+      "rotatable": true,
       "rotationDegrees": 360,
       "canFlipX": false,
       "canFlipY": false,
@@ -85,7 +85,9 @@
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": [],
-      "values": []
+      "values": [],
+      "texture": "../images/editor/start_icon.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAARklEQVR42mN4EBX1nxLMgMwJExYmqAFdDfUMAEkQawCyOuoYABMkxQCYWgwDSMFgA8jVDMOUG0CxF6gSiAOfDgZHXiAXAwAZ2yofZdC35wAAAABJRU5ErkJggg=="
     },
     {
       "exportID": "15206722",
@@ -150,7 +152,7 @@
       "tileSize": {"x": 16, "y": 16},
       "resizeableX": false,
       "resizeableY": false,
-      "rotatable": false,
+      "rotatable": true,
       "rotationDegrees": 360,
       "canFlipX": false,
       "canFlipY": false,
@@ -163,7 +165,9 @@
       "values": [
         {"name": "end", "definition": "Boolean", "display": 0, "defaults": false},
         {"name": "nextRoom", "definition": "String", "display": 2, "defaults": "", "maxLength": 0, "trimWhitespace": true}
-      ]
+      ],
+      "texture": "../images/editor/end_icon.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAARklEQVR42mOYPn36f0owAzLHwtiBoAZ0NdQzACRBrAHI6qhjAEyQFANgajEMIAWDDSBXMwxTbgDFXqBKIA58OhgceYFcDADJylpfdLLgZgAAAABJRU5ErkJggg=="
     },
     {
       "exportID": "21846068",
