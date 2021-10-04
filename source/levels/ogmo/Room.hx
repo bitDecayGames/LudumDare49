@@ -32,7 +32,7 @@ class Room {
 	public var cameraPosition: FlxPoint = FlxPoint.get();
 	public var cameraRotation: Float = 0;
 
-	// public var layer:FlxTilemap;
+	public var floor:FlxTilemap;
 	public var entrances:Array<Entrance> = [];
 	public var exits:Array<Exit> = [];
 	var cores:Array<PowerCore> = [];
@@ -64,6 +64,8 @@ class Room {
 		if (levelHeight != height) {
 			throw '${getErrorName()}: ${name} height mismatch. got ${levelHeight}, expected ${height}';
 		}
+
+		floor = loader.loadTilemap(AssetPaths.floor_tiles__png, "floor");
 
 		// entrance & exits
 		loader.loadEntities((entityData) -> {
@@ -143,7 +145,7 @@ class Room {
 		loaded = true;
 	}
 
-	public function getErrorName() {
+	function getErrorName() {
 		return Type.getClassName(Type.getClass(this));
 	}
 }

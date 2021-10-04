@@ -1,12 +1,6 @@
 package entities;
 
 import helpers.Constants;
-import flixel.FlxObject;
-import spacial.Cardinal;
-import input.SimpleController;
-import input.InputCalcuator;
-import flixel.util.FlxColor;
-import flixel.FlxSprite;
 
 class Wall extends Block {
 	public static inline var OGMO_NAME = "wall";
@@ -15,10 +9,10 @@ class Wall extends Block {
 		super(x, y, false);
 		load_slices(AssetPaths.wall_square__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
 		slice_offset = 0.5;
+		visible = false;
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
-
 	}
 }

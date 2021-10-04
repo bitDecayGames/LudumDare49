@@ -48,6 +48,15 @@
       "exportID": "21846453",
       "requiredTags": [],
       "excludedTags": []
+    },
+    {
+      "definition": "tile",
+      "name": "floor",
+      "gridSize": {"x": 16, "y": 16},
+      "exportID": "32194968",
+      "exportMode": 0,
+      "arrayMode": 0,
+      "defaultTileset": ""
     }
   ],
   "entities": [
@@ -477,5 +486,7 @@
       "values": []
     }
   ],
-  "tilesets": []
+  "tilesets": [
+    {"label": "Floor", "path": "../images/floor_tiles.png", "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAACWklEQVR42u3cu0rDUACA4b6AUHTQ4uZgdRLBXVFwahVx0F1w8QV0cJFu4iCCgy8hHYuv4drJwUdwrCQQL4G2ienFnnzDz4FoRJuP5pwctdJqtXpFen157jUajT8VnTvt84v+/LNepegXiF7IIuf+PP/jdDuu3+enP54+f5LfOwAAAPBfACTH8xYagPrmVjzW6hvxuLI8B0CZAOzv7Mbj3EE7Ho/2VuPxvln79XkLV+tuASHeApKfp3rWjcfby8N4bJ98vxO8d+Z7i3drAIQCIHo9msfnveubx69j1U534DlLD3UAQnwHyLqsrT0BUOpVwMPbBQCWgQAAYBkIAAAAuAUAAAAAtoNLCsAFLDmAUb6FT+N8FxEAjRJAtKU4qGEXMO8yLO8yDoAxAkhf4EF7zoNm8eMEkF4FuIhjAJAc+3mBkzELgHHdAgAAAAAAAAAAAAAAAACA/7oMzHIR+y0DAZjhB0FZd/OGPQcAYEYfBRfdzgUAAABsB9sOBgAAtwC3gAkDiGb46SXhsGMABAYgDwLLwEAfBGVF4EFQ4A+ChiHwKDjAW0BeBACYBAJgEgiASSAAJoEAmAT6tfCyTwL9YUgAANIXvN8xfxpmMwgA28G2g0v/DyIEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAADwIgAgAASAABAAAkAACAABIAAEgAAQAAJAAfYJyB4oGkQJJBoAAAAASUVORK5CYII=", "tileWidth": 16, "tileHeight": 16, "tileSeparationX": 0, "tileSeparationY": 0, "tileMarginX": 0, "tileMarginY": 0}
+  ]
 }

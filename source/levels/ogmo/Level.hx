@@ -106,6 +106,7 @@ class Level extends FlxGroup {
 		}
 
 		room.load(bundle);
+		add(room.floor);
 
 		for (ent in room.entrances) {
 			if (room.name == firstRoomName) {
