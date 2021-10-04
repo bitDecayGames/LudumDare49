@@ -1,23 +1,21 @@
 package states;
 
-import flixel.tweens.FlxTween;
-import levels.ogmo.Room;
-import flixel.math.FlxPoint;
-import depth.DepthUtil;
 import depth.DepthSprite;
+import depth.DepthUtil;
 import entities.Block;
 import entities.Player;
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup;
+import flixel.tweens.FlxTween;
 import levels.ogmo.Level;
+import levels.ogmo.Room;
 import signals.Lifecycle;
 import signals.UI;
 import systems.ControlSystem;
 import ui.camera.SetupCameras;
 import ui.legend.ActionLegend;
-import ui.minimap.MiniMap;
-import flixel.FlxG;
 
 using extensions.FlxStateExt;
 
@@ -29,7 +27,7 @@ class CollidableBundle {
 	public var sortGroup:FlxTypedGroup<DepthSprite> = new FlxTypedGroup();
 
 	public function new(playerCollidables:FlxTypedGroup<Block>, collidables:FlxTypedGroup<FlxSprite>, nonCollidables:FlxTypedGroup<FlxSprite>,
-			uiObjs:FlxTypedGroup<FlxSprite>, sortGroup: FlxTypedGroup<DepthSprite> ) {
+			uiObjs:FlxTypedGroup<FlxSprite>, sortGroup:FlxTypedGroup<DepthSprite>) {
 		this.playerCollidables = playerCollidables;
 		this.collidables = collidables;
 		this.nonCollidables = nonCollidables;
@@ -88,7 +86,7 @@ class PlayState extends FlxTransitionableState {
 		add(test);
 		add(sortGroup);
 		add(uiObjs); // this is last here so text draws on top of everything
-		
+
 		sortGroup.add(player);
 		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
 		add(controlSystem);
@@ -103,7 +101,7 @@ class PlayState extends FlxTransitionableState {
 		sortGroup.sort(DepthUtil.sort_by_depth);
 		level.checkExitCollision(player);
 
-		if(controlSystem.lost()) {
+		if (controlSystem.lost()) {
 			// TODO Indicate player lost
 			FlxG.switchState(new PlayState(level.checkpointRoomName));
 		}
@@ -119,10 +117,8 @@ class PlayState extends FlxTransitionableState {
 		this.handleFocus();
 	}
 
-	private function setCameraLocationRotation(r: Room){
-
+	private function setCameraLocationRotation(r:Room) {
 		camera.focusOn(r.cameraPosition);
-
 
 		FlxTween.tween(camera, {
 			angle: r.cameraRotation
@@ -132,6 +128,5 @@ class PlayState extends FlxTransitionableState {
 			x: r.cameraPosition.x - camera.width * 0.5,
 			y: r.cameraPosition.y - camera.height * 0.5
 		});
-
 	}
 }

@@ -18,16 +18,17 @@ class Tooltip extends FlxTypedSpriteGroup<FlxSprite> {
 
 	public function new(x:Float, y:Float, text:String) {
 		super();
-		this.text = FlxTextFactory.make(text, 0, 0, 10, FlxTextAlign.CENTER);
-		add(this.text);
+		this.text = FlxTextFactory.make(text, 0, -30, 10, FlxTextAlign.CENTER);
 		arrow = new DepthSprite(0, 0);
-		arrow.load_slices(AssetPaths.arrow__png, 16, 16, 6);
+		arrow.load_slices(AssetPaths.arrow__png, 16, 2, 6);
 		arrow.slice_offset = 1.5;
-		add(arrow);
-		this.x = x;
-		this.y = y;
 		zVel = 0;
 		arrow.z = -10;
+		add(arrow);
+		add(this.text);
+
+		this.x = x;
+		this.y = y;
 	}
 
 	public function setFollow(obj:FlxObject):Tooltip {
