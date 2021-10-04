@@ -156,6 +156,7 @@ class Room {
 		for (ent in allEntities) {
 			ent.kill();
 		}
+		floor.kill();
 	}
 
 	function getErrorName() {
