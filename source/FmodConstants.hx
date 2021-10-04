@@ -19,7 +19,7 @@ class FmodSFX {
     public static inline var Typewriter:String = "event:/SFX/Hud/Typewriter";
     public static inline var MenuHover:String = "event:/SFX/Menu/MenuHover";
     public static inline var MenuSelect:String = "event:/SFX/Menu/MenuSelect";
-    public static inline var PocobotMove:String = "event:/SFX/Pocobot/PocobotMove";
+    public static inline var PocobotMoving:String = "event:/SFX/Pocobot/PocobotMoving";
     public static inline var PowerUp:String = "event:/SFX/Pocobot/PowerUp";
     public static inline var UiPhaseProgress:String = "event:/SFX/UI/UiPhaseProgress";
 }
