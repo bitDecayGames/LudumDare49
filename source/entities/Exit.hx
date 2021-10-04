@@ -5,7 +5,7 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import helpers.Constants;
 
-class Exit extends DepthSprite {
+class Exit extends Block {
 	public static inline var OGMO_NAME = "exit";
 	public final end:Bool = false;
 	public final nextRoom:String = "FILL_ME";
@@ -13,16 +13,16 @@ class Exit extends DepthSprite {
 	var entrance:Entrance = null;
 
 	public function new(end:Bool, nextRoom:String) {
-		super();
+		super(false);
 
 		load_slices(AssetPaths.blast_door__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
 		slice_offset = 0.5;
 		this.end = end;
 		this.nextRoom = nextRoom;
 
-		width = 14;
-		height = 14;
-		offset.set(1, 1);
+		width = 8;
+		height = 8;
+		
 	}
 
 	public function setEntrance(value: Entrance) {

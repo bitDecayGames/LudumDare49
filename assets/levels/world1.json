@@ -96,7 +96,19 @@
           "height": 112,
           "originX": 0,
           "originY": 0,
-          "values": {"name": "level5", "start": true}
+          "values": {"name": "level5", "start": false}
+        },
+        {
+          "name": "room",
+          "id": 6,
+          "_eid": "15206722",
+          "x": 416,
+          "y": 288,
+          "width": 208,
+          "height": 144,
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": "level6", "start": true}
         }
       ]
     },

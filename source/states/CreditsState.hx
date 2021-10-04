@@ -19,6 +19,7 @@ class CreditsState extends FlxUIState {
 
 	var _btnMainMenu:FlxButton;
 
+	var _txtWin:FlxText;
 	var _txtCreditsTitle:FlxText;
 	var _txtThankYou:FlxText;
 	var _txtRole:Array<FlxText>;
@@ -38,6 +39,14 @@ class CreditsState extends FlxUIState {
 		AssetPaths.pyxel_edit__png
 	];
 
+	var win:Bool = false;
+
+	public function new(win:Bool = false) {
+		super();
+
+		this.win = win;
+	}
+
 	override public function create():Void {
 		super.create();
 		bgColor = backgroundColor;
@@ -54,6 +63,16 @@ class CreditsState extends FlxUIState {
 
 		_allCreditElements = new Array<FlxSprite>();
 
+		// Win
+		if (win) {
+			_txtWin = FlxTextFactory.make("You Win!", FlxG.width / 4, FlxG.height / 4, 60, FlxTextAlign.CENTER);
+			_txtWin.color = FlxColor.GREEN;
+			center(_txtWin);
+			add(_txtWin);
+			_allCreditElements.push(_txtWin);
+		}
+
+		// Title
 		_txtCreditsTitle = FlxTextFactory.make("Credits", FlxG.width / 4, FlxG.height / 2, 40, FlxTextAlign.CENTER);
 		center(_txtCreditsTitle);
 		add(_txtCreditsTitle);

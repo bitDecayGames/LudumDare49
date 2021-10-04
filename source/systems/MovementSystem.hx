@@ -55,6 +55,15 @@ class MovementSystem extends StateSystem {
 			else {
 				var blockingBlock = collidedBlocks[0];
 
+				if (!blockingBlock.isActive) {			
+					//if block is dead you can move into it	
+					player.setDir(cardinalInput);
+					FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8,
+						Constants.PLAYER_SPEED); // limit player input, add more collisins
+					setRunning();
+					return;
+				}
+
 				// check to see if the block in the way is pushable
 				if (blockingBlock.pushable) {
 					// find the direction/tile that would be blocking the pushable that is blocking the player
