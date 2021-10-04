@@ -99,6 +99,7 @@ class PlayState extends FlxTransitionableState {
 		sortGroup.add(player);
 		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
 		add(controlSystem);
+		level.controlSystem = controlSystem;
 
 		if (startingRoomName != null) {
 			FmodManager.PlaySoundOneShot(FmodSFX.PowerUp);

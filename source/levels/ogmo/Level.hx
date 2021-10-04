@@ -35,6 +35,8 @@ class Level extends FlxGroup {
 	public final roomLoadedSignal: FlxTypedSignal<(Room, Bool, ()->Void)-> Void> = new FlxTypedSignal<(Room, Bool, ()->Void)-> Void>();
 
 	public var checkpointRoomName:String = null;
+
+	public var controlSystem:ControlSystem = null;
 	
 	public function new(level:String, bundle:CollidableBundle, startingRoomName:String = null) {
 		super();
@@ -95,6 +97,10 @@ class Level extends FlxGroup {
 		}
 
 		for (ex in latestRoom.exits) {
+			if (controlSystem == null || !controlSystem.isMovementIdle()) {
+				return;
+			}
+
 			var isGameWon = false;
 			var moveToNextRoom = false;
 			FlxG.overlap(ex, player, (exSpr, playerSpr) -> {

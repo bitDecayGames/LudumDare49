@@ -179,6 +179,10 @@ class ControlSystem extends FlxBasic {
 		return decaySystem.isCritical();
 	}
 
+	public function isMovementIdle() {
+		return movementSystem.isIdle();
+	}
+
 	// Statics
 	public static function nextPointFromCardinal(currentPoint:FlxPoint, cardinalDir:Cardinal) {
 		return currentPoint.addPoint(cardinalDir.asVector().scale(Constants.TILE_SIZE));
