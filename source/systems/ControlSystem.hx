@@ -24,6 +24,8 @@ enum GameState {
 }
 
 class ControlSystem extends FlxBasic {
+	static var numMovesInLevel:Int = 0;
+
 	var player:Player;
 	var playerCollidables:FlxTypedGroup<Block>;
 	var collidables:FlxTypedGroup<FlxSprite>;
@@ -74,12 +76,15 @@ class ControlSystem extends FlxBasic {
 				if (!playerIsControllable) {
 					return;
 				}
+				var isPlayerOnFastForward = playerOnFastForward();
+				if (isPlayerOnFastForward) {
+					Tutorial.hideTouchMe(); // this is ok to call multiple times
+				}
 
-				if (playerOnFastForward() && chargeSystem.anyCoresCharged()) {
+				if (isPlayerOnFastForward && chargeSystem.anyCoresCharged()) {
 					if (!fastForwardStarted) {
 						setFastForwardSystemRuntimes(Constants.FF_SPEED);
 						fastForwardStarted = true;
-						Tutorial.hideTouchMe(); // its ok to call this multiple times
 					}
 
 					if (movementSystem.isIdle()) {
@@ -177,5 +182,17 @@ class ControlSystem extends FlxBasic {
 	// Statics
 	public static function nextPointFromCardinal(currentPoint:FlxPoint, cardinalDir:Cardinal) {
 		return currentPoint.addPoint(cardinalDir.asVector().scale(Constants.TILE_SIZE));
+	}
+
+	public static function incrementMovements() {
+		numMovesInLevel++;
+	}
+
+	public static function getMovesInLevel() {
+		return numMovesInLevel;
+	}
+
+	public static function resetMovesInLevel() {
+		numMovesInLevel = 0;
 	}
 }

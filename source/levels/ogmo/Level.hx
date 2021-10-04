@@ -1,5 +1,9 @@
 package levels.ogmo;
 
+import metrics.Metrics;
+import com.bitdecay.metrics.Metric;
+import com.bitdecay.analytics.Bitlytics;
+import systems.ControlSystem;
 import states.CreditsState;
 import haxefmod.flixel.FmodFlxUtilities;
 import flixel.tweens.FlxTween;
@@ -93,6 +97,7 @@ class Level extends FlxGroup {
 			var isGameWon = false;
 			var moveToNextRoom = false;
 			FlxG.overlap(ex, player, (exSpr, playerSpr) -> {
+				Metrics.levelCompleted(0, ControlSystem.getMovesInLevel());
 				if (ex.end) {
 					isGameWon = true;
 					return;
@@ -112,6 +117,8 @@ class Level extends FlxGroup {
 	}
 
 	private function loadRoom(roomName: String, disablePlayer:Bool = false) {
+		// reset moves on load
+		ControlSystem.resetMovesInLevel();
 		var room = nameToRoom[roomName];
 		if (room == null) {
 			throw 'room ${roomName} not found in level';
