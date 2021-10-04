@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import spacial.Cardinal;
 import states.PlayState.CollidableBundle;
 import flixel.FlxSprite;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
@@ -18,21 +19,29 @@ import entities.FastForward;
 class Room {
 	public static inline var OGMO_NAME = "room";
 
+	public var name:String;
+	public var loaded:Bool = false;
+
+	var project:String;
+	var x:Int;
+	var y:Int;
+	var width:Int;
+	var height:Int;
+
 	// public var layer:FlxTilemap;
 	public var entrances:Array<Entrance> = [];
 	public var exits:Array<Exit> = [];
 
-	public function getErrorName() {
-		return Type.getClassName(Type.getClass(this));
+	public function new(project:String, name:String, x:Int, y:Int, width:Int, height:Int) {
+		this.project = project;
+		this.name = name;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 
-	public function new(
-		project: String,
-		name:String,
-		x:Int, y:Int,
-		width:Int, height:Int,
-		bundle:CollidableBundle
-	) {
+	public function load(bundle:CollidableBundle) {
 		var level = 'assets/levels/${name}.json';
 		var loader = new FlxOgmo3Loader(project, level);
 		// layer = loader.loadTilemap("<AssetPath to tilemap for layer>", "<layer name>");
@@ -52,13 +61,13 @@ class Room {
 			var obj:FlxSprite;
 			switch (entityData.name) {
 				case Entrance.OGMO_NAME:
-					var enter = new Entrance(entityData.values.start);
+					var enter = new Entrance();
 					entrances.push(enter);
 					obj = enter;
 				case Exit.OGMO_NAME:
 					var exit = new Exit(entityData.values.end);
 					exits.push(exit);
-					obj = exit; 
+					obj = exit;
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
@@ -71,12 +80,14 @@ class Room {
 			var obj:FlxSprite;
 			switch (entityData.name) {
 				case Conveyor.OGMO_NAME:
-					obj = new Conveyor();
+					var card = Cardinal.fromFloat(entityData.rotation);
+					trace("this card of this conveyor: " + card);
+					obj = new Conveyor(card);
 				default:
 					throw 'Entity \'${entityData.name}\' is not supported, add parsing to ${getErrorName()}';
 			}
-			obj.x = entityData.x + x;
-			obj.y = entityData.y + y;
+			obj.x = entityData.x + x - entityData.originX;
+			obj.y = entityData.y + y - entityData.originY;
 			bundle.nonCollidables.add(obj);
 		}, "noncollidables");
 
@@ -86,16 +97,20 @@ class Room {
 			switch (entityData.name) {
 				case Wall.OGMO_NAME:
 					obj = new Wall();
-					bundle.playerCollidables.add(cast (obj, Block));
+					bundle.playerCollidables.add(cast(obj, Block));
 				case RadioactiveCooler.OGMO_NAME:
 					obj = new RadioactiveCooler();
-					bundle.playerCollidables.add(cast (obj, Block));
+					bundle.playerCollidables.add(cast(obj, Block));
 				case RadioactiveBlock.OGMO_NAME:
-					obj = new RadioactiveBlock(entityData.values.decayAmount, entityData.values.maxLife);
-					bundle.playerCollidables.add(cast (obj, Block));
+					var radioActiveBlock = new RadioactiveBlock(entityData.values.decayAmount, entityData.values.maxLife);
+					bundle.playerCollidables.add(cast(radioActiveBlock, Block));
+					bundle.uiObjs.add(radioActiveBlock.counter);
+					obj = radioActiveBlock;
 				case PowerCore.OGMO_NAME:
-					obj = new PowerCore(entityData.values.maxCharge);
-					bundle.playerCollidables.add(cast (obj, Block));
+					var powerCore = new PowerCore(entityData.values.maxCharge);
+					bundle.playerCollidables.add(cast(powerCore, Block));
+					bundle.uiObjs.add(powerCore.counter);
+					obj = powerCore;
 				case Grate.OGMO_NAME:
 					obj = new Grate();
 				case FastForward.OGMO_NAME:
@@ -108,5 +123,11 @@ class Room {
 
 			bundle.collidables.add(obj);
 		}, "collidables");
+
+		loaded = true;
+	}
+
+	public function getErrorName() {
+		return Type.getClassName(Type.getClass(this));
 	}
 }

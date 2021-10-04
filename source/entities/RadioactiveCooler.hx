@@ -13,8 +13,7 @@ class RadioactiveCooler extends Block {
 
 	public function new(_coolingAmount:Int = 2, _radius:Int = 1) {
 		super(true);
-		// makeGraphic(20, 20, FlxColor.WHITE);
-		// color = FlxColor.BLUE;
+		load_slices(AssetPaths.cooler_block__png, 16, 16, 16);
 
 		coolingAmount = _coolingAmount;
 		radius = _radius;

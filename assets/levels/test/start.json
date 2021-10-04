@@ -15,16 +15,7 @@
       "gridCellsX": 16,
       "gridCellsY": 8,
       "entities": [
-        {
-          "name": "entrance",
-          "id": 0,
-          "_eid": "15149497",
-          "x": 0,
-          "y": 48,
-          "originX": 0,
-          "originY": 0,
-          "values": {"start": true}
-        },
+        {"name": "entrance", "id": 0, "_eid": "15149497", "x": 0, "y": 48, "originX": 0, "originY": 0},
         {
           "name": "exit",
           "id": 1,
@@ -33,7 +24,7 @@
           "y": 112,
           "originX": 0,
           "originY": 0,
-          "values": {"end": false}
+          "values": {"end": false, "nextRoom": ""}
         }
       ]
     },
@@ -58,7 +49,7 @@
       "gridCellsX": 16,
       "gridCellsY": 8,
       "entities": [
-        {"name": "conveyor", "id": 0, "_eid": "21866260", "x": 144, "y": 96, "originX": 0, "originY": 0}
+        {"name": "conveyor", "id": 0, "_eid": "21866260", "x": 144, "y": 96, "originX": 0, "originY": 0, "rotation": 0}
       ]
     },
     {

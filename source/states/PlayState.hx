@@ -1,5 +1,7 @@
 package states;
 
+import flixel.math.FlxPoint;
+import depth.DepthUtil;
 import depth.DepthSprite;
 import entities.Block;
 import entities.Player;
@@ -20,11 +22,14 @@ class CollidableBundle {
 	public var playerCollidables:FlxTypedGroup<Block>;
 	public var collidables:FlxTypedGroup<FlxSprite>;
 	public var nonCollidables:FlxTypedGroup<FlxSprite>;
+	public var uiObjs:FlxTypedGroup<FlxSprite>;
 
-	public function new(playerCollidables:FlxTypedGroup<Block>, collidables:FlxTypedGroup<FlxSprite>, nonCollidables:FlxTypedGroup<FlxSprite>) {
+	public function new(playerCollidables:FlxTypedGroup<Block>, collidables:FlxTypedGroup<FlxSprite>, nonCollidables:FlxTypedGroup<FlxSprite>,
+			uiObjs:FlxTypedGroup<FlxSprite>) {
 		this.playerCollidables = playerCollidables;
 		this.collidables = collidables;
 		this.nonCollidables = nonCollidables;
+		this.uiObjs = uiObjs;
 	}
 }
 
@@ -39,6 +44,9 @@ class PlayState extends FlxTransitionableState {
 	var playerCollidables:FlxTypedGroup<Block> = new FlxTypedGroup();
 	var collidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 	var nonCollidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
+	var uiObjs:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
+
+	var sortGroup:FlxTypedGroup<DepthSprite> = new FlxTypedGroup();
 
 	override public function create() {
 		super.create();
@@ -47,12 +55,13 @@ class PlayState extends FlxTransitionableState {
 
 		SetupCameras.SetupMainCamera(camera);
 
-		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables);
-		level = new Level(bundle);
+		var bundle = new CollidableBundle(playerCollidables, collidables, nonCollidables, uiObjs);
+		level = new Level(AssetPaths.world1__json, bundle);
 		add(level);
 
 		player = new Player(level.start.x, level.start.y);
 		collidables.add(player);
+		camera.focusOn(FlxPoint.get(level.start.x, level.start.y));
 
 		add(new ActionLegend());
 		UI.setActionSteps.dispatch([MOVEMENT, COOLING, CONVEYOR, DECAY]);
@@ -62,6 +71,12 @@ class PlayState extends FlxTransitionableState {
 		add(playerCollidables);
 		add(nonCollidables);
 		add(test);
+		add(sortGroup);
+		add(uiObjs); // this is last here so text draws on top of everything
+
+		for (m in playerCollidables.members) {
+			sortGroup.add(m);
+		}
 
 		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
 		add(controlSystem);
@@ -69,6 +84,8 @@ class PlayState extends FlxTransitionableState {
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
+
+		sortGroup.sort(DepthUtil.sort_by_depth);
 	}
 
 	override public function onFocusLost() {

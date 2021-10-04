@@ -14,10 +14,13 @@ class Conveyor extends FlxSprite {
 
 	public function new(_cardFacing:Cardinal = Cardinal.N) {
 		super();
-		// makeGraphic(20, 20, FlxColor.WHITE);
-		// color = FlxColor.BLUE;
-
+		loadGraphic(AssetPaths.conveyor__png, true, 16, 16);
+		animation.add("stop", [0], 0);
+		animation.add("go", [ for(i in 0...9) i], 10);
+		animation.play("stop");
 		cardFacing = _cardFacing;
+		angle = cardFacing - 90;
+
 	}
 
 	override public function update(delta:Float) {

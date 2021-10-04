@@ -1,61 +1,81 @@
 package systems;
 
-import haxe.Exception;
 import helpers.Constants;
+import flixel.FlxG;
+import haxe.Exception;
 import spacial.Cardinal;
-import flixel.math.FlxPoint;
 import entities.PowerCore;
 import flixel.FlxSprite;
-import entities.RadioactiveCooler;
 import entities.RadioactiveBlock;
-import flixel.FlxBasic;
 import flixel.group.FlxGroup;
 
-class ChargeSystem extends FlxBasic{
-    
-    var decayingObjects:Array<RadioactiveBlock>;
-    var chargingObjects:Array<PowerCore>;
+class ChargeSystem extends StateSystem {
+	var collidables:FlxTypedGroup<FlxSprite>;
 
-    public function new(_collidables:FlxTypedGroup<FlxSprite>)
-    {
-        super();
+	public function new(_collidables:FlxTypedGroup<FlxSprite>) {
+		super();
 
-        decayingObjects = _collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock));
-        chargingObjects = _collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore));
+		collidables = _collidables;
 
-    }
-
-    override public function update(elapsed:Float) {
-        handleCharge();
+		defaultRunningTimeDuration = Constants.CHARGE_SYSTEM_DEFAULT_RUNTIME;
+		resetRunningTimeDuration();
 	}
 
-    public function getAllCharged(): Array<PowerCore>{
-        return chargingObjects.filter(c -> c.fullyCharged());
-    }
+	override public function update(elapsed:Float) {
+		super.update(elapsed);
+	}
 
-    private function handleCharge(){
-        for(core in chargingObjects){
-            for (cardVector in Cardinal.allCardinals())
-            {
-                var potentialChargePoint = nextPointFromCardinal(core.getMidpoint(), cardVector);
+	public function handleCharge() {
+		setRunning();
 
-                var matchingRadBlocks = decayingObjects.filter(rad -> rad.overlapsPoint(potentialChargePoint));
-                if (matchingRadBlocks.length > 1)
-                {
-                    throw new Exception("Multiple radioactive blocks were found overlapping the same charging space.");
-                }
-                else if (matchingRadBlocks.length == 1)
-                {
-                    trace('Rad block and core touching');
-                    core.charge(1);
-                }
-            }
-        }
-    }
+		var decayingObjects = collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock));
+		var chargingObjects = collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore));
 
-    private function nextPointFromCardinal(currentPoint:FlxPoint, cardinalDir:Cardinal)
-    {
-        return currentPoint.addPoint(cardinalDir.asVector().scale(Constants.TILE_SIZE));
-    }
-    
+		var chargeWorkNeeded = false;
+		for (core in chargingObjects) {
+			for (cardVector in Cardinal.allCardinals()) {
+				var potentialChargePoint = ControlSystem.nextPointFromCardinal(core.getMidpoint(), cardVector);
+
+				var matchingRadBlocks = decayingObjects.filter(rad -> rad.overlapsPoint(potentialChargePoint));
+				if (matchingRadBlocks.length > 1) {
+					throw new Exception("Multiple radioactive blocks were found overlapping the same charging space.");
+				} else if (matchingRadBlocks.length == 1) {
+					chargeWorkNeeded = true;
+					core.charge(1);
+				}
+			}
+		}
+
+		if (!chargeWorkNeeded)
+			forciblyStopRunning();
+	}
+
+	public function getAllCharged():Array<PowerCore> {
+		return collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore)).filter(c -> c.fullyCharged());
+	}
+
+	public function areAllCharged() {
+		var allPowerCores = collidables.members.filter(rad -> Std.isOfType(rad, PowerCore)).map(col -> cast(col, PowerCore));
+		var fullyChargedPowerCores = allPowerCores.filter(c -> c.fullyCharged());
+
+		return allPowerCores.length == fullyChargedPowerCores.length;
+	}
+
+	public function anyCoresCharged() {
+		var cores = collidables.members.filter(c -> Std.isOfType(c, PowerCore)).map(c -> cast(c, PowerCore));
+
+		var noCoresCharged = true;
+		for (core in cores) {
+			if (core.currentCharge > 0) {
+				noCoresCharged = false;
+				break;
+			}
+		}
+
+		if (areAllCharged() || noCoresCharged) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

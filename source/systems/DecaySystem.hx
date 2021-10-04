@@ -1,40 +1,42 @@
 package systems;
 
+import helpers.Constants;
+import haxe.macro.Expr.Constant;
+import flixel.FlxG;
 import flixel.FlxSprite;
 import entities.RadioactiveBlock;
 import flixel.group.FlxGroup;
 
-class DecaySystem extends StateSystem{
-    
-    var collidables:FlxTypedGroup<FlxSprite>;
-    
+class DecaySystem extends StateSystem {
+	var collidables:FlxTypedGroup<FlxSprite>;
 
-    public function new(_collidables:FlxTypedGroup<FlxSprite>)
-    {
-        super();
+	public function new(_collidables:FlxTypedGroup<FlxSprite>) {
+		super();
 
-        collidables = _collidables;
-    }
+		collidables = _collidables;
 
-    override public function update(elapsed:Float) {
-        super.update(elapsed);
+		defaultRunningTimeDuration = Constants.DECAY_SYSTEM_DEFAULT_RUNTIME;
+		resetRunningTimeDuration();
 	}
 
-    public function handleDecay(){
-        setRunning();
+	override public function update(elapsed:Float) {
+		super.update(elapsed);
+	}
 
-        var decayWorkNeeded = false;
-        for (reactor in collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock)))
-        {
-            decayWorkNeeded = true;
-            reactor.decay();
-        }
+	public function handleDecay() {
+		setRunning();
 
-        if (!decayWorkNeeded) forciblyStopRunning();
-    }
+		var decayWorkNeeded = false;
+		for (reactor in collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock))) {
+			decayWorkNeeded = true;
+			reactor.decay();
+		}
 
-    public function getAllMeltdowns(): Array<RadioactiveBlock>{
+		if (!decayWorkNeeded)
+			forciblyStopRunning();
+	}
 
-        return collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock)).filter(d -> d.meltedDown());
-    }
+	public function getAllMeltdowns():Array<RadioactiveBlock> {
+		return collidables.members.filter(col -> Std.isOfType(col, RadioactiveBlock)).map(col -> cast(col, RadioactiveBlock)).filter(d -> d.meltedDown());
+	}
 }

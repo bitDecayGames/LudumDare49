@@ -12,8 +12,8 @@ class Grate extends FlxSprite {
 
 	public function new() {
 		super();
-		// makeGraphic(20, 20, FlxColor.WHITE);
-		// color = FlxColor.BLUE;
+		loadGraphic(AssetPaths.floor_tiles__png, true, 16, 16);
+		animation.frameIndex = 16;
 	}
 
 	override public function update(delta:Float) {
