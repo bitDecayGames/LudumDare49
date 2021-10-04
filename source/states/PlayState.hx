@@ -126,7 +126,7 @@ class PlayState extends FlxTransitionableState {
 			sirenTimer = 0.0;
 		}
 
-		if (controlSystem.lost() || FlxG.keys.justPressed.Q) {
+		if (controlSystem.lost() || FlxG.keys.justPressed.R) {
 			lose();
 		}
 	}
