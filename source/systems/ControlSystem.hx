@@ -28,8 +28,8 @@ class ControlSystem extends FlxBasic {
 	var collidables:FlxTypedGroup<FlxSprite>;
 	var nonCollidables:FlxTypedGroup<FlxSprite>;
 
-    public var playerIscontrollable = true;
-	
+	public var playerIscontrollable = true;
+
 	var gameState:GameState = PlayerMovement;
 
 	var fastForwardStarted:Bool = false;
