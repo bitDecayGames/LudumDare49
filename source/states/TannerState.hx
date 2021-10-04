@@ -114,7 +114,7 @@ class TannerState extends FlxTransitionableState {
 		add(nonCollidables);
 
 		controlSystem = new ControlSystem(player, playerCollidables, collidables, nonCollidables);
-		controlSystem.playerIscontrollable = false;
+		ControlSystem.playerIsControllable = false;
 		add(controlSystem);
 
 			
@@ -150,7 +150,7 @@ class TannerState extends FlxTransitionableState {
 			FmodManager.StopSongImmediately();
 			FmodManager.StopSoundImmediately(sirenId);
 			sirenLight.visible = false;
-			controlSystem.playerIscontrollable = false;
+			ControlSystem.playerIsControllable = false;
 			sirensOff = true;
 			FmodManager.PlaySoundOneShot(FmodSFX.AlarmPowerDown);
 			new FlxTimer().start(2).onComplete = function(t:FlxTimer) {
@@ -182,7 +182,7 @@ class TannerState extends FlxTransitionableState {
 				FlxTween.tween(camera, {zoom: 2}, 1, {});
 			}
 			lowPass = false;
-			controlSystem.playerIscontrollable = true;
+			ControlSystem.playerIsControllable = true;
 		}
 
 		if(lowPass){

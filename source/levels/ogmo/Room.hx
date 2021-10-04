@@ -39,6 +39,8 @@ class Room {
 	public var entrances:Array<Entrance> = [];
 	public var exits:Array<Exit> = [];
 	var cores:Array<PowerCore> = [];
+	public var endUnlocked = false;
+
 
 	public function new(project:String, name:String, x:Int, y:Int, width:Int, height:Int) {
 		this.project = project;

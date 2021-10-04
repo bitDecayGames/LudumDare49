@@ -28,13 +28,13 @@ class ControlSystem extends FlxBasic {
 	var collidables:FlxTypedGroup<FlxSprite>;
 	var nonCollidables:FlxTypedGroup<FlxSprite>;
 
-	public var playerIscontrollable = true;
+	public static var playerIsControllable = true;
 
 	var gameState:GameState = PlayerMovement;
 
 	var fastForwardStarted:Bool = false;
 
-	var movementSystem:MovementSystem;
+	public var movementSystem:MovementSystem;
 	var coolingSystem:CoolingSystem;
 	var conveyorSystem:ConveyorSystem;
 	var decaySystem:DecaySystem;
@@ -69,6 +69,10 @@ class ControlSystem extends FlxBasic {
 
 		switch gameState {
 			case PlayerMovement:
+				if (!playerIsControllable) {
+					return;
+				}
+
 				if (playerOnFastForward() && chargeSystem.anyCoresCharged()) {
 					if (!fastForwardStarted) {
 						setFastForwardSystemRuntimes(Constants.FF_SPEED);

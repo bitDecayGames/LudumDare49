@@ -73,6 +73,7 @@ class PlayState extends FlxTransitionableState {
 
 		level = new Level(AssetPaths.world1__json, bundle, startingRoomName);
 		level.roomLoadedSignal.add(setCameraLocationRotation);
+		level.roomLoadedSignal.add(movePlayerToNextRoom);
 		level.loadFirstRoom();
 		add(level);
 
@@ -126,7 +127,7 @@ class PlayState extends FlxTransitionableState {
 		this.handleFocus();
 	}
 
-	private function setCameraLocationRotation(r:Room) {
+	private function setCameraLocationRotation(r:Room, disablePlayer:Bool, cb:()->Void) {
 		FlxTween.tween(camera, {
 			angle: r.cameraRotation
 		});
@@ -135,5 +136,25 @@ class PlayState extends FlxTransitionableState {
 			x: r.cameraPosition.x - camera.width * 0.5,
 			y: r.cameraPosition.y - camera.height * 0.5
 		});
+	}
+
+	private function movePlayerToNextRoom(r:Room, _disablePlayer:Bool, cb:()->Void) {
+		if (!_disablePlayer) {
+			return;
+		}
+
+		ControlSystem.playerIsControllable = false;
+
+		var targetTile = ControlSystem.nextPointFromCardinal(player.getMidpoint(), player.untouchedDir);
+		targetTile = ControlSystem.nextPointFromCardinal(targetTile, player.untouchedDir);
+		targetTile = ControlSystem.nextPointFromCardinal(targetTile, player.untouchedDir);
+		FlxTween.linearMotion(player, player.x, player.y, targetTile.x - 8, targetTile.y - 8, 1,
+			{
+				onComplete: (t) -> {
+					ControlSystem.playerIsControllable = true;
+					cb();
+				}
+			}
+		);
 	}
 }

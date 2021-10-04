@@ -1,5 +1,6 @@
 package levels.ogmo;
 
+import flixel.tweens.FlxTween;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import entities.Player;
 import states.PlayState.CollidableBundle;
@@ -24,7 +25,8 @@ class Level extends FlxGroup {
 	public var start:Entrance;
 	public var end:Exit;
 
-	public final roomLoadedSignal: FlxTypedSignal<(Room)-> Void> = new FlxTypedSignal<(Room)-> Void>();
+
+	public final roomLoadedSignal: FlxTypedSignal<(Room, Bool, ()->Void)-> Void> = new FlxTypedSignal<(Room, Bool, ()->Void)-> Void>();
 
 	public var checkpointRoomName:String = null;
 	
@@ -71,6 +73,17 @@ class Level extends FlxGroup {
 			return;
 		}
 
+		if (!latestRoom.endUnlocked) {
+			latestRoom.endUnlocked = true;
+			for (e in latestRoom.exits) {
+				FlxTween.tween(e,
+					{
+						alpha: 0,
+						z: -32
+					});
+			}
+		}
+
 		for (ex in latestRoom.exits) {
 			var isGameWon = false;
 			var moveToNextRoom = false;
@@ -88,12 +101,12 @@ class Level extends FlxGroup {
 			if (moveToNextRoom) {
 				latestRoom.unload();
 				checkpointRoomName = ex.nextRoom;
-				loadRoom(ex.nextRoom);
+				loadRoom(ex.nextRoom, true);
 			}
 		}
 	}
 
-	private function loadRoom(roomName: String) {
+	private function loadRoom(roomName: String, disablePlayer:Bool = false) {
 		var room = nameToRoom[roomName];
 		if (room == null) {
 			throw 'room ${roomName} not found in level';
@@ -117,6 +130,7 @@ class Level extends FlxGroup {
 				start = ent;
 			}
 			entrances.add(ent);
+			ent.alpha = 0;
 		}
 		for (ex in room.exits) {
 			if (ex.end) {
@@ -127,7 +141,18 @@ class Level extends FlxGroup {
 			}
 			exits.add(ex);
 		}
-		roomLoadedSignal.dispatch(room);
+		roomLoadedSignal.dispatch(room, disablePlayer, fadeInEntrace);
+	}
+
+	function fadeInEntrace() {
+		for (ent in entrances) {
+			ent.z = -32;
+			FlxTween.tween(ent,
+				{
+					alpha: 1,
+					z: 0
+				});
+		}
 	}
 
 	public function loadFirstRoom() {

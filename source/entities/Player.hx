@@ -10,7 +10,8 @@ class Player extends DepthSprite {
 	var turnSpeed:Float = 90;
 
 	// player's initial facing is east because of the art
-	var dir = Cardinal.E;
+	public var dir = Cardinal.E;
+	public var untouchedDir = Cardinal.E;
 
 	var emittingSmoke:Float = 0.0;
 	var smokeTimer:Float = 0.25;
@@ -29,6 +30,7 @@ class Player extends DepthSprite {
 	}
 
 	public function setDir(dir:Cardinal) {
+		untouchedDir = dir;
 		var currentDir = this.dir;
 		var targetDir = dir + 90;
 

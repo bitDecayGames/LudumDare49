@@ -19,6 +19,10 @@ class Exit extends DepthSprite {
 		slice_offset = 0.5;
 		this.end = end;
 		this.nextRoom = nextRoom;
+
+		width = 14;
+		height = 14;
+		offset.set(1, 1);
 	}
 
 	public function setEntrance(value: Entrance) {
