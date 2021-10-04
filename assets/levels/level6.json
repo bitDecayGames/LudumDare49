@@ -24,7 +24,7 @@
           "originX": 8,
           "originY": 8,
           "rotation": 90,
-          "values": {"end": true, "nextRoom": ""}
+          "values": {"end": false, "nextRoom": "level7"}
         },
         {"name": "entrance", "id": 2, "_eid": "15149497", "x": 8, "y": 104, "originX": 8, "originY": 8, "rotation": 90},
         {"name": "camera", "id": 3, "_eid": "30215525", "x": 96, "y": 112, "originX": 0, "originY": 0, "rotation": -15}
