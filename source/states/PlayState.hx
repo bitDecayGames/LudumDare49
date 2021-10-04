@@ -103,10 +103,15 @@ class PlayState extends FlxTransitionableState {
 		sortGroup.sort(DepthUtil.sort_by_depth);
 		level.checkExitCollision(player);
 
-		if (controlSystem.lost()) {
-			// TODO Indicate player lost
-			FlxG.switchState(new PlayState(level.checkpointRoomName));
+		if (controlSystem.lost() || FlxG.keys.justPressed.Q) {
+			lose();
 		}
+	}
+
+	public function lose() {
+		SetupCameras.uiCamera = null;
+		// TODO Indicate player lost
+		FlxG.switchState(new PlayState(level.checkpointRoomName));
 	}
 
 	override public function onFocusLost() {

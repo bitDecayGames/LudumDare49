@@ -15,7 +15,7 @@
       "gridCellsX": 8,
       "gridCellsY": 11,
       "entities": [
-        {"name": "entrance", "id": 2, "_eid": "15149497", "x": 112, "y": 48, "originX": 0, "originY": 0},
+        {"name": "entrance", "id": 2, "_eid": "15149497", "x": 112, "y": 48, "originX": 0, "originY": 0, "rotation": 0},
         {
           "name": "exit",
           "id": 3,
@@ -24,6 +24,7 @@
           "y": 160,
           "originX": 0,
           "originY": 0,
+          "rotation": 0,
           "values": {"end": false, "nextRoom": "level4"}
         },
         {"name": "camera", "id": 4, "_eid": "30215525", "x": 48, "y": 96, "originX": 0, "originY": 0, "rotation": 20}

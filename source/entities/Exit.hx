@@ -17,7 +17,6 @@ class Exit extends DepthSprite {
 
 		load_slices(AssetPaths.blast_door__png, Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
 		slice_offset = 0.5;
-		angle += 90;
 		this.end = end;
 		this.nextRoom = nextRoom;
 	}
