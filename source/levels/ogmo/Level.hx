@@ -15,6 +15,7 @@ class Level extends FlxGroup {
 	public var latestRoom:Room = null;
 	var firstRoomName:String = null;
 	var nameToRoom:Map<String, Room>;
+	var startingRoomName: String = null;
 
 	var bundle:CollidableBundle;
 	
@@ -25,10 +26,13 @@ class Level extends FlxGroup {
 
 	public final roomLoadedSignal: FlxTypedSignal<(Room)-> Void> = new FlxTypedSignal<(Room)-> Void>();
 
-	public function new(level:String, bundle:CollidableBundle) {
+	public var checkpointRoomName:String = null;
+	
+	public function new(level:String, bundle:CollidableBundle, startingRoomName:String = null) {
 		super();
 		this.bundle = bundle;
-
+		this.firstRoomName = startingRoomName;
+		this.startingRoomName = startingRoomName;
 		var project = AssetPaths.project__ogmo;
 
 		var loader = new FlxOgmo3Loader(project, level);
@@ -42,7 +46,7 @@ class Level extends FlxGroup {
 					var room = new Room(project, name, entityData.x, entityData.y, entityData.width, entityData.height);
 					nameToRoom[name] = room;
 
-					if (entityData.values.start) {
+					if (entityData.values.start && startingRoomName == null) {
 						if (firstRoomName != null) {
 							throw 'duplicate start room. ${firstRoomName} already set, ${name} attempted to override';
 						}
@@ -82,6 +86,7 @@ class Level extends FlxGroup {
 				throw 'TODO Game won fill me in';
 			}
 			if (moveToNextRoom) {
+				checkpointRoomName = ex.nextRoom;
 				loadRoom(ex.nextRoom);
 			}
 		}
@@ -89,6 +94,10 @@ class Level extends FlxGroup {
 
 	private function loadRoom(roomName: String) {
 		var room = nameToRoom[roomName];
+		if (room == null) {
+			throw 'room ${roomName} not found in level';
+		}
+
 		latestRoom = room;
 
 		if (room.loaded) {
@@ -120,6 +129,13 @@ class Level extends FlxGroup {
 	}
 
 	public function loadFirstRoom() {
+		if (startingRoomName != null) {
+			checkpointRoomName = startingRoomName;
+			loadRoom(startingRoomName);
+			return;
+		}
+
+		checkpointRoomName = firstRoomName;
 		loadRoom(firstRoomName);
 	}
 }
