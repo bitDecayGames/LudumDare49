@@ -62,6 +62,11 @@ class PlayState extends FlxTransitionableState {
 	override public function create() {
 		super.create();
 
+		#if music
+		FmodManager.PlaySong(FmodSongs.Carefully);
+		#end
+
+
 		Lifecycle.startup.dispatch();
 
 		SetupCameras.SetupMainCamera(camera);
@@ -103,10 +108,15 @@ class PlayState extends FlxTransitionableState {
 		sortGroup.sort(DepthUtil.sort_by_depth);
 		level.checkExitCollision(player);
 
-		if (controlSystem.lost()) {
-			// TODO Indicate player lost
-			FlxG.switchState(new PlayState(level.checkpointRoomName));
+		if (controlSystem.lost() || FlxG.keys.justPressed.Q) {
+			lose();
 		}
+	}
+
+	public function lose() {
+		SetupCameras.uiCamera = null;
+		// TODO Indicate player lost
+		FlxG.switchState(new PlayState(level.checkpointRoomName));
 	}
 
 	override public function onFocusLost() {
