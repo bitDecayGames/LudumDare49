@@ -29,6 +29,8 @@ class ControlSystem extends FlxBasic
 
     var turnCycleStarted:Bool = false;
 
+    public var playerIscontrollable = true;
+
     var movementSystem:MovementSystem;
     var coolingSystem:CoolingSystem;
     var conveyorSystem:ConveyorSystem;
@@ -64,7 +66,7 @@ class ControlSystem extends FlxBasic
         switch gameState {
             case PlayerMovement:
 
-                if (movementSystem.isIdle())
+                if (movementSystem.isIdle() && playerIscontrollable)
                 {
                     movementSystem.handlePlayerMovement();
                 }

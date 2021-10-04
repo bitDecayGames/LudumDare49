@@ -7,10 +7,13 @@ package;
 
 class FmodSongs {
     public static inline var EmergencyPowerActivated:String = "event:/Music/EmergencyPowerActivated";
+    public static inline var EmergencyPowerActivated_2:String = "event:/Music/EmergencyPowerActivated_2";
+    public static inline var EmergencyPowerActivatedLouderDrums:String = "event:/Music/EmergencyPowerActivatedLouderDrums";
     public static inline var OutsideTheMines:String = "event:/Music/OutsideTheMines";
 }
 
 class FmodSFX {
+    public static inline var AlarmPowerDown:String = "event:/SFX/Cutscene/AlarmPowerDown";
     public static inline var Siren:String = "event:/SFX/Cutscene/Siren";
     public static inline var Type:String = "event:/SFX/Hud/Type";
     public static inline var Typewriter:String = "event:/SFX/Hud/Typewriter";

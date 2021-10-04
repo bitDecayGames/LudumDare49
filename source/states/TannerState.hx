@@ -46,9 +46,9 @@ class TannerState extends FlxTransitionableState {
 	var collidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 	var nonCollidables:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
 
-	var turnedOn = false;
+	var dialgs = new Map<String, Array<String>>();
 
-	var tween:VarTween;
+	var turnedOn = false;
 
 	// SFX
 	var typeSoundId = "Typewriter";
@@ -69,7 +69,6 @@ class TannerState extends FlxTransitionableState {
 
 		FlxG.camera.pixelPerfectRender = true;
 
-		var dialgs = new Map<String, Array<String>>();
 		dialgs["Intro"] = ["Intercom: System power at 0%", "Intercom: Meltdown imminent", "Intercom: Engaging all available Pocobots to recharge facitility power cores",
 		 "Pocobot: ...", "Pocobot: .................powering on", "Pocobot: beep boop", "Pocobot: Power core straight ahead", "Pocobot: I must do my duty"];
 		dialogManager = new DialogManager(dialgs, this, SetupCameras.uiCamera, FlxKey.SPACE, 
@@ -124,10 +123,16 @@ class TannerState extends FlxTransitionableState {
 		sirenLight.alpha = .8;
 		add(sirenLight);
 
-		FmodManager.PlaySong(FmodSongs.EmergencyPowerActivated);
+		FmodManager.PlaySong(FmodSongs.EmergencyPowerActivatedLouderDrums);
 		FmodManager.PlaySoundWithReference(FmodSFX.Siren);	
-		tween = FlxTween.tween(sirenLight, {alpha: 0}, 2, {
+		FlxTween.tween(sirenLight, {alpha: 0}, 2, {
 			type: FlxTweenType.LOOPING,
+			onComplete: function(_)
+			{
+				if(!sirensOff){
+					FmodManager.PlaySoundAndAssignId(FmodSFX.Siren, sirenId);	
+				}
+			}
 		});
 		
         FlxG.camera.zoom = 2;
@@ -141,20 +146,28 @@ class TannerState extends FlxTransitionableState {
 
 		FlxG.watch.addQuick("ID", dialogManager.getCurrentDialogPage());
 
-		if(dialogManager.getCurrentDialogPage() == 3) {
+		if (FlxG.keys.pressed.Z && !sirensOff){
+			FmodManager.StopSongImmediately();
+			FmodManager.StopSoundImmediately(sirenId);
+			sirenLight.visible = false;
+			controlSystem.playerIscontrollable = false;
+			sirensOff = true;
+			FmodManager.PlaySoundOneShot(FmodSFX.AlarmPowerDown);
+			new FlxTimer().start(2).onComplete = function(t:FlxTimer) {
+				dialgs["Begin"] = ["Intercom: Meltdown risk reduced drastically", "Intercom: System power at 10%", "Intercom: Please return system power to 100%"];
+				dialogManager.loadDialog("Begin");
+			}
+		}
+
+		if(dialogManager.getCurrentDialogPage() == 3 && !sirensOff) {
 			if(!lowPass) {
+				trace("Changing zoom");
 				FlxTween.tween(camera, {zoom: 4}, 3, {});
 			}
 			lowPass = true;
 		}
 
-		if (FlxG.keys.pressed.Z){
-			FmodManager.StopSongImmediately();
-			FmodManager.StopSoundImmediately(sirenId);
-			sirenLight.visible = false;
-		}
-
-		if(dialogManager.getCurrentDialogPage() == 4) { 
+		if(dialogManager.getCurrentDialogPage() == 4 && !sirensOff) { 
 			if(!turnedOn){
 				new FlxTimer().start(2).onComplete = function(t:FlxTimer) {
 					playerOff.visible = false;
@@ -164,19 +177,20 @@ class TannerState extends FlxTransitionableState {
 			}
 		}
 
-		if(dialogManager.getCurrentDialogPage() == 8) {
+		if(dialogManager.getCurrentDialogPage() == 8 && !sirensOff) {
 			if(lowPass) {
 				FlxTween.tween(camera, {zoom: 2}, 1, {});
 			}
 			lowPass = false;
 			controlSystem.playerIscontrollable = true;
-			tween.destroy();
 		}
 
 		if(lowPass){
-			FmodManager.SetEventParameterOnSong("LowPass", 1);
-			FmodManager.SetEventParameterOnSound(sirenId, "LowPass", 1);
-		} else {
+			if (FmodManager.GetEventParameterOnSong("LowPass") == 0){
+				FmodManager.SetEventParameterOnSong("LowPass", 1);
+				FmodManager.SetEventParameterOnSound(sirenId, "LowPass", 1);
+			}
+		} else if (FmodManager.GetEventParameterOnSong("LowPass") == 1){
 			FmodManager.SetEventParameterOnSong("LowPass", 0);
 			FmodManager.SetEventParameterOnSound(sirenId, "LowPass", 0);
 		}
