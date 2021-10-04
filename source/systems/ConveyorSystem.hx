@@ -125,7 +125,7 @@ class ConveyorSystem extends StateSystem {
 
 	private function resolveDuplicates(map:Map<DepthSprite, FlxPoint>, duplicatePoint:FlxPoint) {
 		for (object => point in map) {
-			if (point == duplicatePoint) {
+			if (point.equals(duplicatePoint)) {
 				map[object] = object.getMidpoint();
 			}
 		}
