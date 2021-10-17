@@ -1,0 +1,816 @@
+title Pocobot
+author Logan Moore
+homepage www.puzzlescript.net
+
+========
+OBJECTS
+========
+
+Background
+#848484 #4c4c4c #d4bbaf
+11111
+10001
+10001
+10001
+11111
+
+Grate
+#848484 #4c4c4c #d4bbaf
+11111
+12021
+10201
+12021
+11111
+Wall
+#0b1319
+00000
+00000
+00000
+00000
+00000
+
+Exit
+#848484 #4c4c4c #d4bbaf Red
+11111
+10001
+10201
+10001
+11111
+
+Player
+Black Orange White Blue
+.000.
+.111.
+22222
+.333.
+.3.3.
+
+ConvU
+Gray Red
+00100
+01010
+10001
+00000
+00000
+
+ConvD
+Gray Red
+00000
+00000
+10001
+01010
+00100
+
+ConvL
+Gray Red
+00010
+00100
+01000
+00100
+00010
+
+ConvR
+Gray Red
+01000
+00100
+00010
+00100
+01000
+
+Cooler
+Blue Gray
+00000
+01010
+00100
+01010
+00000
+
+React1
+DarkGreen Blue Green Yellow
+00000
+00000
+00000
+01000
+00000
+
+React2
+DarkGreen Blue Green Yellow
+00000
+00000
+00000
+01100
+00000
+
+React3
+DarkGreen Blue Green Yellow
+00000
+00000
+00000
+01110
+00000
+
+React4
+DarkGreen Blue Green Yellow
+00000
+00000
+01000
+01110
+00000
+
+React5
+DarkGreen Blue Green Yellow
+00000
+00000
+01100
+01110
+00000
+
+React6
+DarkGreen Blue Green Yellow
+00000
+00000
+01110
+01110
+00000
+
+React7
+DarkGreen Blue Green Yellow
+00000
+01000
+01110
+01110
+00000
+
+React8
+DarkGreen Blue Green Yellow
+00000
+01100
+01110
+01110
+00000
+
+React9
+DarkGreen Blue Green Yellow
+00000
+01110
+01110
+01110
+00000
+
+React10
+DarkGreen Blue Green Yellow
+00000
+01110
+01110
+02110
+00000
+
+React11
+DarkGreen Blue Green Yellow
+00000
+01110
+01110
+02210
+00000
+
+React12
+DarkGreen Blue Green Yellow
+00000
+01110
+01110
+02220
+00000
+
+React13
+DarkGreen Blue Green Yellow
+00000
+01110
+02110
+02220
+00000
+
+React14
+DarkGreen Blue Green Yellow
+00000
+01110
+02210
+02220
+00000
+
+React15
+DarkGreen Blue Green Yellow
+00000
+01110
+02220
+02220
+00000
+
+React16
+DarkGreen Blue Green Yellow
+00000
+02110
+02220
+02220
+00000
+
+React17
+DarkGreen Blue Green Yellow
+00000
+02210
+02220
+02220
+00000
+
+React18
+DarkGreen Blue Green Yellow
+00000
+02220
+02220
+02220
+00000
+
+React19
+DarkGreen Blue Green Yellow
+00000
+02220
+02220
+03220
+00000
+
+React20
+DarkGreen Blue Green Yellow
+00000
+02220
+02220
+03320
+00000
+
+
+Meltdown
+DarkGreen Red Yellow
+00000
+01210
+02120
+01210
+00000
+
+Battery0
+Purple Green
+00000
+00000
+00000
+00000
+00000
+
+Battery1
+Purple Green
+00000
+00000
+00000
+01000
+00000
+
+Battery2
+Purple Green
+00000
+00000
+00000
+01100
+00000
+
+Battery3
+Purple Green
+00000
+00000
+00000
+01110
+00000
+
+Battery4
+Purple Green
+00000
+00000
+01000
+01110
+00000
+
+Battery5
+Purple Green
+00000
+00000
+01100
+01110
+00000
+
+Battery6
+Purple Green
+00000
+00000
+01110
+01110
+00000
+
+Battery7
+Purple Green
+00000
+01000
+01110
+01110
+00000
+
+Battery8
+Purple Green
+00000
+01100
+01110
+01110
+00000
+
+Battery9
+Purple Green
+00000
+01110
+01110
+01110
+00000
+
+
+ChargeAuraCenter
+White
+.....
+..0..
+.000.
+..0..
+.....
+
+ChargeAuraPrime
+LightGreen
+..0..
+..0..
+00000
+..0..
+..0..
+
+ChargeAuraCorner
+LightGreen
+0.0.0
+..0..
+00000
+..0..
+0.0.0
+
+ChargeAuraFinal
+LightGreen
+0....
+..0..
+....0
+.0...
+...0.
+
+CoolAuraCenter
+Black
+.....
+..0..
+.000.
+..0..
+.....
+
+CoolAuraPrime
+LightBlue
+..0..
+..0..
+00000
+..0..
+..0..
+
+CoolAuraCorner
+LightBlue
+0.0.0
+..0..
+00000
+..0..
+0.0.0
+
+CoolAuraFinal
+LightBlue
+....0
+0....
+.....
+...0.
+.0...
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Wall
+P = Player
+U = ConvU
+D = ConvD
+L = ConvL
+R = ConvR
+N = React20
+C = Cooler
+B = Battery0
+E = Exit
+x = Grate
+
+
+=======
+SOUNDS
+=======
+
+
+
+================
+COLLISIONLAYERS
+================
+
+Background
+ConvL, ConvR, ConvU, ConvD, Exit, Grate
+CoolAuraPrime, CoolAuraCorner, CoolAuraCenter, CoolAuraFinal
+ChargeAuraPrime, ChargeAuraCorner, ChargeAuraCenter, ChargeAuraFinal
+Player, Wall, Cooler, React1, React2, React3, React4, React5, React6, React7, React8, React9, React10, React11, React12, React13, React14, React15, React16, React17, React18, React19, React20, Meltdown, Battery0, Battery1, Battery2, Battery3, Battery4, Battery5, Battery6, Battery7, Battery8, Battery9
+
+======
+RULES
+======
+
+(TODO: Prevent holding direction from spamming)
+(TODO: Don't allow player to walk into walls (maybe) )
+(Player pushes blocks)
+[ >  Player | Cooler ]    -> [  >  Player | > Cooler  ]
+
+[ >  Player | React1 ] -> [ >  Player | > React1 ]
+[ >  Player | React2 ] -> [ >  Player | > React2 ]
+[ >  Player | React3 ] -> [ >  Player | > React3 ]
+[ >  Player | React4 ] -> [ >  Player | > React4 ]
+[ >  Player | React5 ] -> [ >  Player | > React5 ]
+[ >  Player | React6 ] -> [ >  Player | > React6 ]
+[ >  Player | React7 ] -> [ >  Player | > React7 ]
+[ >  Player | React8 ] -> [ >  Player | > React8 ]
+[ >  Player | React9 ] -> [ >  Player | > React9 ]
+[ >  Player | React10 ] -> [ >  Player | > React10 ]
+[ >  Player | React11 ] -> [ >  Player | > React11 ]
+[ >  Player | React12 ] -> [ >  Player | > React12 ]
+[ >  Player | React13 ] -> [ >  Player | > React13 ]
+[ >  Player | React14 ] -> [ >  Player | > React14 ]
+[ >  Player | React15 ] -> [ >  Player | > React15 ]
+[ >  Player | React16 ] -> [ >  Player | > React16 ]
+[ >  Player | React17 ] -> [ >  Player | > React17 ]
+[ >  Player | React18 ] -> [ >  Player | > React18 ]
+[ >  Player | React19 ] -> [ >  Player | > React19 ]
+[ >  Player | React20 ] -> [ >  Player | > React20 ]
+
+[ >  Player | Meltdown ]  -> [  >  Player | > Meltdown  ]
+
+[ >  Player | Battery0 ]  -> [  >  Player | > Battery0  ]
+[ >  Player | Battery1 ]  -> [  >  Player | > Battery1  ]
+[ >  Player | Battery2 ]  -> [  >  Player | > Battery2  ]
+[ >  Player | Battery3 ]  -> [  >  Player | > Battery3  ]
+[ >  Player | Battery4 ]  -> [  >  Player | > Battery4  ]
+[ >  Player | Battery5 ]  -> [  >  Player | > Battery5  ]
+[ >  Player | Battery6 ]  -> [  >  Player | > Battery6  ]
+[ >  Player | Battery7 ]  -> [  >  Player | > Battery7  ]
+[ >  Player | Battery8 ]  -> [  >  Player | > Battery8  ]
+[ >  Player | Battery9 ]  -> [  >  Player | > Battery9  ]
+
+(Move blocks on conveyors... lots of permutations)
+UP    [ ConvU stationary Cooler | ] -> [  ConvU > Cooler | ]
+DOWN  [ ConvD stationary Cooler | ] -> [  ConvD > Cooler | ]
+LEFT  [ ConvL stationary Cooler | ] -> [  ConvL > Cooler | ]
+RIGHT [ ConvR stationary Cooler | ] -> [  ConvR > Cooler | ]
+
+UP    [ ConvU stationary React1 | ] -> [  ConvU > React1 | ]
+DOWN  [ ConvD stationary React1 | ] -> [  ConvD > React1 | ]
+LEFT  [ ConvL stationary React1 | ] -> [  ConvL > React1 | ]
+RIGHT [ ConvR stationary React1 | ] -> [  ConvR > React1 | ]
+UP    [ ConvU stationary React2 | ] -> [  ConvU > React2 | ]
+DOWN  [ ConvD stationary React2 | ] -> [  ConvD > React2 | ]
+LEFT  [ ConvL stationary React2 | ] -> [  ConvL > React2 | ]
+RIGHT [ ConvR stationary React2 | ] -> [  ConvR > React2 | ]
+UP    [ ConvU stationary React3 | ] -> [  ConvU > React3 | ]
+DOWN  [ ConvD stationary React3 | ] -> [  ConvD > React3 | ]
+LEFT  [ ConvL stationary React3 | ] -> [  ConvL > React3 | ]
+RIGHT [ ConvR stationary React3 | ] -> [  ConvR > React3 | ]
+UP    [ ConvU stationary React4 | ] -> [  ConvU > React4 | ]
+DOWN  [ ConvD stationary React4 | ] -> [  ConvD > React4 | ]
+LEFT  [ ConvL stationary React4 | ] -> [  ConvL > React4 | ]
+RIGHT [ ConvR stationary React4 | ] -> [  ConvR > React4 | ]
+UP    [ ConvU stationary React5 | ] -> [  ConvU > React5 | ]
+DOWN  [ ConvD stationary React5 | ] -> [  ConvD > React5 | ]
+LEFT  [ ConvL stationary React5 | ] -> [  ConvL > React5 | ]
+RIGHT [ ConvR stationary React5 | ] -> [  ConvR > React5 | ]
+UP    [ ConvU stationary React6 | ] -> [  ConvU > React6 | ]
+DOWN  [ ConvD stationary React6 | ] -> [  ConvD > React6 | ]
+LEFT  [ ConvL stationary React6 | ] -> [  ConvL > React6 | ]
+RIGHT [ ConvR stationary React6 | ] -> [  ConvR > React6 | ]
+UP    [ ConvU stationary React7 | ] -> [  ConvU > React7 | ]
+DOWN  [ ConvD stationary React7 | ] -> [  ConvD > React7 | ]
+LEFT  [ ConvL stationary React7 | ] -> [  ConvL > React7 | ]
+RIGHT [ ConvR stationary React7 | ] -> [  ConvR > React7 | ]
+UP    [ ConvU stationary React8 | ] -> [  ConvU > React8 | ]
+DOWN  [ ConvD stationary React8 | ] -> [  ConvD > React8 | ]
+LEFT  [ ConvL stationary React8 | ] -> [  ConvL > React8 | ]
+RIGHT [ ConvR stationary React8 | ] -> [  ConvR > React8 | ]
+UP    [ ConvU stationary React9 | ] -> [  ConvU > React9 | ]
+DOWN  [ ConvD stationary React9 | ] -> [  ConvD > React9 | ]
+LEFT  [ ConvL stationary React9 | ] -> [  ConvL > React9 | ]
+RIGHT [ ConvR stationary React9 | ] -> [  ConvR > React9 | ]
+UP    [ ConvU stationary React10 | ] -> [  ConvU > React10 | ]
+DOWN  [ ConvD stationary React10 | ] -> [  ConvD > React10 | ]
+LEFT  [ ConvL stationary React10 | ] -> [  ConvL > React10 | ]
+RIGHT [ ConvR stationary React10 | ] -> [  ConvR > React10 | ]
+UP    [ ConvU stationary React11 | ] -> [  ConvU > React11 | ]
+DOWN  [ ConvD stationary React11 | ] -> [  ConvD > React11 | ]
+LEFT  [ ConvL stationary React11 | ] -> [  ConvL > React11 | ]
+RIGHT [ ConvR stationary React11 | ] -> [  ConvR > React11 | ]
+UP    [ ConvU stationary React12 | ] -> [  ConvU > React12 | ]
+DOWN  [ ConvD stationary React12 | ] -> [  ConvD > React12 | ]
+LEFT  [ ConvL stationary React12 | ] -> [  ConvL > React12 | ]
+RIGHT [ ConvR stationary React12 | ] -> [  ConvR > React12 | ]
+UP    [ ConvU stationary React13 | ] -> [  ConvU > React13 | ]
+DOWN  [ ConvD stationary React13 | ] -> [  ConvD > React13 | ]
+LEFT  [ ConvL stationary React13 | ] -> [  ConvL > React13 | ]
+RIGHT [ ConvR stationary React13 | ] -> [  ConvR > React13 | ]
+UP    [ ConvU stationary React14 | ] -> [  ConvU > React14 | ]
+DOWN  [ ConvD stationary React14 | ] -> [  ConvD > React14 | ]
+LEFT  [ ConvL stationary React14 | ] -> [  ConvL > React14 | ]
+RIGHT [ ConvR stationary React14 | ] -> [  ConvR > React14 | ]
+UP    [ ConvU stationary React15 | ] -> [  ConvU > React15 | ]
+DOWN  [ ConvD stationary React15 | ] -> [  ConvD > React15 | ]
+LEFT  [ ConvL stationary React15 | ] -> [  ConvL > React15 | ]
+RIGHT [ ConvR stationary React15 | ] -> [  ConvR > React15 | ]
+UP    [ ConvU stationary React16 | ] -> [  ConvU > React16 | ]
+DOWN  [ ConvD stationary React16 | ] -> [  ConvD > React16 | ]
+LEFT  [ ConvL stationary React16 | ] -> [  ConvL > React16 | ]
+RIGHT [ ConvR stationary React16 | ] -> [  ConvR > React16 | ]
+UP    [ ConvU stationary React17 | ] -> [  ConvU > React17 | ]
+DOWN  [ ConvD stationary React17 | ] -> [  ConvD > React17 | ]
+LEFT  [ ConvL stationary React17 | ] -> [  ConvL > React17 | ]
+RIGHT [ ConvR stationary React17 | ] -> [  ConvR > React17 | ]
+UP    [ ConvU stationary React18 | ] -> [  ConvU > React18 | ]
+DOWN  [ ConvD stationary React18 | ] -> [  ConvD > React18 | ]
+LEFT  [ ConvL stationary React18 | ] -> [  ConvL > React18 | ]
+RIGHT [ ConvR stationary React18 | ] -> [  ConvR > React18 | ]
+UP    [ ConvU stationary React19 | ] -> [  ConvU > React19 | ]
+DOWN  [ ConvD stationary React19 | ] -> [  ConvD > React19 | ]
+LEFT  [ ConvL stationary React19 | ] -> [  ConvL > React19 | ]
+RIGHT [ ConvR stationary React19 | ] -> [  ConvR > React19 | ]
+UP    [ ConvU stationary React20 | ] -> [  ConvU > React20 | ]
+DOWN  [ ConvD stationary React20 | ] -> [  ConvD > React20 | ]
+LEFT  [ ConvL stationary React20 | ] -> [  ConvL > React20 | ]
+RIGHT [ ConvR stationary React20 | ] -> [  ConvR > React20 | ]
+
+UP    [ ConvU stationary Battery0 | ] -> [  ConvU > Battery0 | ]
+DOWN  [ ConvD stationary Battery0 | ] -> [  ConvD > Battery0 | ]
+LEFT  [ ConvL stationary Battery0 | ] -> [  ConvL > Battery0 | ]
+RIGHT [ ConvR stationary Battery0 | ] -> [  ConvR > Battery0 | ]
+UP    [ ConvU stationary Battery1 | ] -> [  ConvU > Battery1 | ]
+DOWN  [ ConvD stationary Battery1 | ] -> [  ConvD > Battery1 | ]
+LEFT  [ ConvL stationary Battery1 | ] -> [  ConvL > Battery1 | ]
+RIGHT [ ConvR stationary Battery1 | ] -> [  ConvR > Battery1 | ]
+UP    [ ConvU stationary Battery2 | ] -> [  ConvU > Battery2 | ]
+DOWN  [ ConvD stationary Battery2 | ] -> [  ConvD > Battery2 | ]
+LEFT  [ ConvL stationary Battery2 | ] -> [  ConvL > Battery2 | ]
+RIGHT [ ConvR stationary Battery2 | ] -> [  ConvR > Battery2 | ]
+UP    [ ConvU stationary Battery3 | ] -> [  ConvU > Battery3 | ]
+DOWN  [ ConvD stationary Battery3 | ] -> [  ConvD > Battery3 | ]
+LEFT  [ ConvL stationary Battery3 | ] -> [  ConvL > Battery3 | ]
+RIGHT [ ConvR stationary Battery3 | ] -> [  ConvR > Battery3 | ]
+UP    [ ConvU stationary Battery4 | ] -> [  ConvU > Battery4 | ]
+DOWN  [ ConvD stationary Battery4 | ] -> [  ConvD > Battery4 | ]
+LEFT  [ ConvL stationary Battery4 | ] -> [  ConvL > Battery4 | ]
+RIGHT [ ConvR stationary Battery4 | ] -> [  ConvR > Battery4 | ]
+UP    [ ConvU stationary Battery5 | ] -> [  ConvU > Battery5 | ]
+DOWN  [ ConvD stationary Battery5 | ] -> [  ConvD > Battery5 | ]
+LEFT  [ ConvL stationary Battery5 | ] -> [  ConvL > Battery5 | ]
+RIGHT [ ConvR stationary Battery5 | ] -> [  ConvR > Battery5 | ]
+UP    [ ConvU stationary Battery6 | ] -> [  ConvU > Battery6 | ]
+DOWN  [ ConvD stationary Battery6 | ] -> [  ConvD > Battery6 | ]
+LEFT  [ ConvL stationary Battery6 | ] -> [  ConvL > Battery6 | ]
+RIGHT [ ConvR stationary Battery6 | ] -> [  ConvR > Battery6 | ]
+UP    [ ConvU stationary Battery7 | ] -> [  ConvU > Battery7 | ]
+DOWN  [ ConvD stationary Battery7 | ] -> [  ConvD > Battery7 | ]
+LEFT  [ ConvL stationary Battery7 | ] -> [  ConvL > Battery7 | ]
+RIGHT [ ConvR stationary Battery7 | ] -> [  ConvR > Battery7 | ]
+UP    [ ConvU stationary Battery8 | ] -> [  ConvU > Battery8 | ]
+DOWN  [ ConvD stationary Battery8 | ] -> [  ConvD > Battery8 | ]
+LEFT  [ ConvL stationary Battery8 | ] -> [  ConvL > Battery8 | ]
+RIGHT [ ConvR stationary Battery8 | ] -> [  ConvR > Battery8 | ]
+UP    [ ConvU stationary Battery9 | ] -> [  ConvU > Battery9 | ]
+DOWN  [ ConvD stationary Battery9 | ] -> [  ConvD > Battery9 | ]
+LEFT  [ ConvL stationary Battery9 | ] -> [  ConvL > Battery9 | ]
+RIGHT [ ConvR stationary Battery9 | ] -> [  ConvR > Battery9 | ]
+
+(TODO: Conveyor rules for other block objects)
+
+(Move the player on conveyors)
+(
+  To make this work, we'll have to create more complex patterns as we can't do a second
+  pass of movement after the primary rule phase finishes.
+
+UP    [ ConvU Player | ] -> [  ConvU | Player ]
+DOWN  [ ConvD Player | ] -> [  ConvD | Player ]
+LEFT  [ ConvL Player | ] -> [  ConvL | Player ]
+RIGHT [ ConvR Player | ] -> [  ConvR | Player ]
+)
+
+( Cancel if any invalid moves occur)
+[ > Cooler | Grate ] -> [ Cooler | Grate ]
+
+(Clear all auras)
+[ CoolAuraFinal ] -> []
+[ ChargeAuraFinal ] -> []
+
+
+(===========================================================================
+======The following rule should all apply AFTER movement has occurred=======
+===========================================================================)
+
+(START Cooling Auras)
+(First, mark where the origin starts)
+late [ Cooler ] -> [ Cooler CoolAuraCenter ]
+
+(Then make our initial '+' shape)
+late UP    [ | CoolAuraCenter | ] -> [ CoolAuraPrime | CoolAuraCenter | CoolAuraPrime ]
+late RIGHT [ | CoolAuraCenter | ] -> [ CoolAuraPrime | CoolAuraCenter | CoolAuraPrime ]
+
+(Then fill in our corners)
+late UP    [ No CoolAuraCenter | CoolAuraPrime | No CoolAuraCenter ] -> [ CoolAuraCorner | CoolAuraPrime | CoolAuraCorner ]
+late RIGHT [ No CoolAuraCenter | CoolAuraPrime | No CoolAuraCenter ] -> [ CoolAuraCorner | CoolAuraPrime | CoolAuraCorner ]
+
+(Replace all of these aura builders with a single aura type each for easier rules later)
+late [ CoolAuraCenter ] -> [ CoolAuraFinal ]
+late [ CoolAuraPrime ] -> [ CoolAuraFinal ]
+late [ CoolAuraCorner ] -> [ CoolAuraFinal ]
+(END Cooling Auras)
+
+(Decay Nukes)
+late [ React1 No CoolAuraFinal ] -> [ Meltdown ]
+late [ React2 No CoolAuraFinal ] -> [ React1 ]
+late [ React3 No CoolAuraFinal ] -> [ React2 ]
+late [ React4 No CoolAuraFinal ] -> [ React3 ]
+late [ React5 No CoolAuraFinal ] -> [ React4 ]
+late [ React6 No CoolAuraFinal ] -> [ React5 ]
+late [ React7 No CoolAuraFinal ] -> [ React6 ]
+late [ React8 No CoolAuraFinal ] -> [ React7 ]
+late [ React9 No CoolAuraFinal ] -> [ React8 ]
+late [ React10 No CoolAuraFinal ] -> [ React9 ]
+late [ React11 No CoolAuraFinal ] -> [ React10 ]
+late [ React12 No CoolAuraFinal ] -> [ React11 ]
+late [ React13 No CoolAuraFinal ] -> [ React12 ]
+late [ React14 No CoolAuraFinal ] -> [ React13 ]
+late [ React15 No CoolAuraFinal ] -> [ React14 ]
+late [ React16 No CoolAuraFinal ] -> [ React15 ]
+late [ React17 No CoolAuraFinal ] -> [ React16 ]
+late [ React18 No CoolAuraFinal ] -> [ React17 ]
+late [ React19 No CoolAuraFinal ] -> [ React18 ]
+late [ React20 No CoolAuraFinal ] -> [ React19 ]
+
+(START Build Charge Auras)
+
+(First, mark where the origin starts)
+late [ React1 ] -> [ React1 ChargeAuraCenter ]
+late [ React2 ] -> [ React2 ChargeAuraCenter ]
+late [ React3 ] -> [ React3 ChargeAuraCenter ]
+late [ React4 ] -> [ React4 ChargeAuraCenter ]
+late [ React5 ] -> [ React5 ChargeAuraCenter ]
+late [ React6 ] -> [ React6 ChargeAuraCenter ]
+late [ React7 ] -> [ React7 ChargeAuraCenter ]
+late [ React8 ] -> [ React8 ChargeAuraCenter ]
+late [ React9 ] -> [ React9 ChargeAuraCenter ]
+late [ React10 ] -> [ React10 ChargeAuraCenter ]
+late [ React11 ] -> [ React11 ChargeAuraCenter ]
+late [ React12 ] -> [ React12 ChargeAuraCenter ]
+late [ React13 ] -> [ React13 ChargeAuraCenter ]
+late [ React14 ] -> [ React14 ChargeAuraCenter ]
+late [ React15 ] -> [ React15 ChargeAuraCenter ]
+late [ React16 ] -> [ React16 ChargeAuraCenter ]
+late [ React17 ] -> [ React17 ChargeAuraCenter ]
+late [ React18 ] -> [ React18 ChargeAuraCenter ]
+late [ React19 ] -> [ React19 ChargeAuraCenter ]
+late [ React20 ] -> [ React20 ChargeAuraCenter ]
+
+(Then make our initial '+' shape)
+late UP    [ | ChargeAuraCenter | ] -> [ ChargeAuraPrime | ChargeAuraCenter | ChargeAuraPrime ]
+late RIGHT [ | ChargeAuraCenter | ] -> [ ChargeAuraPrime | ChargeAuraCenter | ChargeAuraPrime ]
+
+(Then fill in our corners)
+late UP    [ No ChargeAuraCenter | ChargeAuraPrime | No ChargeAuraCenter ] -> [ ChargeAuraCorner | ChargeAuraPrime | ChargeAuraCorner ]
+late RIGHT [ No ChargeAuraCenter | ChargeAuraPrime | No ChargeAuraCenter ] -> [ ChargeAuraCorner | ChargeAuraPrime | ChargeAuraCorner ]
+
+(Replace all of these aura builders with a single aura type each for easier rules later)
+late [ ChargeAuraCenter ] -> [ ChargeAuraFinal ]
+late [ ChargeAuraPrime ] -> [ ChargeAuraFinal ]
+late [ ChargeAuraCorner ] -> [ ChargeAuraFinal ]
+(END Build Charge Auras)
+
+(Cool Reactors)
+late [ CoolAuraFinal React19 ] -> [ CoolAuraFinal React20 ]
+late [ CoolAuraFinal React18 ] -> [ CoolAuraFinal React19 ]
+late [ CoolAuraFinal React17 ] -> [ CoolAuraFinal React18 ]
+late [ CoolAuraFinal React16 ] -> [ CoolAuraFinal React17 ]
+late [ CoolAuraFinal React15 ] -> [ CoolAuraFinal React16 ]
+late [ CoolAuraFinal React14 ] -> [ CoolAuraFinal React15 ]
+late [ CoolAuraFinal React13 ] -> [ CoolAuraFinal React14 ]
+late [ CoolAuraFinal React12 ] -> [ CoolAuraFinal React13 ]
+late [ CoolAuraFinal React11 ] -> [ CoolAuraFinal React12 ]
+late [ CoolAuraFinal React10 ] -> [ CoolAuraFinal React11 ]
+late [ CoolAuraFinal React9 ] -> [ CoolAuraFinal React10 ]
+late [ CoolAuraFinal React8 ] -> [ CoolAuraFinal React9 ]
+late [ CoolAuraFinal React7 ] -> [ CoolAuraFinal React8 ]
+late [ CoolAuraFinal React6 ] -> [ CoolAuraFinal React7 ]
+late [ CoolAuraFinal React5 ] -> [ CoolAuraFinal React6 ]
+late [ CoolAuraFinal React4 ] -> [ CoolAuraFinal React5 ]
+late [ CoolAuraFinal React3 ] -> [ CoolAuraFinal React4 ]
+late [ CoolAuraFinal React2 ] -> [ CoolAuraFinal React3 ]
+late [ CoolAuraFinal React1 ] -> [ CoolAuraFinal React2 ]
+late [ CoolAuraFinal Meltdown ] -> [ CoolAuraFinal React1 ]
+
+(Charge Batteries)
+late [ ChargeAuraFinal Battery8 ] ->  [ ChargeAuraFinal Battery9 ]  message Battery Charged!
+late [ ChargeAuraFinal Battery7 ] ->  [ ChargeAuraFinal Battery8 ]
+late [ ChargeAuraFinal Battery6 ] ->  [ ChargeAuraFinal Battery7 ]
+late [ ChargeAuraFinal Battery5 ] ->  [ ChargeAuraFinal Battery6 ]
+late [ ChargeAuraFinal Battery4 ] ->  [ ChargeAuraFinal Battery5 ]
+late [ ChargeAuraFinal Battery3 ] ->  [ ChargeAuraFinal Battery4 ]
+late [ ChargeAuraFinal Battery2 ] ->  [ ChargeAuraFinal Battery3 ]
+late [ ChargeAuraFinal Battery1 ] ->  [ ChargeAuraFinal Battery2 ]
+late [ ChargeAuraFinal Battery0 ] ->  [ ChargeAuraFinal Battery1 ]
+
+(Lose Condition)
+late [ Meltdown] -> [] message Reactor meltdown
+
+==============
+WINCONDITIONS
+==============
+
+(Implied that none of these means all batteries are full)
+No Battery0
+No Battery1
+No Battery2
+No Battery3
+No Battery4
+No Battery5
+No Battery6
+No Battery7
+No Battery8
+All Player On Exit
+
+
+(Uncomment to Debug a Level)
+(No Player)
+
+=======
+LEVELS
+=======
+
+(Debug level)
+(
+#######
+#.....#
+#PCRRx#
+#.C...#
+#.....#
+#######
+)
+
+#############
+#...........#
+#...........#
+#.....C.....#
+P..N........E
+#.....B.....#
+#...........#
+#...........#
+#############
+
+###########
+P........C#
+#..N.RRR.B#
+#.........#
+#.........#
+#.........#
+#.........#
+#####E#####
+
+#######P#
+E..CBx..#
+#....xNx#
+#.......#
+#.......#
+#.......#
+#.......#
+#########
+
+##########
+#........#
+#.RDP....#
+#.ULC....#
+#........#
+#.C.N.BD.#
+#......D.#
+#..CU..D.#
+##########

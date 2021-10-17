@@ -1,0 +1,359 @@
+title Pocobot
+author Logan Moore
+homepage www.puzzlescript.net
+
+========
+OBJECTS
+========
+
+Background
+#848484 #4c4c4c #d4bbaf
+11111
+10001
+10001
+10001
+11111
+
+Grate
+#848484 #4c4c4c #d4bbaf
+11111
+12021
+10201
+12021
+11111
+Wall
+#0b1319
+00000
+00000
+00000
+00000
+00000
+
+Exit
+#848484 #4c4c4c #d4bbaf Red
+11111
+10001
+10201
+10001
+11111
+
+Player
+Black Orange White Blue
+.000.
+.111.
+22222
+.333.
+.3.3.
+
+ConvU
+Gray Red
+00100
+01010
+10001
+00000
+00000
+
+ConvD
+Gray Red
+00000
+00000
+10001
+01010
+00100
+
+ConvL
+Gray Red
+00010
+00100
+01000
+00100
+00010
+
+ConvR
+Gray Red
+01000
+00100
+00010
+00100
+01000
+
+Cooler
+Blue Gray
+00000
+01010
+00100
+01010
+00000
+
+::ReactorObjects::
+
+Meltdown
+DarkGreen Red Yellow
+00000
+01210
+02120
+01210
+00000
+
+::BatteryObjects::
+
+ChargeAuraCenter
+White
+.....
+..0..
+.000.
+..0..
+.....
+
+ChargeAuraPrime
+LightGreen
+..0..
+..0..
+00000
+..0..
+..0..
+
+ChargeAuraCorner
+LightGreen
+0.0.0
+..0..
+00000
+..0..
+0.0.0
+
+ChargeAuraFinal
+LightGreen
+0....
+..0..
+....0
+.0...
+...0.
+
+CoolAuraCenter
+Black
+.....
+..0..
+.000.
+..0..
+.....
+
+CoolAuraPrime
+LightBlue
+..0..
+..0..
+00000
+..0..
+..0..
+
+CoolAuraCorner
+LightBlue
+0.0.0
+..0..
+00000
+..0..
+0.0.0
+
+CoolAuraFinal
+LightBlue
+....0
+0....
+.....
+...0.
+.0...
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Wall
+P = Player
+U = ConvU
+D = ConvD
+L = ConvL
+R = ConvR
+N = ::MaxReactor::
+C = Cooler
+B = Battery0
+E = Exit
+x = Grate
+
+
+=======
+SOUNDS
+=======
+
+
+
+================
+COLLISIONLAYERS
+================
+
+Background
+ConvL, ConvR, ConvU, ConvD, Exit, Grate
+CoolAuraPrime, CoolAuraCorner, CoolAuraCenter, CoolAuraFinal
+ChargeAuraPrime, ChargeAuraCorner, ChargeAuraCenter, ChargeAuraFinal
+Player, Wall, Cooler, ::ReactorNameList::, Meltdown, ::BatteryNameList::
+
+======
+RULES
+======
+
+(TODO: Prevent holding direction from spamming)
+(TODO: Don't allow player to walk into walls (maybe) )
+(Player pushes blocks)
+[ >  Player | Cooler ]    -> [  >  Player | > Cooler  ]
+
+::ReactorPushRules::
+
+[ >  Player | Meltdown ]  -> [  >  Player | > Meltdown  ]
+
+::BatteryPushRules::
+
+(Move blocks on conveyors... lots of permutations)
+UP    [ ConvU stationary Cooler | ] -> [  ConvU > Cooler | ]
+DOWN  [ ConvD stationary Cooler | ] -> [  ConvD > Cooler | ]
+LEFT  [ ConvL stationary Cooler | ] -> [  ConvL > Cooler | ]
+RIGHT [ ConvR stationary Cooler | ] -> [  ConvR > Cooler | ]
+
+::ReactorConveyorRules::
+
+::BatteryConveyorRules::
+
+(TODO: Conveyor rules for other block objects)
+
+(Move the player on conveyors)
+(
+  To make this work, we'll have to create more complex patterns as we can't do a second
+  pass of movement after the primary rule phase finishes.
+
+UP    [ ConvU Player | ] -> [  ConvU | Player ]
+DOWN  [ ConvD Player | ] -> [  ConvD | Player ]
+LEFT  [ ConvL Player | ] -> [  ConvL | Player ]
+RIGHT [ ConvR Player | ] -> [  ConvR | Player ]
+)
+
+( Cancel if any invalid moves occur)
+[ > Cooler | Grate ] -> [ Cooler | Grate ]
+
+(Clear all auras)
+[ CoolAuraFinal ] -> []
+[ ChargeAuraFinal ] -> []
+
+
+(===========================================================================
+======The following rule should all apply AFTER movement has occurred=======
+===========================================================================)
+
+(START Cooling Auras)
+(First, mark where the origin starts)
+late [ Cooler ] -> [ Cooler CoolAuraCenter ]
+
+(Then make our initial '+' shape)
+late UP    [ | CoolAuraCenter | ] -> [ CoolAuraPrime | CoolAuraCenter | CoolAuraPrime ]
+late RIGHT [ | CoolAuraCenter | ] -> [ CoolAuraPrime | CoolAuraCenter | CoolAuraPrime ]
+
+(Then fill in our corners)
+late UP    [ No CoolAuraCenter | CoolAuraPrime | No CoolAuraCenter ] -> [ CoolAuraCorner | CoolAuraPrime | CoolAuraCorner ]
+late RIGHT [ No CoolAuraCenter | CoolAuraPrime | No CoolAuraCenter ] -> [ CoolAuraCorner | CoolAuraPrime | CoolAuraCorner ]
+
+(Replace all of these aura builders with a single aura type each for easier rules later)
+late [ CoolAuraCenter ] -> [ CoolAuraFinal ]
+late [ CoolAuraPrime ] -> [ CoolAuraFinal ]
+late [ CoolAuraCorner ] -> [ CoolAuraFinal ]
+(END Cooling Auras)
+
+(Decay Nukes)
+::ReactorDecayRules::
+
+(START Build Charge Auras)
+
+(First, mark where the origin starts)
+::ReactorChargeOriginRules::
+
+(Then make our initial '+' shape)
+late UP    [ | ChargeAuraCenter | ] -> [ ChargeAuraPrime | ChargeAuraCenter | ChargeAuraPrime ]
+late RIGHT [ | ChargeAuraCenter | ] -> [ ChargeAuraPrime | ChargeAuraCenter | ChargeAuraPrime ]
+
+(Then fill in our corners)
+late UP    [ No ChargeAuraCenter | ChargeAuraPrime | No ChargeAuraCenter ] -> [ ChargeAuraCorner | ChargeAuraPrime | ChargeAuraCorner ]
+late RIGHT [ No ChargeAuraCenter | ChargeAuraPrime | No ChargeAuraCenter ] -> [ ChargeAuraCorner | ChargeAuraPrime | ChargeAuraCorner ]
+
+(Replace all of these aura builders with a single aura type each for easier rules later)
+late [ ChargeAuraCenter ] -> [ ChargeAuraFinal ]
+late [ ChargeAuraPrime ] -> [ ChargeAuraFinal ]
+late [ ChargeAuraCorner ] -> [ ChargeAuraFinal ]
+(END Build Charge Auras)
+
+(Cool Reactors)
+::ReactorCoolRules::
+
+(Charge Batteries)
+::BatteryChargeRules::
+
+(Lose Condition)
+late [ Meltdown] -> [] message Reactor meltdown
+
+==============
+WINCONDITIONS
+==============
+
+(Implied that none of these means all batteries are full)
+::BatteryWinConditions::
+All Player On Exit
+
+
+(Uncomment to Debug a Level)
+(No Player)
+
+=======
+LEVELS
+=======
+
+(Debug level)
+(
+#######
+#.....#
+#PCRRx#
+#.C...#
+#.....#
+#######
+)
+
+#############
+#...........#
+#...........#
+#.....C.....#
+P..N........E
+#.....B.....#
+#...........#
+#...........#
+#############
+
+###########
+P........C#
+#..N.RRR.B#
+#.........#
+#.........#
+#.........#
+#.........#
+#####E#####
+
+#######.#
+...CBx..#
+#....xNx#
+#.......#
+#.......#
+#.......#
+#.......#
+#########
+
+##########
+#........#
+#.RDP....#
+#.ULC....#
+#........#
+#.C.N.BD.#
+#......D.#
+#..CU..D.#
+##########
