@@ -11,7 +11,7 @@ class Main {
 		var content:String = sys.io.File.getContent('./pocobot.ps');
 		// fill out template
 		var template = new haxe.Template(content);
-		var rendered = template.execute(new PocobotTemplate(20, 10).getDynamic());
+		var rendered = template.execute(new PocobotTemplate(28, 10).getDynamic());
 
 		File.saveContent('./pocobot_rendered.ps', rendered);
 	}

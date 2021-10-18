@@ -51,7 +51,7 @@ class PocobotTemplate {
 
 		for (i in reactorLoopStart...reactorLoopMax) {
 			output.push('React${i}');
-			output.push('DarkGreen Blue Green Yellow');
+			output.push('DarkGreen Blue Green Yellow Orange');
 			for (row in fill(3, i)) {
 				output.push(row);
 			}
@@ -108,7 +108,7 @@ class PocobotTemplate {
 	function getBatteryChargeRules():Array<String> {
 		var rules = new Array<String>();
 		for (i in 1...batteryMax) {
-			rules.push('late [ ChargeAuraFinal Battery${i-1} ] ->  [ ChargeAuraFinal Battery${i} ] ${i == batteryMax - 1 ? " message Battery Charged!" : ""}');
+			rules.push('late [ ChargeAuraFinal Battery${i-1} ] ->  [ ChargeAuraFinal Battery${i} ] ${i == batteryMax - 1 ? " SFX0 message Battery Charged!" : ""}');
 		}
 		// These rules need to go in reverse order so they don't chain and cause batteries to fully
 		// charge every cycle of the game
