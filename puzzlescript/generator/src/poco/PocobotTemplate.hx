@@ -2,17 +2,6 @@ package poco;
 
 class PocobotTemplate {
 	var MaxReactor:String;
-	var ReactorNameList:String;
-	var BatteryNameList:String;
-	var ReactorObjects:Array<String>;
-	var ReactorPushRules:Array<String>;
-	var BatteryPushRules:Array<String>;
-	var ReactorConveyorRules:Array<String>;
-	var BatteryConveyorRules:Array<String>;
-	var ReactorDecayRules:Array<String>;
-	var ReactorChargeOriginRules:Array<String>;
-	var BatteryChargeRules:Array<String>;
-	var BatteryWinConditions:Array<String>;
 
 	private var batteryMax:Int;
 	private var reactorLoopStart:Int = 1;
@@ -21,37 +10,27 @@ class PocobotTemplate {
 	public function new(reactorMax:Int, batteryMax:Int) {
 		reactorLoopMax = reactorMax + 1;
 		this.batteryMax = batteryMax;
-
 		MaxReactor = 'React${reactorMax}';
-		ReactorNameList = getReactorNameList();
-		BatteryNameList = getBatteryNameList();
-		ReactorObjects = getReactorObjects();
-		ReactorPushRules = getReactorPushRules();
-		BatteryPushRules = getBatteryPushRules();
-		ReactorConveyorRules = getReactorConveyorRules();
-		BatteryConveyorRules = getBatteryConveyorRules();
-		ReactorDecayRules = getReactorDecayRules();
-		ReactorChargeOriginRules = getReactorChargeOriginRules();
-		BatteryChargeRules = getBatteryChargeRules();
-		BatteryWinConditions = getBatteryWinConditions();
 	}
 
 	public function getDynamic():Dynamic {
 		return {
 			"MaxReactor": MaxReactor,
-			"ReactorNameList": ReactorNameList,
-			"BatteryNameList": BatteryNameList,
-			"ReactorObjects": ReactorObjects.join("\n"),
+			"ReactorNameList": getReactorNameList(),
+			"BatteryNameList": getBatteryNameList(),
+			"ReactorObjects": getReactorObjects().join("\n"),
 			"BatteryObjects": getBatteryObjects().join("\n"),
-			"ReactorPushRules": ReactorPushRules.join("\n"),
-			"BatteryPushRules": BatteryPushRules.join("\n"),
-			"ReactorConveyorRules": ReactorConveyorRules.join("\n"),
-			"BatteryConveyorRules": BatteryConveyorRules.join("\n"),
-			"ReactorDecayRules": ReactorDecayRules.join("\n"),
+			"ReactorPushRules": getReactorPushRules().join("\n"),
+			"BatteryPushRules": getBatteryPushRules().join("\n"),
+			"ReactorGrateRules": getReactorGrateRules().join("\n"),
+			"BatteryGrateRules": getBatteryGrateRules().join("\n"),
+			"ReactorConveyorRules": getReactorConveyorRules().join("\n"),
+			"BatteryConveyorRules": getBatteryConveyorRules().join("\n"),
+			"ReactorDecayRules": getReactorDecayRules().join("\n"),
 			"ReactorCoolRules": getReactorCoolRules().join("\n"),
-			"ReactorChargeOriginRules": ReactorChargeOriginRules.join("\n"),
-			"BatteryChargeRules": BatteryChargeRules.join("\n"),
-			"BatteryWinConditions": BatteryWinConditions.join("\n"),
+			"ReactorChargeOriginRules": getReactorChargeOriginRules().join("\n"),
+			"BatteryChargeRules": getBatteryChargeRules().join("\n"),
+			"BatteryWinConditions": getBatteryWinConditions().join("\n"),
 		};
 	}
 
@@ -153,6 +132,23 @@ class PocobotTemplate {
 		return rules;
 	}
 
+	function getReactorGrateRules():Array<String> {
+		var rules = new Array<String>();
+		for (i in reactorLoopStart...reactorLoopMax) {
+			// [ > Cooler | Grate ] -> [ Cooler | Grate ]
+			rules.push('[ > React${i} | Grate ] -> [ React${i} | Grate ]');
+		}
+		return rules;
+	}
+
+	function getBatteryGrateRules():Array<String> {
+		var rules = new Array<String>();
+		for (i in 0...batteryMax) {
+			rules.push('[ > Battery${i} | Grate ] -> [ Battery${i} | Grate ]');
+		}
+		return rules;
+	}
+
 	function getReactorConveyorRules():Array<String> {
 		var rules = new Array<String>();
 		for (i in reactorLoopStart...reactorLoopMax) {
@@ -160,7 +156,8 @@ class PocobotTemplate {
 			rules.push('DOWN  [ ConvD stationary React${i} | ] -> [  ConvD > React${i} | ]');
 			rules.push('LEFT  [ ConvL stationary React${i} | ] -> [  ConvL > React${i} | ]');
 			rules.push('RIGHT [ ConvR stationary React${i} | ] -> [  ConvR > React${i} | ]');
-			}
+			rules.push('');
+		}
 		return rules;
 	}
 
@@ -171,7 +168,8 @@ class PocobotTemplate {
 			rules.push('DOWN  [ ConvD stationary Battery${i} | ] -> [  ConvD > Battery${i} | ]');
 			rules.push('LEFT  [ ConvL stationary Battery${i} | ] -> [  ConvL > Battery${i} | ]');
 			rules.push('RIGHT [ ConvR stationary Battery${i} | ] -> [  ConvR > Battery${i} | ]');
-			}
+			rules.push('');
+		}
 		return rules;
 	}
 
